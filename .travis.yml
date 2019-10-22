@@ -20,7 +20,6 @@ script:
 - cd devframework
 - mvn test
 - mvn install
-- rm -f dist/*.war && cp target/*.war dist/
 
 # cache the build tool's caches
 cache:
