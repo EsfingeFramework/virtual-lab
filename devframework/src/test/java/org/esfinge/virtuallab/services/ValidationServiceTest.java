@@ -1,5 +1,6 @@
 package org.esfinge.virtuallab.services;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -7,6 +8,8 @@ import java.util.List;
 import org.esfinge.virtuallab.TestUtils;
 import org.esfinge.virtuallab.api.annotations.ServiceClass;
 import org.esfinge.virtuallab.api.annotations.ServiceMethod;
+import org.esfinge.virtuallab.exceptions.ValidationException;
+import org.esfinge.virtuallab.metadata.ClassMetadata;
 import org.esfinge.virtuallab.utils.Utils;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -62,10 +65,11 @@ public class ValidationServiceTest
 		String classPath = TestUtils.pathFromTestDir(className + ".class");
 
 		// verifica se a classe eh valida
-		Class<?> clazz = ValidationService.getInstance().checkClassFile(classPath);
-		Assert.assertEquals(className, clazz.getCanonicalName());
+		ClassMetadata clazz = ValidationService.getInstance().validateUploadedFile(new File(classPath));
+		Assert.assertEquals(className, clazz.getClassName());
 	}
 
+	/*Não está mais fazendo
 	@Test
 	public void testValidClassFromStream() throws Exception
 	{
@@ -82,9 +86,11 @@ public class ValidationServiceTest
 		// verifica se a classe eh valida
 		Class<?> clazz = ValidationService.getInstance().checkClassFile(classStream, className);
 		Assert.assertEquals(className, clazz.getCanonicalName());
-	}
+	}*/
 
-	@Test
+	
+	
+	@Test(expected = ValidationException.class)
 	public void testInvalidClassFromPath() throws Exception
 	{
 		// cria um nome para a classe de teste
@@ -98,10 +104,12 @@ public class ValidationServiceTest
 		String classPath = TestUtils.pathFromTestDir(className + ".class");
 
 		// verifica se a classe eh valida
-		Class<?> clazz = ValidationService.getInstance().checkClassFile(classPath);
-		Assert.assertNull(clazz);
+		ClassMetadata clazz = ValidationService.getInstance().validateUploadedFile(new File(classPath));
+		
+		
+		Assert.assertNull(clazz.getClass());
 	}
-
+	/*Não está mais fazendo
 	@Test
 	public void testInvalidClassFromStream() throws Exception
 	{
@@ -118,8 +126,9 @@ public class ValidationServiceTest
 		// verifica se a classe eh valida
 		Class<?> clazz = ValidationService.getInstance().checkClassFile(classStream, className);
 		Assert.assertNull(clazz);
-	}
+	}*/
 
+	/*
 	@Test
 	public void testValidJarFromPath() throws Exception
 	{
@@ -142,8 +151,9 @@ public class ValidationServiceTest
 		Assert.assertEquals(2, classList.size());
 		Assert.assertNotNull(Utils.getFromCollection(classList, c -> c.getCanonicalName().equals(validClass1)));
 		Assert.assertNotNull(Utils.getFromCollection(classList, c -> c.getCanonicalName().equals(validClass2)));
-	}
+	}*/
 
+	/*
 	@Test
 	public void testValidJarFromStream() throws Exception
 	{
@@ -165,8 +175,9 @@ public class ValidationServiceTest
 		List<Class<?>> classList = ValidationService.getInstance().checkJarFile(jarStream, "validJar.jar");
 		Assert.assertEquals(1, classList.size());
 		Assert.assertNotNull(Utils.getFromCollection(classList, c -> c.getCanonicalName().equals(validClass)));
-	}
+	}*/
 
+	/*
 	@Test
 	public void testInvalidJarFromPath() throws Exception
 	{
@@ -209,5 +220,5 @@ public class ValidationServiceTest
 
 		List<Class<?>> classList = ValidationService.getInstance().checkJarFile(jarStream, "invalidJar.jar");
 		Assert.assertNull(classList);
-	}
+	}*/
 }
