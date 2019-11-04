@@ -29,6 +29,8 @@ import org.esfinge.virtuallab.utils.Utils;
 /**
  * Gerencia as classes persistidas com servicos validos.
  */
+
+
 public class PersistenceService
 {
 	// instancia unica da classe
@@ -90,6 +92,7 @@ public class PersistenceService
 		}
 		
 		// carrega as entidades no EntityManager
+		//ele não carregah
 		EntityManagerFactoryHelper.getInstance().loadEntities();
 	}
 	
@@ -245,7 +248,7 @@ public class PersistenceService
 	{
 		private File serviceFile;
 		private ClassMetadata serviceMetadata;
-		
+			
 		
 		ServiceInfo(File serviceFile, ClassMetadata serviceMetadata)
 		{

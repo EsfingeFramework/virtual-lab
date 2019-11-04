@@ -1,12 +1,17 @@
-package org.esfinge.virtuallab.demo.chart.lines;
+package org.esfinge.virtuallab.demo.chart.lines.dao;
 
 import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import net.sf.esfinge.querybuilder.annotation.Condition;
+import net.sf.esfinge.querybuilder.annotation.DomainTerm;
 
 /**
  * The persistent class for the xray_data_low database table.
@@ -30,8 +35,9 @@ public class XrayDataLow{
 	@Column(name="short_xray")
 	private double  shortXray;
 
-	@Column(name="header_fk")
-	private Long header;
+	@ManyToOne
+	@JoinColumn(name = "header_fk", referencedColumnName = "id")
+	private Header header;
 
 	@Transient
 	private double R1 = 10e-5d; 
@@ -54,7 +60,7 @@ public class XrayDataLow{
 	
 	
 
-	public XrayDataLow(Long id, Calendar eventDatetime, double longXray, double ratio, double shortXray, long header) {
+	public XrayDataLow(Long id, Calendar eventDatetime, double longXray, double ratio, double shortXray, Header header) {
 		super();
 		this.id = id;
 		this.eventDateTime = eventDatetime;
@@ -128,13 +134,13 @@ public class XrayDataLow{
 
 
 
-	public Long getHeader() {
+	public Header getHeader() {
 		return header;
 	}
 
 
 
-	public void setHeader(Long header) {
+	public void setHeader(Header header) {
 		this.header = header;
 	}
 

@@ -78,8 +78,7 @@ public class ClassLoaderService
 			throw new ClassLoaderException(String.format("Erro ao carregar servico, arquivo inacessivel: %s", fileName));
 			
 		// verifica se eh um .class ou .jar		
-		if (! (FilenameUtils.isExtension(fileName, "class") ||  
-			   FilenameUtils.isExtension(fileName, "jar")) )
+		if (! (FilenameUtils.isExtension(fileName, "class") ||FilenameUtils.isExtension(fileName, "jar")) )
 			throw new ClassLoaderException(String.format("Erro ao carregar servico, arquivo invalido: %s", fileName));
 		
 		try

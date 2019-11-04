@@ -75,6 +75,7 @@ public class TableReturnProcessor extends MethodReturnProcessor<TableReturn>
 		}
 		
 		// retorna o objeto JSON
+		System.out.println(JsonUtils.fromObjectToJsonData(returnObj));;
 		return JsonUtils.fromObjectToJsonData(returnObj);
 	}
 	

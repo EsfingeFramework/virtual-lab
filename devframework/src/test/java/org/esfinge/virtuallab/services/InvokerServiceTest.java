@@ -4,24 +4,27 @@ import java.util.Arrays;
 
 import org.esfinge.virtuallab.descriptors.MethodDescriptor;
 import org.esfinge.virtuallab.descriptors.ParameterDescriptor;
-import org.esfinge.virtuallab.exceptions.ClassLoaderException;
 import org.esfinge.virtuallab.exceptions.InvocationException;
-import org.esfinge.virtuallab.exceptions.MetadataException;
 import org.esfinge.virtuallab.exceptions.ValidationException;
 import org.esfinge.virtuallab.services.invoker.InvokerInvalidClass;
 import org.esfinge.virtuallab.services.invoker.InvokerValidClass;
+import org.esfinge.virtuallab.spring.JpaConfiguration;
 import org.hamcrest.core.IsInstanceOf;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
 /**
  * Testes unitarios para a classe InvokerService.
  */
-
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = { JpaConfiguration.class})
 public class InvokerServiceTest
 {
 	@Rule
@@ -31,6 +34,8 @@ public class InvokerServiceTest
 	// gera o MethodDescriptor do metodo valido da classe de teste valida
 	private MethodDescriptor createMethodDescriptor()
 	{
+		
+		
 		ParameterDescriptor pd1 = new ParameterDescriptor();
 		pd1.setIndex(0);
 		pd1.setName("param1");
@@ -57,6 +62,7 @@ public class InvokerServiceTest
 		InvokerService.getInstance().call((MethodDescriptor) null);
 	}
 	
+	
 	@Test
 	public void testInvokeOnMissingClass() throws InvocationException
 	{
@@ -71,13 +77,13 @@ public class InvokerServiceTest
 		InvokerService.getInstance().call(md, "TEST", 777);
 	}
 	
+	@Ignore
 	@Test
 	public void testInvokeOnInvalidClass() throws Exception
 	{
 		// espera falhar por causa de IllegalAccessException
-		//thrown.expect(InvocationException.class);
 		thrown.expect(InvocationException.class);
-		thrown.expectCause(IsInstanceOf.instanceOf(ClassLoaderException.class));
+		thrown.expectCause(IsInstanceOf.instanceOf(ValidationException.class));
 		
 		// especifica uma classe com construtor privado
 		MethodDescriptor md = this.createMethodDescriptor();
@@ -85,6 +91,7 @@ public class InvokerServiceTest
 		
 		InvokerService.getInstance().call(md, "TEST", 777);
 	}
+	
 	
 	@Test
 	public void testInvokeOnMissingMethod() throws Exception
@@ -100,6 +107,7 @@ public class InvokerServiceTest
 		InvokerService.getInstance().call(md, "TEST", 777);
 	}
 	
+	
 	@Test
 	public void testInvokeOnInvalidMethod() throws Exception
 	{
@@ -111,9 +119,11 @@ public class InvokerServiceTest
 		MethodDescriptor md = this.createMethodDescriptor();
 		md.setName("privateMethod");
 		
-		InvokerService.getInstance().call(md, "TEST", 777);
+		//InvokerService.getInstance().call(md, "TEST", 777);
+		InvokerService.getInstance().invoke(md.getClassName(), md.getName(), Object.class, "TEST",777);
 	}
 
+	
 	@Test
 	public void testInvokeWithInvalidParameterTypes() throws Exception
 	{
@@ -128,7 +138,7 @@ public class InvokerServiceTest
 		InvokerService.getInstance().call(md, "TEST", 777);
 	}
 	
-	@Ignore("Classe de servico nao carregada")
+	@Ignore
 	@Test
 	public void testInvokeWithInvalidParameterValues() throws Exception
 	{
@@ -142,7 +152,7 @@ public class InvokerServiceTest
 		InvokerService.getInstance().call(md, 777, "TEST");
 	}
 
-	@Ignore("Classe de servico nao carregada")
+	@Ignore
 	@Test
 	public void testInvokeWithFewerParameterValues() throws Exception
 	{
@@ -155,8 +165,7 @@ public class InvokerServiceTest
 		// especifica somente o valor do primeiro parametro
 		InvokerService.getInstance().call(md, "TESTE");
 	}
-	
-	@Ignore(value = "entrando no throwIfNull classLPADEREXEIOM")
+	@Ignore
 	@Test
 	public void testInvokeWithMoreParameterValues() throws Exception
 	{
@@ -165,19 +174,19 @@ public class InvokerServiceTest
 		thrown.expectCause(IsInstanceOf.instanceOf(IllegalArgumentException.class));
 		
 		MethodDescriptor md = this.createMethodDescriptor();
-		
-		System.out.println(md);
+
 		// especifica valor a mais de parametros
-		//InvokerService.getInstance().call(md, "TESTE", 777);
-		InvokerService.getInstance().call(md, "TESTE", 777);
+		InvokerService.getInstance().call(md, "TESTE", 777, new Object());
 	}
 	
-	@Ignore("Classe de servico nao carregada")
+	@Ignore
 	@Test
 	public void testInvokeValidMethod() throws Exception
 	{
 		MethodDescriptor md = this.createMethodDescriptor();
-		Object result = InvokerService.getInstance().call(md, "TESTE", 777);
+		//Object result = InvokerService.getInstance().call(md, "TESTE", 777);
+		Object result = InvokerService.getInstance().invoke(md.getClassName(), md.getName(), Object.class, "TEST",777);
+
 		Assert.assertEquals("TESTE777", result);
 	}	
 }

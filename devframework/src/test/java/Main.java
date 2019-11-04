@@ -2,9 +2,11 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.esfinge.virtuallab.TestUtils;
-import org.esfinge.virtuallab.demo.chart.lines.DaoXrayLow;
 import org.esfinge.virtuallab.demo.chart.lines.LineChartDemo;
-import org.esfinge.virtuallab.demo.chart.lines.XrayDataLow;
+import org.esfinge.virtuallab.demo.chart.lines.dao.DaoHeader;
+import org.esfinge.virtuallab.demo.chart.lines.dao.DaoXrayLow;
+import org.esfinge.virtuallab.demo.chart.lines.dao.Header;
+import org.esfinge.virtuallab.demo.chart.lines.dao.XrayDataLow;
 import org.esfinge.virtuallab.demo.dao.DaoDemo;
 import org.esfinge.virtuallab.demo.dao.Temperatura;
 import org.esfinge.virtuallab.demo.json.Disciplina;
@@ -30,6 +32,9 @@ public class Main
 //		TestUtils.createJar("topicDAO.jar", TopicService.class, Topic.class);
 		TestUtils.createJar("INPE_Goes.jar", DaoXrayLow.class, XrayDataLow.class);
 		TestUtils.createJar("LineChartDemo.jar", LineChartDemo.class);		
+		TestUtils.createJar("DaoHeader.jar", DaoHeader.class,Header.class);		
+		
+		
 		/*
 		Temperatura t = new Temperatura(2l, "-23.5475","-46.63611111", 28.2, 19.3, "janeiro");
 		

@@ -6,6 +6,8 @@ import org.esfinge.virtuallab.api.annotations.Inject;
 import org.esfinge.virtuallab.api.annotations.LineChartReturn;
 import org.esfinge.virtuallab.api.annotations.ServiceClass;
 import org.esfinge.virtuallab.api.annotations.ServiceMethod;
+import org.esfinge.virtuallab.demo.chart.lines.dao.DaoXrayLow;
+import org.esfinge.virtuallab.demo.chart.lines.dao.XrayDataLow;
 
 @ServiceClass(
 		label = "GRÁFICOS - LINHAS",
@@ -32,7 +34,7 @@ public class LineChartDemo {
 		public List<?> listaXrayDataLowGetXray(Long header)
 		{
 			
-			List<XrayDataLow> resp = xrayLow.getXrayDataLowByHeaderOrderById(header);
+			List<XrayDataLow> resp = xrayLow.getXrayDataLowByHeaderIdOrderById(header);
 			
 			
 			return resp;	
