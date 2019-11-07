@@ -2,8 +2,10 @@ package org.esfinge.virtuallab.services;
 
 import java.util.Arrays;
 
+import org.esfinge.virtuallab.TestUtils;
 import org.esfinge.virtuallab.descriptors.MethodDescriptor;
 import org.esfinge.virtuallab.descriptors.ParameterDescriptor;
+import org.esfinge.virtuallab.exceptions.ClassLoaderException;
 import org.esfinge.virtuallab.exceptions.InvocationException;
 import org.esfinge.virtuallab.exceptions.ValidationException;
 import org.esfinge.virtuallab.services.invoker.InvokerInvalidClass;
@@ -34,7 +36,10 @@ public class InvokerServiceTest
 	// gera o MethodDescriptor do metodo valido da classe de teste valida
 	private MethodDescriptor createMethodDescriptor()
 	{
-		
+		TestUtils.createJar("InvokerValidClass.jar", InvokerValidClass.class);
+		String jarPath = TestUtils.pathFromTestDir("InvokerValidClass.jar");
+		ClassLoaderService.getInstance().loadService(jarPath);
+
 		
 		ParameterDescriptor pd1 = new ParameterDescriptor();
 		pd1.setIndex(0);
@@ -51,7 +56,8 @@ public class InvokerServiceTest
 		md.setName("validMethod");
 		md.setReturnType(String.class.getCanonicalName());
 		md.setParameters(Arrays.asList(pd1, pd2));
-
+		
+		
 		return md;
 	}	
 	
@@ -77,13 +83,13 @@ public class InvokerServiceTest
 		InvokerService.getInstance().call(md, "TEST", 777);
 	}
 	
-	@Ignore
+	
 	@Test
 	public void testInvokeOnInvalidClass() throws Exception
 	{
-		// espera falhar por causa de IllegalAccessException
+		// espera falhar por causa de ClassLoaderException
 		thrown.expect(InvocationException.class);
-		thrown.expectCause(IsInstanceOf.instanceOf(ValidationException.class));
+		thrown.expectCause(IsInstanceOf.instanceOf(ClassLoaderException.class));
 		
 		// especifica uma classe com construtor privado
 		MethodDescriptor md = this.createMethodDescriptor();
@@ -138,7 +144,8 @@ public class InvokerServiceTest
 		InvokerService.getInstance().call(md, "TEST", 777);
 	}
 	
-	@Ignore
+	
+	
 	@Test
 	public void testInvokeWithInvalidParameterValues() throws Exception
 	{
@@ -152,7 +159,7 @@ public class InvokerServiceTest
 		InvokerService.getInstance().call(md, 777, "TEST");
 	}
 
-	@Ignore
+	
 	@Test
 	public void testInvokeWithFewerParameterValues() throws Exception
 	{
@@ -165,7 +172,8 @@ public class InvokerServiceTest
 		// especifica somente o valor do primeiro parametro
 		InvokerService.getInstance().call(md, "TESTE");
 	}
-	@Ignore
+	
+	
 	@Test
 	public void testInvokeWithMoreParameterValues() throws Exception
 	{
@@ -179,14 +187,18 @@ public class InvokerServiceTest
 		InvokerService.getInstance().call(md, "TESTE", 777, new Object());
 	}
 	
-	@Ignore
+
 	@Test
 	public void testInvokeValidMethod() throws Exception
-	{
+	{	
+		TestUtils.createJar("InvokerValidClass.jar", InvokerValidClass.class);
+		String jarPath = TestUtils.pathFromTestDir("InvokerValidClass.jar");
+		ClassLoaderService.getInstance().loadService(jarPath);
+		
 		MethodDescriptor md = this.createMethodDescriptor();
 		//Object result = InvokerService.getInstance().call(md, "TESTE", 777);
-		Object result = InvokerService.getInstance().invoke(md.getClassName(), md.getName(), Object.class, "TEST",777);
-
+		Object result = InvokerService.getInstance().invoke(md.getClassName(), md.getName(), Object.class, "TESTE",777);
+		
 		Assert.assertEquals("TESTE777", result);
 	}	
 }

@@ -5,14 +5,17 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.esfinge.virtuallab.descriptors.ClassDescriptor;
 import org.esfinge.virtuallab.descriptors.MethodDescriptor;
 import org.esfinge.virtuallab.descriptors.ParameterDescriptor;
 import org.esfinge.virtuallab.metadata.processors.MethodReturnProcessor;
 import org.esfinge.virtuallab.metadata.processors.MethodReturnProcessorHelper;
 import org.esfinge.virtuallab.services.InvokerService;
+import org.esfinge.virtuallab.services.PersistenceService;
 import org.esfinge.virtuallab.utils.JsonUtils;
 import org.esfinge.virtuallab.utils.ReflectionUtils;
 import org.esfinge.virtuallab.web.JsonReturn;
+import org.esfinge.virtuallab.web.json.JsonArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 public class MappingRestController {
 
-	@RequestMapping("/")
+	@RequestMapping("/welcome")
 	public String welcome() {
 		return "Welcome to RestTemplate Example.";
 	}
@@ -56,5 +59,18 @@ public class MappingRestController {
 		jsonReturn.setData(returnProcessor.process(result));
 		jsonReturn.setType(returnProcessor.getType());
 		return jsonReturn;
+	}
+	
+	@RequestMapping(value = "/services", method = RequestMethod.GET)
+	public Object listAllClass() {
+		
+		List<ClassDescriptor> classesList = PersistenceService.getInstance().listServiceClasses();
+
+		JsonReturn jsonReturn = new JsonReturn();
+		jsonReturn.setData(new JsonArray<ClassDescriptor>(classesList));
+		jsonReturn.setSuccess(true);
+		jsonReturn.setMessage("");
+		return jsonReturn;
+
 	}
 }

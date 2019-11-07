@@ -1,5 +1,7 @@
 package org.esfinge.virtuallab.services;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -128,7 +130,7 @@ public class ValidationServiceTest
 		Assert.assertNull(clazz);
 	}*/
 
-	/*
+	
 	@Test
 	public void testValidJarFromPath() throws Exception
 	{
@@ -136,22 +138,17 @@ public class ValidationServiceTest
 		
 		// cria umas classes de teste
 		String validClass1 = TestUtils.createMockClassName();
-		String validClass2 = TestUtils.createMockClassName();
-		String invalidClass = TestUtils.createMockClassName();
 		
 		this.createClass(validClass1, true);
-		this.createClass(validClass2, true);
-		this.createClass(invalidClass, false);
 		
 		// cria o jar
-		Assert.assertTrue(TestUtils.createJar("validJar.jar", validClass1, validClass2, invalidClass));
+		Assert.assertTrue(TestUtils.createJar("validJar.jar", validClass1));
 		String jarPath = TestUtils.pathFromTestDir("validJar.jar");
 
-		List<Class<?>> classList = ValidationService.getInstance().checkJarFile(jarPath);
-		Assert.assertEquals(2, classList.size());
-		Assert.assertNotNull(Utils.getFromCollection(classList, c -> c.getCanonicalName().equals(validClass1)));
-		Assert.assertNotNull(Utils.getFromCollection(classList, c -> c.getCanonicalName().equals(validClass2)));
-	}*/
+		ClassMetadata classList = ValidationService.getInstance().validateUploadedFile(new File(jarPath));
+		Assert.assertNotNull(classList);
+		
+	}
 
 	/*
 	@Test

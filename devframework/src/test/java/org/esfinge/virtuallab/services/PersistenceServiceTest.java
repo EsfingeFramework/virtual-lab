@@ -137,6 +137,10 @@ public class PersistenceServiceTest
 		Assert.assertEquals(2, classList.size());
 		Assert.assertNotNull(Utils.getFromCollection(classList, c -> c.getQualifiedName().equals(validClass1)));
 		Assert.assertNotNull(Utils.getFromCollection(classList, c -> c.getQualifiedName().equals(validClass2)));
+		PersistenceService.getInstance().removeServiceClass(validClass1);
+		PersistenceService.getInstance().removeServiceClass(validClass2);
+		classList = this.getPersistenceService().listServiceClasses();
+		Assert.assertEquals(0, classList.size());
 	}
 	
 	@Test
