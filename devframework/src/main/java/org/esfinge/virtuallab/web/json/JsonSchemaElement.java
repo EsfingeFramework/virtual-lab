@@ -11,6 +11,9 @@ public class JsonSchemaElement implements JsonSchema
 	// label do elemento
 	private String title;
 	
+	// label do class
+	private String clazz;
+	
 	// se o preenchimento do elemento eh obrigatorio
 	private boolean required;
 	
@@ -18,6 +21,15 @@ public class JsonSchemaElement implements JsonSchema
 	private String format;
 
 	
+	
+	public String getClazz() {
+		return clazz;
+	}
+
+	public void setClazz(String clazz) {
+		this.clazz = clazz;
+	}
+
 	public String getType()
 	{
 		return type;
@@ -64,6 +76,10 @@ public class JsonSchemaElement implements JsonSchema
 		builder.append(String.format("\"type\" : \"%s\", ", this.type));
 		builder.append(String.format("\"title\" : \"%s\", ", this.title));
 		builder.append(String.format("\"required\" : \"%b\"", this.required));
+		if(this.clazz!=null)
+		{
+			builder.append(String.format(",\"htmlClass\" : \"%s\"", this.clazz));
+		}
 		
 		if ( this.format != null )
 			builder.append(String.format(", \"format\" : \"%s\"", this.format));

@@ -1,4 +1,4 @@
-package org.esfinge.virtuallab.demo.chart.lines.dao;
+package org.esfinge.virtuallab.demo.chart.lines.xray;
 
 import java.util.List;
 
@@ -22,21 +22,21 @@ import net.sf.esfinge.querybuilder.methodparser.ComparisonType;
 	user = "postgres", 					    
 	password = "postgres", 
 	dialect = "org.hibernate.dialect.PostgreSQLDialect")
-public interface DaoXrayLow extends Repository<XrayDataLow>
+public interface DaoHeader extends Repository<Header>
 {
 
 	    @ServiceMethod(
 				label = "Listar os valores de goes.xray_data_low",
 				description = "Retorna todos os elementos da tabela goes.xray_data_low")
 		@TableReturn
-		public List<XrayDataLow> getXrayDataLowByHeaderEquipament(long n);
+		public List<Header> getHeader();
 	    
-	    	    
+
+
 	    @ServiceMethod(
-				label = "Listar os valores de goes.xray_data_low filtrando por data",
+				label = "Listar os valores de goes.xray_data_low",
 				description = "Retorna todos os elementos da tabela goes.xray_data_low")
 		@TableReturn
-	    public List<XrayDataLow> getXrayDataLowByHeaderIdOrderById(Long header);
-
+		public List<Header> getHeaderByEquipament(long e);
 
 }

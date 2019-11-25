@@ -14,8 +14,9 @@
 			    		<a href="./">Home</a>
 			    		<i class="fas fa-angle-right mx-2" aria-hidden="true"></i>
 			    		
+			    		
 			    	</li>
-			    	<li class="breadcrumb-item active" aria-current="page">Documentação</li>
+			    	<li class="breadcrumb-item active" aria-current="page">DocumentacÃ£o</li>
 				</ol>
 			</nav>
 
@@ -29,7 +30,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<p>
-							Documentação sobre como implementar as classes para upload na plataforma.
+							DocumentaÃ§Ã£o sobre como implementar as classes para upload na plataforma.
 						</p>
 					</div>
 				</div>

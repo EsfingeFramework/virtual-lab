@@ -6,8 +6,9 @@ import org.esfinge.virtuallab.api.annotations.Inject;
 import org.esfinge.virtuallab.api.annotations.LineChartReturn;
 import org.esfinge.virtuallab.api.annotations.ServiceClass;
 import org.esfinge.virtuallab.api.annotations.ServiceMethod;
-import org.esfinge.virtuallab.demo.chart.lines.dao.DaoXrayLow;
-import org.esfinge.virtuallab.demo.chart.lines.dao.XrayDataLow;
+import org.esfinge.virtuallab.demo.chart.lines.xray.DaoXrayLow;
+import org.esfinge.virtuallab.demo.chart.lines.xray.Header;
+import org.esfinge.virtuallab.demo.chart.lines.xray.XrayDataLow;
 
 @ServiceClass(
 		label = "GRÁFICOS - LINHAS",
@@ -31,12 +32,9 @@ public class LineChartDemo {
 					xAxisLabel = "Tempo",
 					xAxis = {"eventDateTime"},
 					yAxis= {"shortXray","longXray","R1","R2","R3","R4","R5"})
-		public List<?> listaXrayDataLowGetXray(Long header)
+		public List<?> listaXrayDataLowGetXray(Header header)
 		{
-			
-			List<XrayDataLow> resp = xrayLow.getXrayDataLowByHeaderIdOrderById(header);
-			
-			
-			return resp;	
+			//List<XrayDataLow> resp = xrayLow.getXrayDataLowByHeaderOrderById(header);
+			return null;	
 		}	
 }

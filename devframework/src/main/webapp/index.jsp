@@ -10,7 +10,7 @@
 			<section class="jumbotron text-center">
 				<div class="container">
 					<h1 class="jumbotron-heading">Lista de Classes</h1>
-					<p class="lead">Selecione o bot„o abaixo para cadastrar novas classes java.</p>
+					<p class="lead">Selecione o bot√£o abaixo para cadastrar novas classes java.</p>
 					<p>
 						<button type="button" class="btn btn-primary" data-toggle="modal"
 						data-target="#classModal">Adicionar Nova Classe Java</button>

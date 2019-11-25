@@ -24,7 +24,8 @@ app.Methods = {
 	    		$index = $(this).data("index");
 	    		app.Methods.invokeMethod($index);
 	    	});
-			
+	        $('input[type=datetime-local]').datepicker();
+
 		},
 		
 		// carrega a lista de metodos

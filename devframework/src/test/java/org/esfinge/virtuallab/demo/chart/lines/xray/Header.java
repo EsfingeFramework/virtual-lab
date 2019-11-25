@@ -1,10 +1,12 @@
-package org.esfinge.virtuallab.demo.chart.lines.dao;
+package org.esfinge.virtuallab.demo.chart.lines.xray;
 
 import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,9 +20,9 @@ public class Header {
 	@Column(name = "acquisition_fk")
 	private long aquisition;
 	
-	
-	@Column(name="station_equipment_fk")
-	private long equipament;
+	@ManyToOne
+	@JoinColumn(name="station_equipment_fk")
+	private StationEquipament equipament;
 	
 	@Column(name = "time_resolution")
 	private long timeResolution;
@@ -37,24 +39,6 @@ public class Header {
 	@Column(name = "missing_data")
 	private double missingData;
 
-	public Header()
-	{
-		
-	}
-	
-	
-	
-	public Header(Long id, long aquisition, long equipament, long timeResolution, Calendar eventDate,
-			Calendar timeStart, Calendar timeEnd, double missingData) {
-		this.id = id;
-		this.aquisition = aquisition;
-		this.equipament = equipament;
-		this.timeResolution = timeResolution;
-		this.eventDate = eventDate;
-		this.timeStart = timeStart;
-		this.timeEnd = timeEnd;
-		this.missingData = missingData;
-	}
 
 	public Long getId() {
 		return id;
@@ -72,11 +56,11 @@ public class Header {
 		this.aquisition = aquisition;
 	}
 
-	public long getEquipament() {
+	public StationEquipament getEquipament() {
 		return equipament;
 	}
 
-	public void setEquipament(long equipament) {
+	public void setEquipament(StationEquipament equipament) {
 		this.equipament = equipament;
 	}
 

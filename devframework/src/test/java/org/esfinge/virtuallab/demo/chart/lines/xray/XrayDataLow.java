@@ -1,6 +1,7 @@
-package org.esfinge.virtuallab.demo.chart.lines.dao;
+package org.esfinge.virtuallab.demo.chart.lines.xray;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,41 +36,28 @@ public class XrayDataLow{
 	@Column(name="short_xray")
 	private double  shortXray;
 
-	@ManyToOne
-	@JoinColumn(name = "header_fk", referencedColumnName = "id")
-	private Header header;
+	
+	@Column(name="header_fk")
+	private Long header;
 
 	@Transient
-	private double R1 = 10e-5d; 
+	private double R1 = 0.00001; 
 	
 	@Transient
-	private double R2 = 5*10e-5;
+	private double R2 = 0.00005;
 	
 	@Transient
-	private double R3 = 10e-4;
+	private double R3 =  0.0001;
 	
 	@Transient
-	private double R4 = 10e-3;
+	private double R4 = 0.001;
 	
 	@Transient
-	private double R5 = 2*10e-3;
+	private double R5 = 0.002;
 	
 	
 	public XrayDataLow() {
 	}
-	
-	
-
-	public XrayDataLow(Long id, Calendar eventDatetime, double longXray, double ratio, double shortXray, Header header) {
-		super();
-		this.id = id;
-		this.eventDateTime = eventDatetime;
-		this.longXray = longXray;
-		this.ratio = ratio;
-		this.shortXray = shortXray;
-		this.header = header;
-	}
-
 	
 	
 	
@@ -134,13 +122,13 @@ public class XrayDataLow{
 
 
 
-	public Header getHeader() {
+	public Long getHeader() {
 		return header;
 	}
 
 
 
-	public void setHeader(Header header) {
+	public void setHeader(Long header) {
 		this.header = header;
 	}
 

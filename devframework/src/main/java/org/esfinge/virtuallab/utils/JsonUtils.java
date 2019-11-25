@@ -1,9 +1,14 @@
 package org.esfinge.virtuallab.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.print.attribute.standard.SheetCollate;
 
 import org.esfinge.virtuallab.web.json.JsonArray;
 import org.esfinge.virtuallab.web.json.JsonData;
@@ -84,6 +89,13 @@ public class JsonUtils
 	{
 		try
 		{
+			System.out.println(typeClass);
+			if(typeClass.equals(Calendar.class)) {
+				
+				SimpleDateFormat dateFormat = new SimpleDateFormat("\"yyyy-MM-dd\"");
+				Date parsedDate = dateFormat.parse(jsonString);
+				System.out.println(parsedDate.getTime());
+			}
 			return _JSON_MAPPER.readValue(jsonString, typeClass);
 		}
 		catch (Exception e)
@@ -317,8 +329,9 @@ public class JsonUtils
 		Map<String,String> schemaMap = convertToMap(schemaString);
 		
 		// verifica se a classe eh do tipo Temporal (Calendar, Timestamp, Date..)
-//		if( ReflectionUtils.isTemporalType(typeClass) )
-//			schemaMap.put("type", "datetime-local");
+		if( ReflectionUtils.isTemporalType(typeClass) )
+			schemaMap.put("type", "datetime-local");
+			System.out.println(schemaMap.toString());
 		
 		// monta os schemas dos tipos referenciados (definitions)
 		Map<String, JsonSchema> refsMap = new HashMap<>();
@@ -338,7 +351,7 @@ public class JsonUtils
 		
 		// monta o schema principal
 		JsonSchema jsonSchema = parseSchema(schemaMap.get("title"), schemaMap);
-		
+		System.out.println(jsonSchema.toString());
 		// substitui os schemas referenciados
 		if ( schemaMap.containsKey("definitions") )
 			replaceRefsSchema(jsonSchema, refsMap);
@@ -369,6 +382,9 @@ public class JsonUtils
 		// propriedades basicas
 		schema.setType(type);
 		schema.setTitle(name);
+		if ( schemaMap.containsKey("class"))
+			schema.setClazz(schemaMap.get("class"));
+		
 		if ( schemaMap.containsKey("format"))
 			schema.setFormat(schemaMap.get("format"));
 

@@ -1,10 +1,13 @@
-package org.esfinge.virtuallab.demo.chart.lines.dao;
+package org.esfinge.virtuallab.demo.chart.lines.xray;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.esfinge.virtuallab.api.annotations.ServiceDAO;
 import org.esfinge.virtuallab.api.annotations.ServiceMethod;
 import org.esfinge.virtuallab.api.annotations.TableReturn;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import net.sf.esfinge.querybuilder.Repository;
 import net.sf.esfinge.querybuilder.annotation.Condition;
@@ -22,21 +25,21 @@ import net.sf.esfinge.querybuilder.methodparser.ComparisonType;
 	user = "postgres", 					    
 	password = "postgres", 
 	dialect = "org.hibernate.dialect.PostgreSQLDialect")
-public interface DaoHeader extends Repository<Header>
+public interface DaoXrayLow extends Repository<XrayDataLow>
 {
 
+	    /*    	    
 	    @ServiceMethod(
-				label = "Listar os valores de goes.xray_data_low",
+				label = "Listar os valores de goes.xray_data_low filtrando por Header",
 				description = "Retorna todos os elementos da tabela goes.xray_data_low")
 		@TableReturn
-		public List<Header> getHeader();
-	    
-
-
+	    public List<XrayDataLow> getXrayDataLowByHeaderOrderById(Header header);
+	    */
+	    	
 	    @ServiceMethod(
-				label = "Listar os valores de goes.xray_data_low",
+				label = "Listar os valores de goes.xray_data_low filtrando por Header",
 				description = "Retorna todos os elementos da tabela goes.xray_data_low")
 		@TableReturn
-		public List<Header> getHeaderByEquipament(long e);
+	    public List<XrayDataLow> getXrayDataLowByEventDateTime(    Calendar c);
 
 }

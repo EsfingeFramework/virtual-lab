@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -193,7 +194,7 @@ public class ReflectionUtils
 	public static Class<?> findClass(String classQualifiedName) throws ClassNotFoundException
 	{
 		Class<?> clazz = null;
-		
+
 		// verifica se eh uma classe basica
 		if ( basicTypesMap.containsKey(classQualifiedName) )
 			clazz = basicTypesMap.get(classQualifiedName);
@@ -224,7 +225,7 @@ public class ReflectionUtils
 	 */
 	public static boolean isTemporalType(Class<?> clazz)
 	{
-		return ( clazz == Calendar.class );
+			return ( clazz == Calendar.class );
 	}
 	
 	/**

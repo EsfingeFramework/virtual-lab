@@ -26,6 +26,8 @@ public class ListServiceMethodsHandler implements IJsonRequestHandler
 			// obtem a string do objeto JSON do request
 			String jsonString = this.getJsonParameter(request);
 
+			
+			
 			// obtem a lista de servicos validos da classe informada
 			String clazzQualifiedName = JsonUtils.getProperty(jsonString, "clazz");
 			List<MethodDescriptor> methodList = PersistenceService.getInstance().listServiceMethods(clazzQualifiedName);
@@ -50,7 +52,6 @@ public class ListServiceMethodsHandler implements IJsonRequestHandler
 			jsonReturn.setSuccess(false);
 			jsonReturn.setMessage("Erro: " + e.toString());
 		}
-
 		return jsonReturn;
 	}
 }

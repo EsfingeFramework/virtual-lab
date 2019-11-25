@@ -27,8 +27,6 @@ public class LineChartReturnProcessor extends MethodReturnProcessor<LineChartRet
 		
 		ChartObject returnObj = new ChartObject(this.annotation);
 		
-		
-			
 		// popula as informacoes
 		returnObj.setType(this.annotation.horizontal() ? "horizontalBar" : annotation.typeOfChart());
 		returnObj.getOptions().populate(this.annotation);
@@ -41,20 +39,26 @@ public class LineChartReturnProcessor extends MethodReturnProcessor<LineChartRet
 				Map<String, Object> value2 = (Map<String, Object>) value;
 				Map<String, Map<String, ?>> formatedValue = getMulltipleValuesMap(value2);
 				System.out.println(formatedValue.toString());
-				System.out.println("+++====+++");
 				List<DatasetObject> dataset = this.createDataSetTime(formatedValue);
 				returnObj.data.datasets = dataset;				
 				System.out.println(formatedValue.toString());
-				System.out.println("++++++");
 			}
 			else if(value instanceof List)
 			{
-				System.out.println("==========");
 				Map<String, Map<String, ?>> formatedValue = getMulltipleValues(value);
 				List<DatasetObject> dataset = this.createDataSetTime(formatedValue);
 				returnObj.data.datasets = dataset;	
-				System.out.println("==========");
 			}
+		}
+		else
+		{
+			System.out.println("Não IMPLEMENTADO");
+			 if(value instanceof List)
+			 {
+					//Map<String, Map<String, ?>> formatedValue = getOneValues(value);
+				//	List<DatasetObject> dataset = this.createDataSetTime(formatedValue);
+
+			 }
 		}
 				
 		
@@ -69,8 +73,7 @@ public class LineChartReturnProcessor extends MethodReturnProcessor<LineChartRet
 		// TODO Auto-generated method stub
 		
 		Map<String, Map<String, ?>> addNumber =new HashMap<String, Map<String, ?>>();
-		if(this.annotation.yAxis().length>1)
-		{
+	
 			for (String name: this.annotation.yAxis()) {
 				System.out.println(name);
 				Map<String, Object> lx = new HashMap<String, Object>(); 
@@ -79,7 +82,8 @@ public class LineChartReturnProcessor extends MethodReturnProcessor<LineChartRet
 				for(Object  obj :(List<Object>)value) {
 					try {
 						Object nix = ReflectionUtils.getFieldValue(obj,this.annotation.xAxis()[0]);
-							if(nix instanceof Calendar);
+						System.out.println(this.annotation.temporalSeries());
+						if(this.annotation.temporalSeries())
 							{
 								Calendar c = (Calendar) nix;
 								nix = c.getTimeInMillis();
@@ -99,7 +103,7 @@ public class LineChartReturnProcessor extends MethodReturnProcessor<LineChartRet
 				lx.put("y", numberY);
 				addNumber.put(name, lx);
 			}
-		}
+		
 		return addNumber;
 	}
 
@@ -146,7 +150,6 @@ public class LineChartReturnProcessor extends MethodReturnProcessor<LineChartRet
 	 				Object x = ((Map) value).get(this.annotation.dataLabels());
 	 				
 	 				
-	 				System.out.println("++++++++++++++++++++++++++++++");
 	 				System.out.println(x.toString());
 	 				if(x instanceof List)
 	 				{
@@ -157,7 +160,6 @@ public class LineChartReturnProcessor extends MethodReturnProcessor<LineChartRet
 						}
 	 				}
 	 				
-	 				System.out.println("++++++++++++++++++++++++++++++");
 	 				
 	 				
 	 				//labels.addAll((Collection<? extends String>) );
@@ -204,8 +206,9 @@ public class LineChartReturnProcessor extends MethodReturnProcessor<LineChartRet
 		
 		if (! Utils.isNullOrEmpty(values) ) {
 			for(String yAxis:this.annotation.yAxis()) {
+				System.out.println("ENTROuu");
 				DatasetObject dataset = new DatasetObject();
-
+				
 				List<?> xArr = (List<?>) values.get(yAxis).get("x");
 				List<?> yArr = (List<?>) values.get(yAxis).get("y");
 				if (! Utils.isNullOrEmpty(xArr)&&! Utils.isNullOrEmpty(yArr) )
@@ -607,11 +610,14 @@ public class LineChartReturnProcessor extends MethodReturnProcessor<LineChartRet
 			xGridLines.addProperty("display", annotation.xAxisShowGridlines());
 			
 			JsonObject xAxes = new JsonObject();
-			xAxes.addProperty("type", "time");
+			if(annotation.temporalSeries())
+			{
+				xAxes.addProperty("type", "time");
+			}
+			
 			xAxes.addProperty("responsive", true);
 			if (! Utils.isNullOrEmpty(annotation.xAxisLabel()) )
 			{
-				System.out.println("============Utils==============");
 				JsonObject scaleLabel = new JsonObject();
 				scaleLabel.addProperty("display", true);
 				
@@ -619,16 +625,19 @@ public class LineChartReturnProcessor extends MethodReturnProcessor<LineChartRet
 					
 				scaleLabel.addProperty("fontSize", annotation.axisFontSize());
 				
-				JsonObject time = new JsonObject();
-				JsonObject displayFormats = new JsonObject();
-				displayFormats.addProperty("minute", "DD/MM/YYYY HH:mm");
-				time.addProperty("unit", "minute");
-				time.addProperty("displayFormats", displayFormats);
-				time.addProperty("tooltipFormat",displayFormats );
-				//xAxes.addProperty("distribution", "series");
-				xAxes.addProperty("time", time);
-				xAxes.addProperty("scaleLabel", scaleLabel);
-				System.out.println("============Utils==============");
+				if(annotation.temporalSeries())
+				{
+					JsonObject time = new JsonObject();
+					JsonObject displayFormats = new JsonObject();
+					displayFormats.addProperty("minute", "DD/MM/YYYY HH:mm");
+
+					time.addProperty("unit", "minute");
+					time.addProperty("displayFormats", displayFormats);
+					time.addProperty("tooltipFormat",displayFormats );
+					//xAxes.addProperty("distribution", "series");
+					xAxes.addProperty("time", time);
+					xAxes.addProperty("scaleLabel", scaleLabel);
+				}	
 			}
 			
 			// eixo Y

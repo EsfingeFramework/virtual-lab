@@ -14,7 +14,7 @@
 			    	<li class="breadcrumb-item">
 			    		<a href="./">Classes</a>
 			    		<i class="fas fa-angle-right mx-2" aria-hidden="true"></i>
-			    		
+			    	
 			    	</li>
 			    	<li class="breadcrumb-item active" aria-current="page">
 			    		<a href="methods.jsp" id="breadcrumbClassName"/></a>
@@ -35,7 +35,7 @@
 					<div class="col-md-12">
 						<div class="card">
 	  						<div class="card-header">
-								Entre com os parâmetros do método <strong>"<span id="InvokeMethodName"></span>"</strong> :
+								Entre com os parâmetro do método <strong>"<span id="InvokeMethodName"></span>"</strong> :
 							</div>
 							<div class="card-body">
 								<form id="formParam" data-url="invokeMethod.op"></form>
@@ -71,9 +71,14 @@
 	
 	<jsp:attribute name="js_custom">
 		<!-- load chartjs library -->
+		
+		<script type="text/javascript" src="webjars/modernizr/2.8.3/modernizr.min.js"></script>
 		<script type="text/javascript" src="webjars/momentjs/2.24.0/moment.js"></script>
 		<script type="text/javascript" src="webjars/chartjs/2.8.0/Chart.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/RenderResult.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/InvokeMethod.js"></script>
+		
+	
+		
 	</jsp:attribute>
 </tags:_Layout>
