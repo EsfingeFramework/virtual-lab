@@ -13,6 +13,14 @@
 		<link href="webjars/datatables/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
 		<link href="webjars/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" type="text/css">
 		<link href="webjars/leaflet/1.5.1/leaflet.css" rel="stylesheet" type="text/css">
+		
+		
+			<script type="text/javascript" src="webjars/jquery/3.3.1/jquery.min.js"></script>
+	      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+				
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 		  
 		<link href="${pageContext.request.contextPath}/resources/css/app.css" rel="stylesheet" type="text/css">
      	<jsp:invoke fragment="css_custom"/>
@@ -46,8 +54,8 @@
     	<jsp:invoke fragment="content"/>
     	
     <!-- load jQuery library -->
-	<script type="text/javascript" src="webjars/jquery/3.3.1/jquery.min.js"></script>
-	      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
 	
 	<!-- load Bootstrap library -->
 	<script type="text/javascript" src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>

@@ -1,6 +1,7 @@
 package org.virtuallab.annotations;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.esfinge.virtuallab.api.annotations.LineChartReturn;
@@ -37,5 +38,8 @@ public class Chart {
 		return list;
 	}
 	
-	
+	@ServiceMethod()
+	public Calendar cal(Calendar c) {
+		return c;
+	}
 }

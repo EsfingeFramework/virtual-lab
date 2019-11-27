@@ -78,7 +78,15 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/RenderResult.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/InvokeMethod.js"></script>
 		
-	
+		<script>
+		    $(function(){
+		         // Find any date inputs and override their functionality
+		         $('input[type="datetime-local"]').flatpickr({
+		        	    enableTime: true,
+		        	    dateFormat: "d-m-Y H:i",
+		        	});
+		    });
+		</script>
 		
 	</jsp:attribute>
 </tags:_Layout>

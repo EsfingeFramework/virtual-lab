@@ -91,10 +91,15 @@ public class JsonUtils
 		{
 			System.out.println(typeClass);
 			if(typeClass.equals(Calendar.class)) {
+				System.out.println(jsonString);
+				SimpleDateFormat dateFormat = new SimpleDateFormat("\"dd-MM-yyyy hh:mm\"");
 				
-				SimpleDateFormat dateFormat = new SimpleDateFormat("\"yyyy-MM-dd\"");
+				
 				Date parsedDate = dateFormat.parse(jsonString);
+				
 				System.out.println(parsedDate.getTime());
+				jsonString = ""+parsedDate.getTime();
+				System.out.println(jsonString);
 			}
 			return _JSON_MAPPER.readValue(jsonString, typeClass);
 		}
