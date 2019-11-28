@@ -43,13 +43,18 @@ public class ChartReturnTest {
 		List<MethodDescriptor> methodList = PersistenceService.getInstance().listServiceMethods(Chart.class.getCanonicalName());
 		for (MethodDescriptor methodDescriptor : methodList) {
 			System.out.println(methodDescriptor.getName());
+			if(methodDescriptor.getName().equals("tableReturnTest"));
+			{
+				MethodReturnProcessor<?> returnProcessor = MethodReturnProcessorHelper.getInstance().findProcessor(methodDescriptor);
+				Object result = InvokerService.getInstance().call(methodDescriptor);
+				JsonReturn ret = new JsonReturn();
+				ret.setData(returnProcessor.process(result));
+				assertEquals("{\"rows\":[[1,1],[2,1],[3,1]],\"header\":[\"X1\",\"Y1\"],\"showHeader\":true}" + 
+						"", ret.getData().toString());
+
+			}
 		}
 		
-		Object result = InvokerService.getInstance().call(methodList.get(0));
-		MethodReturnProcessor<?> returnProcessor = MethodReturnProcessorHelper.getInstance().findProcessor(methodList.get(0));
-		JsonReturn ret = new JsonReturn();
-		ret.setData(returnProcessor.process(result));
-		System.out.println(ret.getData());
 	}
 	
 }

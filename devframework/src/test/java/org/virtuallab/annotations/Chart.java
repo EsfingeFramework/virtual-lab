@@ -7,6 +7,7 @@ import java.util.List;
 import org.esfinge.virtuallab.api.annotations.LineChartReturn;
 import org.esfinge.virtuallab.api.annotations.ServiceClass;
 import org.esfinge.virtuallab.api.annotations.ServiceMethod;
+import org.esfinge.virtuallab.api.annotations.TableReturn;
 
 @ServiceClass(
 		label = "GRÁFICOS - LINHAS",
@@ -22,24 +23,10 @@ public class Chart {
 		list.add(new Data2Val(3, 1));
 	}
 	
-	@ServiceMethod(description = "Test",label = "T")
-	@LineChartReturn(typeOfChart = "line",
-			dataLabels = "eventDateTime",
-			temporalSeries = false,
-			multipleDataset = true,
-			xAxisShowGridlines = false, 
-			title = "Fluxo Raio-X",
-			yAxisLabel = "Watts m²",
-			xAxisLabel = "Tempo",
-			xAxis = {"x1"},
-			yAxis= {"y1"})
-	public List<Data2Val> lista()
+	@ServiceMethod(description = "Test",label = "TableReturn")
+	@TableReturn
+	public List<Data2Val> tableReturnTest()
 	{
 		return list;
-	}
-	
-	@ServiceMethod()
-	public Calendar cal(Calendar c) {
-		return c;
 	}
 }
