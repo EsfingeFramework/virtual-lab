@@ -2,6 +2,8 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.esfinge.virtuallab.TestUtils;
+import org.esfinge.virtuallab.demo.chart.bars.BarChartDemo;
+import org.esfinge.virtuallab.demo.chart.bars.Votes;
 import org.esfinge.virtuallab.demo.chart.lines.LineChartDemo;
 import org.esfinge.virtuallab.demo.chart.lines.xray.DaoHeader;
 import org.esfinge.virtuallab.demo.chart.lines.xray.DaoStation;
@@ -31,14 +33,14 @@ public class Main
 	{
 //		TestUtils.createJar("tarefa.jar", TarefaService.class, Tarefa.class);
 //		TestUtils.createJar("matematica.jar", MatematicaService.class, MatematicaInvokerProxy.class, Ponto.class);
-//		TestUtils.createJar("chart.jar", ChartService.class, Temperatura.class);
+		TestUtils.createJar("mapDemo.jar", Cidade.class, Localidade.class, MapDemo.class);
 //		TestUtils.createJar("temperaturaDAO.jar", TemperaturaService.class, TemperaturaServiceProxy.class, Temperatura.class);
 //		TestUtils.createJar("topicDAO.jar", TopicService.class, Topic.class);
-		TestUtils.createJar("INPE_Goes.jar", DaoXrayLow.class, XrayDataLow.class);
+		 //TestUtils.createJar("INPE_Goes.jar", DaoXrayLow.class, XrayDataLow.class);
 		//TestUtils.createJar("LineChartDemo.jar", LineChartDemo.class);		
-		TestUtils.createJar("DaoHeader.jar", DaoHeader.class,Header.class);		
-		TestUtils.createJar("Stations.jar",DaoStation.class, Station.class);
-		TestUtils.createJar("StationEquipament.jar",DaoStationEquipament.class, StationEquipament.class);
+		//TestUtils.createJar("DaoHeader.jar", DaoHeader.class,Header.class);		
+		//TestUtils.createJar("Stations.jar",DaoStation.class, Station.class);
+		//TestUtils.createJar("StationEquipament.jar",DaoStationEquipament.class, StationEquipament.class);
 		/*
 		Temperatura t = new Temperatura(2l, "-23.5475","-46.63611111", 28.2, 19.3, "janeiro");
 		

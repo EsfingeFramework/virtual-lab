@@ -16,7 +16,7 @@
 			    		
 			    		
 			    	</li>
-			    	<li class="breadcrumb-item active" aria-current="page">DocumentacÃ£o</li>
+			    	<li class="breadcrumb-item active" aria-current="page">Documentação</li>
 				</ol>
 			</nav>
 
@@ -29,9 +29,18 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<p>
-							DocumentaÃ§Ã£o sobre como implementar as classes para upload na plataforma.
-						</p>
+					<h3>Utilizando a ferramenta</h3>
+                  	<p>No momento que for utilizar a ferramenta pela primeira vês ela estará assim:<br>
+                      <img src="resources/images/virtuallab.png" alt="virtualLabGui" width=1024></p>
+                 <p> Em seguida vai em adicionar nova classe e adicione as classes ou jars que necessita para utilizar a ferramenta.<br>
+                      <img src="resources/images/virtuallab_envio.png" alt="virtualLabGui" width=1024></p>
+                  <p>Este por sua vês vai abrir essa janela.</p>
+                  <p>Selecione Browse e selecione o arquivo.</p>
+                  <img src="resources/images/virtuallab_envio_incluir.png" alt="virtualLabGui" width=1024 ><br>
+                  <img src="resources/images/virtuallab_envio_fileUpload.png" alt="virtualLabGui" width=1024><br>
+                  <img src="resources/images/virtuallab_envio_fileUpload.png" alt="virtualLabGui" width=1024><br>
+                  <img src="resources/images/virtuallab_envio_upload.png" alt="virtualLabGui" width=1024><br>
+
 					</div>
 				</div>
 				<div class="row">

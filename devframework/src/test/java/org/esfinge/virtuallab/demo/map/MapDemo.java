@@ -54,8 +54,6 @@ public class MapDemo
 			new Localidade("DCTA", "Departamento de Ciência e Tecnologia Aeroespacial", -23.208436, -45.871526)
 	};
 	
-	@Inject
-	private DaoDemo temperaturaDAO;
 
 	
 	/*--------------------------------------------------------------------------
@@ -71,19 +69,7 @@ public class MapDemo
 	}
 	
 	
-	/*--------------------------------------------------------------------------
-	 * Especifica o titulo e texto do marcador utilizando EL.
-	 *-------------------------------------------------------------------------*/
-	@ServiceMethod(
-		label = "Listar temperatura por mês", 
-		description = "@MapReturn utilizando EL.")
-	@MapReturn(
-		markerTitle = "${obj.local}",
-		markerText = "Min: ${obj.minima}°C / Max: ${obj.maxima}°C")
-	public List<Temperatura> listTemperaturaDoMes(String mes)
-	{
-		return this.temperaturaDAO.getTemperaturaByMes(mes);
-	}
+	
 	
 	@ServiceMethod(
 		label = "Listar capitais do Brasil - Detalhes", 
