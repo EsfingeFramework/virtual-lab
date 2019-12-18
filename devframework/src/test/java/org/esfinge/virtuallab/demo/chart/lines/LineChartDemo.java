@@ -32,9 +32,9 @@ public class LineChartDemo {
 					xAxisLabel = "Tempo",
 					xAxis = {"eventDateTime"},
 					yAxis= {"shortXray","longXray","R1","R2","R3","R4","R5"})
-		public List<?> listaXrayDataLowGetXray(Header header)
+		public List<?> listaXrayDataLowGetXray(Long header)
 		{
-			//List<XrayDataLow> resp = xrayLow.getXrayDataLowByHeaderOrderById(header);
+			List<XrayDataLow> resp = xrayLow.getXrayDataLowByHeaderOrderById(header);
 			return null;	
 		}	
 }

@@ -36,8 +36,8 @@ public class Main
 		TestUtils.createJar("mapDemo.jar", Cidade.class, Localidade.class, MapDemo.class);
 //		TestUtils.createJar("temperaturaDAO.jar", TemperaturaService.class, TemperaturaServiceProxy.class, Temperatura.class);
 //		TestUtils.createJar("topicDAO.jar", TopicService.class, Topic.class);
-		 //TestUtils.createJar("INPE_Goes.jar", DaoXrayLow.class, XrayDataLow.class);
-		//TestUtils.createJar("LineChartDemo.jar", LineChartDemo.class);		
+		TestUtils.createJar("INPE_Goes.jar", DaoXrayLow.class, XrayDataLow.class);
+		TestUtils.createJar("LineChartDemo.jar", LineChartDemo.class);		
 		//TestUtils.createJar("DaoHeader.jar", DaoHeader.class,Header.class);		
 		//TestUtils.createJar("Stations.jar",DaoStation.class, Station.class);
 		//TestUtils.createJar("StationEquipament.jar",DaoStationEquipament.class, StationEquipament.class);

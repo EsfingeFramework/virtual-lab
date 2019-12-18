@@ -40,6 +40,6 @@ public interface DaoXrayLow extends Repository<XrayDataLow>
 				label = "Listar os valores de goes.xray_data_low filtrando por Header",
 				description = "Retorna todos os elementos da tabela goes.xray_data_low")
 		@TableReturn
-	    public List<XrayDataLow> getXrayDataLowByEventDateTime(    Calendar c);
+	    public List<XrayDataLow> getXrayDataLowByHeaderOrderById(Long header );
 
 }

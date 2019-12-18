@@ -40,12 +40,54 @@
                   <img src="resources/images/virtuallab_envio_fileUpload.png" alt="virtualLabGui" width=1024><br>
                   <img src="resources/images/virtuallab_envio_fileUpload.png" alt="virtualLabGui" width=1024><br>
                   <img src="resources/images/virtuallab_envio_upload.png" alt="virtualLabGui" width=1024><br>
-
-					</div>
+				  <img src="resources/images/virtuallab_selectMethod.png" alt="virtualLabGui" width=1024><br>
+				  <img src="resources/images/virtuallab_executar.png" alt="virtualLabGui" width=1024><br>
+				  <img src="resources/images/virtuallab_resultado.png" alt="virtualLabGui" width=1024><br>
+				  
+				</div>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
-						&nbsp;<br />&nbsp;<br />
+						<h3>Desenvolvimento utilizando a ferramenta</h3>
+						<h4>Conexão ao banco de dados</h4>
+						<p>Cria a classe entidade</p>
+						<pre>
+							<code>
+@Entity
+public class Temperatura
+{
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+							
+	private String latitude;
+	private String longitude;
+	private String local;
+	private double maxima;
+	private double minima;
+	private String mes;
+									
+	public Temperatura()
+	{		
+	}
+									
+	public Temperatura(Long id, String lat, String lng, String local, double max, double min, String mes)
+	{
+		this.id = id;
+		this.latitude = lat;
+		this.longitude = lng;
+		this.local = local;
+		this.maxima = max;
+		this.minima = min;
+		this.mes = mes;
+	}
+	//Gets e sets omitidos
+								
+}
+																
+							
+							</code>
+						</pre>
 					</div>
 				</div>
 			</div>
