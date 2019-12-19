@@ -49,7 +49,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<h3>Desenvolvimento utilizando a ferramenta</h3>
-						<h4>Conexão ao banco de dados</h4>
+						<h4>Conexão ao banco de dados utilizando <code>@ServiceDAO</code></h4>
 						<p>Cria a classe entidade</p>
 						<pre>
 							<code>
@@ -86,6 +86,78 @@ public class Temperatura
 }
 																
 							
+							</code>
+						</pre>						
+						<pre>
+							<code>
+
+@ServiceDAO(
+	label = "DAO",
+	description = "Demonstração da anotação @ServiceDAO.",
+	url = "jdbc:postgresql://localhost:5432/postgres", 
+	user = "postgres", 
+	password = "postgres", 
+	dialect = "org.hibernate.dialect.PostgreSQLDialect")
+public interface DaoDemo extends Repository&lt;Temperatura&gt;
+{
+	
+	@ServiceMethod(
+		label = "Listar todas temperaturas",
+		description = "Retorna todos as temperaturas cadastradas no Banco de Dados.")
+	@TableReturn
+	public List&lt;Temperatura&gt; getTemperatura();
+	
+	
+	@ServiceMethod(
+		label = "Listar temperaturas por mês",
+		description = "Retorna as temperaturas referentes ao mês informado.")
+	@TableReturn
+	public List&lt;Temperatura&gt;getTemperaturaByMes(String mes);
+
+	
+	@ServiceMethod(
+		label = "Listar temperaturas máximas",
+		description = "Retorna as temperaturas com máxima igual ou maior ao valor informado.")
+	@TableReturn
+	public List&lt;Temperatura&gt; getTemperaturaByMaximaOrderByMaximaAsc(@GreaterOrEquals double temp);
+
+	
+	@ServiceMethod(
+			label = "Listar temperaturas mínimas",
+			description = "Retorna as temperaturas com mínima igual ou menor ao valor informado.")
+	@TableReturn
+	public List&lt;Temperatura&gt; getTemperaturaByMinimaOrderByMinimaDesc(@LesserOrEquals double temp);
+}		
+							</code>
+						</pre>
+
+<h4>Desenvolvimento utilizando o <code>@ServiceClass</code></h4>
+<p></p>
+						<pre>
+							<code>
+@ServiceClass(
+	label = "GRÁFICOS - BARRAS",
+	description = "Demonstração da anotação @BarChartReturn.")
+public class BarChartDemo
+{
+	
+		@ServiceMethod(
+		label = "Criar gráfico - Lista",
+		description = "@BarChartReturn sem parâmetros.")
+	@BarChartReturn
+	public List&lt;Number&gt; createChartByList()
+	{
+		List&lt;Number&gt; list = new ArrayList<>();
+		list.add(12);
+		list.add(19);
+		list.add(3);
+		list.add(7);
+		list.add(10);
+		
+		return list;
+	}
+
+}	
 							</code>
 						</pre>
 					</div>
