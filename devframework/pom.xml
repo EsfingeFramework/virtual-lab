@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>VirtualLab Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-	
+		
 	<!-- SPRING-BOOT PARENT -->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -20,19 +20,37 @@
 	<properties>
 	    <maven.compiler.target>1.8</maven.compiler.target>
 	    <maven.compiler.source>1.8</maven.compiler.source>
-	<!-- 
+	
 	    <springframework.version>4.3.0.RELEASE</springframework.version>
 		<jackson.library>2.7.5</jackson.library>
-	 -->
+		
 	</properties>
 
 	<dependencies>
+		
+		 <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-webapp</artifactId>
+    		<version>9.3.0.M2</version>
+    	    <scope>provided</scope>
+        </dependency>
+		
+	
+			
 	
 		<!-- SPRING-BOOT DEPENDENCIES -->
+		
+		
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+	<exclusions>
+        <exclusion>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+        </exclusion>
+    </exclusions>
 		</dependency>
 		
 		<dependency>
@@ -41,17 +59,16 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-jetty</artifactId>
+		</dependency>		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+	
+	
 		
 		<!-- SPRING DEPENDENCIES 
 		
@@ -267,7 +284,6 @@
 		    <scope>test</scope>
 		</dependency>
 		
-						
 		<!-- TEST DEPENDENCIES -->
 		
 		<dependency>
@@ -295,16 +311,28 @@
 
 	<build>
 		<finalName>virtuallab</finalName>
+		 <plugins>
+		 <plugin>
+		  <groupId>org.eclipse.jetty</groupId>
+		  <artifactId>jetty-maven-plugin</artifactId>
+		  <version>9.4.26.v20200117</version>
+		</plugin>
+		 </plugins>       
+		<!-- 
 		
-		<!-- 
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-		 -->
-		<!-- 
+		
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                	<executable>true</executable>
+            		<skip>true</skip>
+        		</configuration>
+            </plugin>
+        </plugins>
+
+    	
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>

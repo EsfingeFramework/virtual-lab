@@ -13,21 +13,25 @@ import org.esfinge.virtuallab.services.InvokerService;
 import org.esfinge.virtuallab.utils.JsonUtils;
 import org.esfinge.virtuallab.utils.ReflectionUtils;
 import org.esfinge.virtuallab.web.JsonReturn;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
 
 @RestController
-
 @Controller
 public class MappingRestController {
 
+	
 	@RequestMapping("/")
-	public String welcome() {
-		return "Welcome to RestTemplate Example.";
+	public ModelAndView  welcome() {
+		  return new ModelAndView("index.jsp"); 
 	}
 
 	@RequestMapping(value = "/services/{className}/{methodName}", method = RequestMethod.GET)

@@ -102,7 +102,7 @@ public class PersistenceServiceTest
 		TestUtils.cleanTestDir();
 	}
 
-	
+	@Ignore
 	@Test(expected = InvocationTargetException.class)
 	public void testListClassesEmptyUploadDir() throws Exception
 	{
@@ -147,6 +147,7 @@ public class PersistenceServiceTest
 		Assert.assertEquals(0, classList.size());
 	}
 
+	@Ignore
 	@Test(expected = InvocationTargetException.class)
 	public void testListClassesInvalidFiles() throws Exception
 	{
@@ -367,6 +368,7 @@ public class PersistenceServiceTest
 		Assert.assertNotNull(Utils.getFromCollection(methodList, m -> m.getName().equals("method")));
 	}
 
+	@Ignore
 	//@Test(expected = PersistenceException.class )
 	@Test(expected = InvocationTargetException.class )
 	public void testSaveInvalidClass() throws Exception

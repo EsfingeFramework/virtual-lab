@@ -28,8 +28,8 @@ public class Main
 //		TestUtils.createJar("chart.jar", ChartService.class, Temperatura.class);
 //		TestUtils.createJar("temperaturaDAO.jar", TemperaturaService.class, TemperaturaServiceProxy.class, Temperatura.class);
 //		TestUtils.createJar("topicDAO.jar", TopicService.class, Topic.class);
-		TestUtils.createJar("INPE_Goes.jar", DaoXrayLow.class, XrayDataLow.class);
-		TestUtils.createJar("LineChartDemo.jar", LineChartDemo.class);		
+		//TestUtils.createJar("INPE_Goes.jar", DaoXrayLow.class, XrayDataLow.class);
+		TestUtils.createJar("table.jar", TableDemo.class, Task.class);		
 		/*
 		Temperatura t = new Temperatura(2l, "-23.5475","-46.63611111", 28.2, 19.3, "janeiro");
 		

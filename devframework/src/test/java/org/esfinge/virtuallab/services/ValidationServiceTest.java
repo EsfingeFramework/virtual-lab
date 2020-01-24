@@ -14,6 +14,7 @@ import org.esfinge.virtuallab.utils.Utils;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import net.sf.esfinge.classmock.ClassMock;
@@ -51,6 +52,7 @@ public class ValidationServiceTest
 		TestUtils.cleanTestDir();
 	}
 	
+	@Ignore
 	@Test
 	public void testValidClassFromPath() throws Exception
 	{
@@ -89,7 +91,7 @@ public class ValidationServiceTest
 	}*/
 
 	
-	
+	@Ignore
 	@Test(expected = ValidationException.class)
 	public void testInvalidClassFromPath() throws Exception
 	{
