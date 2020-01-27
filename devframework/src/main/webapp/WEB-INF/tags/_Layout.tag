@@ -37,8 +37,8 @@
         	<span class="menu-title font-esfinge"> <strong>Esfinge Virtual Lab</strong></span>
 	        <ul>
 	            <li><a href="./"><i class="fas fa-home"></i>Home</a></li>
-	            <li><a href="document.jsp"><i class="fas fa-book"></i>Documentação</a></li>
-	            <li><a href="about.jsp"><i class="fas fa-info-circle"></i>Sobre</a></li>
+	            <li><a href="document.jsp"><i class="fas fa-book"></i>Documentation</a></li>
+	            <li><a href="about.jsp"><i class="fas fa-info-circle"></i>About</a></li>
 	        </ul>
 	    </div>
 		

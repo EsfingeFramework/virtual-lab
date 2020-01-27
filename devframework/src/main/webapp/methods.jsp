@@ -11,7 +11,7 @@
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
 			    	<li class="breadcrumb-item">
-			    		<a href="./">Classes</a>
+			    		<a href="./">Class</a>
 			    		<i class="fas fa-angle-right mx-2" aria-hidden="true"></i>
 			    		
 			    	</li>
@@ -21,7 +21,7 @@
 
 			<section class="jumbotron text-center">
 				<div class="container">
-					<h1 class="jumbotron-heading">Serviços do Módulo: <strong id="headerClassName"></strong></h1>
+					<h1 class="jumbotron-heading">Module Services: <strong id="headerClassName"></strong></h1>
 				</div>
 			</section>
 	
@@ -32,9 +32,9 @@
 							<table id="methodTable" class="table table-striped table-bordered">
 								<thead>
 									<tr>
-										<th>Serviço</th>
-										<th>Assinatura</th>
-										<th>Descrição</th>
+										<th>Service</th>
+										<th>Signature</th>
+										<th>Description</th>
 									</tr>
 								</thead>
 								<tbody>

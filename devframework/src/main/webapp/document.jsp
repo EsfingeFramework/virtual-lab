@@ -15,13 +15,13 @@
 			    		<i class="fas fa-angle-right mx-2" aria-hidden="true"></i>
 			    		
 			    	</li>
-			    	<li class="breadcrumb-item active" aria-current="page">Documentação</li>
+			    	<li class="breadcrumb-item active" aria-current="page">Documentation</li>
 				</ol>
 			</nav>
 
 			<section class="jumbotron text-center">
 				<div class="container">
-					<h1 class="jumbotron-heading"><strong>Documentação</strong> </h1>
+					<h1 class="jumbotron-heading"><strong>Documentation</strong> </h1>
 				</div>
 			</section>
 	
@@ -29,7 +29,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<p>
-							Documentação sobre como implementar as classes para upload na plataforma.
+							Documentation on how to implement the classes for uploading on the platform.
 						</p>
 					</div>
 				</div>

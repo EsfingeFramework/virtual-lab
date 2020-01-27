@@ -4,13 +4,16 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.esfinge</groupId>
 	<artifactId>virtuallab</artifactId>
-	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>VirtualLab Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	  <packaging>jar</packaging>
 		
 	<!-- SPRING-BOOT PARENT -->
 	<parent>
+		
+	
+	
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.1.7.RELEASE</version>
@@ -24,33 +27,41 @@
 	    <springframework.version>4.3.0.RELEASE</springframework.version>
 		<jackson.library>2.7.5</jackson.library>
 		
+		    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <version.java>1.8</version.java>
+    <version.tomee>8.0.0</version.tomee>
+    <version.microprofile>1.3</version.microprofile>
+
+    <version.arquillian>1.1.13.Final</version.arquillian>
+    <version.shrinkwrap.resolvers>3.1.3</version.shrinkwrap.resolvers>
+		
 	</properties>
 
 	<dependencies>
-		
-		 <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-webapp</artifactId>
-    		<version>9.3.0.M2</version>
-    	    <scope>provided</scope>
-        </dependency>
 		
 	
 			
 	
 		<!-- SPRING-BOOT DEPENDENCIES -->
+		<dependency>
+		    <groupId>org.apache.tomee</groupId>
+		    <artifactId>tomee</artifactId>
+		    <version>8.0.0</version>
+		    <type>pom</type>
+		</dependency>
 		
 		
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-	<exclusions>
-        <exclusion>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-        </exclusion>
-    </exclusions>
+			        <exclusions>
+            <exclusion>
+                <groupId>org.hibernate.validator</groupId>
+                <artifactId>hibernate-validator</artifactId>
+            </exclusion>
+        </exclusions>
 		</dependency>
 		
 		<dependency>
@@ -60,7 +71,7 @@
 		
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-jetty</artifactId>
+		    <artifactId>spring-boot-starter-tomcat</artifactId>
 		</dependency>		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -311,6 +322,52 @@
 
 	<build>
 		<finalName>virtuallab</finalName>
+		
+				
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+          <configuration>
+            <failOnMissingWebXml>false</failOnMissingWebXml>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.tomee.maven</groupId>
+          <artifactId>tomee-maven-plugin</artifactId>
+          <version>${version.tomee}</version>
+          <executions>
+            <execution>
+              <id>executable-jar</id>
+              <goals>
+                <goal>exec</goal>
+              </goals>
+              <phase>package</phase>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>${version.java}</source>
+          <target>${version.java}</target>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.tomee.maven</groupId>
+        <artifactId>tomee-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+    		
+		<!--
 		 <plugins>
 		 <plugin>
 		  <groupId>org.eclipse.jetty</groupId>
@@ -318,7 +375,7 @@
 		  <version>9.4.26.v20200117</version>
 		</plugin>
 		 </plugins>       
-		<!-- 
+		 
 		
 		
         <plugins>

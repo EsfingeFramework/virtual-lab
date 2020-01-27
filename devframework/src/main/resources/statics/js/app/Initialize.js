@@ -2,29 +2,29 @@ var app = window.app || {};
 
 app.settings = {
 		languagePtBr: {
-			"sEmptyTable": "Nenhum registro encontrado",
-    	    "sInfo": "Mostrando de _START_ at&eacute; _END_ de _TOTAL_ registros",
-    	    "sInfoEmpty": "Mostrando 0 at&eacute; 0 de 0 registros",
-    	    "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+			"sEmptyTable": "No records found",
+    	    "sInfo": "Showing from _START_ to _END_ of _TOTAL_ records",
+    	    "sInfoEmpty": "Showing 0 to 0 of 0 entries",
+    	    "sInfoFiltered": "(Filtered from _MAX_ records)",
     	    "sInfoPostFix": "",
     	    "sInfoThousands": ".",
-    	    "sLengthMenu": "_MENU_ resultados por p&aacute;gina",
-    	    "sLoadingRecords": "Carregando...",
-    	    "sProcessing": "Processando...",
-    	    "sZeroRecords": "Nenhum registro encontrado",
-    	    "sSearch": "Pesquisar",
+    	    "sLengthMenu": "_MENU_ results per page",
+    	    "sLoadingRecords": "Loading...",
+    	    "sProcessing": "Processing...",
+    	    "sZeroRecords": "No records found",
+    	    "sSearch": "Search",
     	    "oPaginate": {
-    	        "sNext": "Pr&oacute;ximo",
-    	        "sPrevious": "Anterior",
-    	        "sFirst": "Primeiro",
-    	        "sLast": "&Uacute;ltimo"
+    	        "sNext": "Next",
+    	        "sPrevious": "Previous",
+    	        "sFirst": "First",
+    	        "sLast": "Last"
     	    },
     	    "oAria": {
-    	        "sSortAscending": ": Ordenar colunas de forma ascendente",
-    	        "sSortDescending": ": Ordenar colunas de forma descendente"
+    	        "sSortAscending": ": Sort columns ascending",
+    	        "sSortDescending": ": Sort columns descending"
     	    }
 		},		
-		loading: $("<div id='loading'><span><i class='fas fa-spinner fa-pulse fa-1x'></i> Carregando...</span></div>"),
+		loading: $("<div id='loading'><span><i class='fas fa-spinner fa-pulse fa-1x'></i> Loading...</span></div>"),
 		setLoad: function () {
 			$(".Load").append(app.settings.loading);
 		},
