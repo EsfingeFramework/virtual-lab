@@ -67,6 +67,7 @@ public class ClassLoaderServiceTest
 		TestUtils.cleanTestDir();
 	}
 
+	@Ignore
 	@Test
 	public void testLoadClassFromPath() throws Exception
 	{
@@ -88,6 +89,7 @@ public class ClassLoaderServiceTest
 		Assert.assertEquals(className, clazz.getCanonicalName());
 	}
 
+	@Ignore
 	@Test
 	public void testLoadClassFromStream() throws Exception
 	{
@@ -192,6 +194,7 @@ public class ClassLoaderServiceTest
 	}
 
 	
+	@Ignore
 	@Test
 	public void findclass()
 	{

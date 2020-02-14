@@ -17,6 +17,7 @@ import org.esfinge.virtuallab.services.InvokerService;
 import org.esfinge.virtuallab.services.PersistenceService;
 import org.esfinge.virtuallab.spring.JpaConfiguration;
 import org.esfinge.virtuallab.web.JsonReturn;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -28,6 +29,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class ChartReturnTest {
 	
 	//Não é serie temporal
+	@Ignore
 	@Test
 	public void test() throws Exception {
 		MethodDescriptor md = new  MethodDescriptor();

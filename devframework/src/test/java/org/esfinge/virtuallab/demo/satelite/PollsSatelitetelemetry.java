@@ -1,6 +1,5 @@
 package org.esfinge.virtuallab.demo.satelite;
 
-import java.io.Serializable;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -11,10 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "polls_satelitetelemetry")
-public class PollsSatelitetelemetry implements Serializable {
+@Table(name = "polls_sat")
+public class PollsSatelitetelemetry{
 
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -121,10 +119,6 @@ public class PollsSatelitetelemetry implements Serializable {
     private int potencEst;
 
     public PollsSatelitetelemetry() {
-    }
-
-    public PollsSatelitetelemetry(Integer id) {
-        this.id = id;
     }
 
     public PollsSatelitetelemetry(Integer id, String sync, int contadorMensagens, int nroPacote1, int nroPacote2, int nroPacote3, double latitudeGps, double longitudeGps, int dia, int mes, int ano, int hora, int minuto, int segundo, int hdop, int nroSatelite, double speed, double curso, double altitudeGps, double potRecBal, double tempInterUm, double tempExt, double tempInterDois, double pressao, double pressaoMar, int altitudeBMP, double potTxNoBalao, int statusHeader, int statusTemperatura, int ds18b20, int bmp180, int sdcard, int gpsPresent, int potencEst) {
@@ -434,31 +428,6 @@ public class PollsSatelitetelemetry implements Serializable {
 
     public void setPotencEst(int potencEst) {
         this.potencEst = potencEst;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PollsSatelitetelemetry)) {
-            return false;
-        }
-        PollsSatelitetelemetry other = (PollsSatelitetelemetry) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.mycompany.mavenproject1.PollsSatelitetelemetry[ id=" + id + " ]";
     }
     
 }
