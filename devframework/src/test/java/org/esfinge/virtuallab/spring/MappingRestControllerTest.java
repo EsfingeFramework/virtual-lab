@@ -61,7 +61,7 @@ public class MappingRestControllerTest extends AbstractTest {
 	    	         .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 	     
 	      int status = mvcResult.getResponse().getStatus();
-	      //assertEquals(200, status);
+	      assertEquals(406, status);
 	      String content = mvcResult.getResponse().getContentAsString();
 	      System.out.println(content);
 	}

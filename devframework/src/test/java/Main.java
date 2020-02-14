@@ -21,6 +21,8 @@ import org.esfinge.virtuallab.demo.map.Cidade;
 import org.esfinge.virtuallab.demo.map.Localidade;
 import org.esfinge.virtuallab.demo.map.MapDemo;
 import org.esfinge.virtuallab.demo.proxy.ProxyDemo;
+import org.esfinge.virtuallab.demo.satelite.DaoSatelite;
+import org.esfinge.virtuallab.demo.satelite.PollsSatelitetelemetry;
 import org.esfinge.virtuallab.demo.table.TableDemo;
 import org.esfinge.virtuallab.demo.table.Task;
 import org.objectweb.asm.ClassReader;
@@ -33,7 +35,7 @@ public class Main
 	{
 //		TestUtils.createJar("tarefa.jar", TarefaService.class, Tarefa.class);
 //		TestUtils.createJar("matematica.jar", MatematicaService.class, MatematicaInvokerProxy.class, Ponto.class);
-		TestUtils.createJar("mapDemo.jar", Cidade.class, Localidade.class, MapDemo.class);
+		TestUtils.createJar("satelite.jar", DaoSatelite.class, PollsSatelitetelemetry.class);
 //		TestUtils.createJar("temperaturaDAO.jar", TemperaturaService.class, TemperaturaServiceProxy.class, Temperatura.class);
 //		TestUtils.createJar("topicDAO.jar", TopicService.class, Topic.class);
 		TestUtils.createJar("INPE_Goes.jar", DaoXrayLow.class, XrayDataLow.class);

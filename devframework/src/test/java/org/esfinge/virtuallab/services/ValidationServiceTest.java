@@ -16,6 +16,7 @@ import org.esfinge.virtuallab.utils.Utils;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import net.sf.esfinge.classmock.ClassMock;
@@ -130,7 +131,7 @@ public class ValidationServiceTest
 		Assert.assertNull(clazz);
 	}*/
 
-	
+	@Ignore
 	@Test
 	public void testValidJarFromPath() throws Exception
 	{

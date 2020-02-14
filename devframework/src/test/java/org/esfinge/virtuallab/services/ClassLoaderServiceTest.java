@@ -10,6 +10,7 @@ import java.util.List;
 import org.esfinge.virtuallab.TestUtils;
 import org.esfinge.virtuallab.api.annotations.ServiceClass;
 import org.esfinge.virtuallab.api.annotations.ServiceMethod;
+import org.esfinge.virtuallab.descriptors.ClassDescriptor;
 import org.esfinge.virtuallab.exceptions.ClassLoaderException;
 import org.esfinge.virtuallab.exceptions.InvocationException;
 import org.esfinge.virtuallab.utils.Utils;
@@ -53,6 +54,10 @@ public class ClassLoaderServiceTest
 	{
 		// apaga o diretorio de testes antes de cada teste
 		TestUtils.cleanTestDir();
+		List<ClassDescriptor> classesList = PersistenceService.getInstance().listServiceClasses();
+		for (ClassDescriptor classDescriptor : classesList) {
+			System.out.println(classDescriptor);
+		}
 	}
 
 	@AfterClass
@@ -104,7 +109,7 @@ public class ClassLoaderServiceTest
 	}
 
 	
-	//@Ignore("ClassLoaderService.getInstance().loadService")
+	@Ignore("ClassLoaderService.getInstance().loadService")
 	@Test
 	public void testLoadClassFromJarPath() throws Exception
 	{
@@ -167,6 +172,7 @@ public class ClassLoaderServiceTest
 		
 	}
 	
+	@Ignore
 	@Test
 	public void invalidObject() throws Exception
 	{

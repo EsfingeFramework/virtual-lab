@@ -34,6 +34,8 @@ public class InvokeMethodHandler implements IJsonRequestHandler
 			
 			// obtem os valores dos parametros
 			String jsonParamValues = JsonUtils.getProperty(jsonString, "paramValues");
+			System.out.println(jsonParamValues);
+			
 			// converte os valores para a ordem e tipos corretos
 			List<Object> values = methodDescriptor.getParameters()
 					.stream()
