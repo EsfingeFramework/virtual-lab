@@ -35,6 +35,6 @@ public class LineChartDemo {
 		public List<?> listaXrayDataLowGetXray(Long header)
 		{
 			List<XrayDataLow> resp = xrayLow.getXrayDataLowByHeaderOrderById(header);
-			return null;	
+			return resp;	
 		}	
 }

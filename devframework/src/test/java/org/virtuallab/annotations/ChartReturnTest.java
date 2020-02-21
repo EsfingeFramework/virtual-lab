@@ -29,7 +29,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class ChartReturnTest {
 	
 	//Não é serie temporal
-	@Ignore
 	@Test
 	public void test() throws Exception {
 		MethodDescriptor md = new  MethodDescriptor();
@@ -45,7 +44,7 @@ public class ChartReturnTest {
 		List<MethodDescriptor> methodList = PersistenceService.getInstance().listServiceMethods(Chart.class.getCanonicalName());
 		for (MethodDescriptor methodDescriptor : methodList) {
 			System.out.println(methodDescriptor.getName());
-			if(methodDescriptor.getName().equals("tableReturnTest"));
+			if(methodDescriptor.getClassName().contains("tableReturnTest"));
 			{
 				MethodReturnProcessor<?> returnProcessor = MethodReturnProcessorHelper.getInstance().findProcessor(methodDescriptor);
 				Object result = InvokerService.getInstance().call(methodDescriptor);
@@ -53,8 +52,23 @@ public class ChartReturnTest {
 				ret.setData(returnProcessor.process(result));
 				assertEquals("{\"rows\":[[1,1],[2,1],[3,1]],\"header\":[\"X1\",\"Y1\"],\"showHeader\":true}" + 
 						"", ret.getData().toString());
+				
+				System.out.println(ret.toString());
 
 			}
+			if(methodDescriptor.getClassName().contains("tableReturnTest"));
+			{
+				MethodReturnProcessor<?> returnProcessor = MethodReturnProcessorHelper.getInstance().findProcessor(methodDescriptor);
+				Object result = InvokerService.getInstance().call(methodDescriptor);
+				JsonReturn ret = new JsonReturn();
+				ret.setData(returnProcessor.process(result));
+				assertEquals("{\"rows\":[[1,1],[2,1],[3,1]],\"header\":[\"X1\",\"Y1\"],\"showHeader\":true}" + 
+						"", ret.getData().toString());
+				
+				System.out.println(ret.toString());
+
+			}
+
 		}
 		
 	}

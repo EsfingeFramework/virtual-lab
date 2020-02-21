@@ -78,5 +78,7 @@ public @interface LineChartReturn
 
 
 
-	boolean temporalSeries() default false; 
+	boolean temporalSeries() default false;
+
+	double[] yAxisScales() default {}; 
 }

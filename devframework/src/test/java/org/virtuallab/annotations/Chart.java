@@ -29,4 +29,11 @@ public class Chart {
 	{
 		return list;
 	}
+	
+	@ServiceMethod(description = "Test",label = "TableReturn")
+	@LineChartReturn(xAxis = {"x1"},yAxis = {"y1"})
+	public List<Data2Val> chartReturnTest()
+	{
+		return list;
+	}
 }

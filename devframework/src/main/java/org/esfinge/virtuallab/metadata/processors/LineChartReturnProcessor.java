@@ -32,16 +32,14 @@ public class LineChartReturnProcessor extends MethodReturnProcessor<LineChartRet
 		returnObj.getOptions().populate(this.annotation);
 
 		
-		if(this.annotation.multipleDataset()) {
+
 			if(value instanceof Map)
 			{
 				
 				Map<String, Object> value2 = (Map<String, Object>) value;
 				Map<String, Map<String, ?>> formatedValue = getMulltipleValuesMap(value2);
-				System.out.println(formatedValue.toString());
 				List<DatasetObject> dataset = this.createDataSetTime(formatedValue);
 				returnObj.data.datasets = dataset;				
-				System.out.println(formatedValue.toString());
 			}
 			else if(value instanceof List)
 			{
@@ -49,21 +47,9 @@ public class LineChartReturnProcessor extends MethodReturnProcessor<LineChartRet
 				List<DatasetObject> dataset = this.createDataSetTime(formatedValue);
 				returnObj.data.datasets = dataset;	
 			}
-		}
-		else
-		{
-			System.out.println("Não IMPLEMENTADO");
-			 if(value instanceof List)
-			 {
-					//Map<String, Map<String, ?>> formatedValue = getOneValues(value);
-				//	List<DatasetObject> dataset = this.createDataSetTime(formatedValue);
-
-			 }
-		}
+		
 				
 		
-		JsonData xxx = JsonUtils.fromObjectToJsonData(returnObj);
-		System.out.println(xxx);
 		return JsonUtils.fromObjectToJsonData(returnObj);
 		
 	}
@@ -75,14 +61,12 @@ public class LineChartReturnProcessor extends MethodReturnProcessor<LineChartRet
 		Map<String, Map<String, ?>> addNumber =new HashMap<String, Map<String, ?>>();
 	
 			for (String name: this.annotation.yAxis()) {
-				System.out.println(name);
 				Map<String, Object> lx = new HashMap<String, Object>(); 
 				List<Object> numberY = new ArrayList<Object>();
 				List<Object> numberX = new ArrayList<Object>();
 				for(Object  obj :(List<Object>)value) {
 					try {
 						Object nix = ReflectionUtils.getFieldValue(obj,this.annotation.xAxis()[0]);
-						System.out.println(this.annotation.temporalSeries());
 						if(this.annotation.temporalSeries())
 							{
 								Calendar c = (Calendar) nix;
@@ -116,7 +100,6 @@ public class LineChartReturnProcessor extends MethodReturnProcessor<LineChartRet
 		
 		if(this.annotation.temporalSeries()) {
 				for (String element : annotation.yAxis()) {
-					System.out.println(element);
 					List<?> numberY =  this.getValues(value.get(element));
 					List<?> numberX =  this.getValues(value.get(this.annotation.xAxis()[0]));
 					Map<String,Object> elements= new HashMap<String, Object>();
@@ -127,7 +110,6 @@ public class LineChartReturnProcessor extends MethodReturnProcessor<LineChartRet
 				}
 		
 		}
-		System.out.println(addNumber.toString());
 		return addNumber;
 	}
 	
@@ -146,16 +128,13 @@ public class LineChartReturnProcessor extends MethodReturnProcessor<LineChartRet
 	 		{
 	 			if(this.annotation.temporalSeries())
 	 			{
-	 				System.out.println("ENTROU AQUI");
 	 				Object x = ((Map) value).get(this.annotation.dataLabels());
 	 				
 	 				
-	 				System.out.println(x.toString());
 	 				if(x instanceof List)
 	 				{
 
 	 					for (Object object : (List<?>)x) {
-							System.out.println(object);
 							labels.add(object.toString());
 						}
 	 				}
@@ -206,14 +185,12 @@ public class LineChartReturnProcessor extends MethodReturnProcessor<LineChartRet
 		
 		if (! Utils.isNullOrEmpty(values) ) {
 			for(String yAxis:this.annotation.yAxis()) {
-				System.out.println("ENTROuu");
 				DatasetObject dataset = new DatasetObject();
 				
 				List<?> xArr = (List<?>) values.get(yAxis).get("x");
 				List<?> yArr = (List<?>) values.get(yAxis).get("y");
 				if (! Utils.isNullOrEmpty(xArr)&&! Utils.isNullOrEmpty(yArr) )
 				{
-					System.out.println("entrou");
 					for ( int i = 0; i < xArr.size(); i++ )
 					{
 						Object xValue = xArr.get(i);
@@ -659,9 +636,12 @@ public class LineChartReturnProcessor extends MethodReturnProcessor<LineChartRet
 			
 			// ticks (comecar escala do 0)
 			JsonObject ticks = new JsonObject();
-			ticks.addProperty("min", 10e-10f);
-			ticks.addProperty("max", 10e-2f);
-
+			
+			if(annotation.yAxisScales().length>0) {
+				ticks.addProperty("min", annotation.yAxisScales()[0]);
+				ticks.addProperty("max", annotation.yAxisScales()[1]);
+			}
+			
 			if ( annotation.horizontal() )
 				xAxes.addProperty("ticks", ticks);
 			else {
@@ -669,7 +649,7 @@ public class LineChartReturnProcessor extends MethodReturnProcessor<LineChartRet
 				
 			}
 			
-			yAxes.addProperty("type", "logarithmic");
+			//yAxes.addProperty("type", "logarithmic");
 			this.scales.addProperty("xAxes", Arrays.asList(xAxes));
 			this.scales.addProperty("yAxes", Arrays.asList(yAxes));
 			
