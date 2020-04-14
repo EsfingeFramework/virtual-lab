@@ -30,6 +30,7 @@ public class ChartReturnTest {
 	
 	//Não é serie temporal
 	@Test
+	@Ignore
 	public void test() throws Exception {
 		MethodDescriptor md = new  MethodDescriptor();
 		TestUtils.createJar("ChartTest.jar", Chart.class, Data2Val.class);

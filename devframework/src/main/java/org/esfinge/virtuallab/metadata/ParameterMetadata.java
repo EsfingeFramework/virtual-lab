@@ -2,6 +2,7 @@ package org.esfinge.virtuallab.metadata;
 
 import java.lang.reflect.Parameter;
 
+import org.esfinge.virtuallab.api.annotations.Combo;
 import org.esfinge.virtuallab.api.annotations.Param;
 import org.esfinge.virtuallab.api.annotations.ParamAttribute;
 
@@ -16,12 +17,14 @@ import net.sf.esfinge.metadata.container.ContainerTarget;
  * Extrai informacoes de metadados dos parametros dos metodos.
  */
 @ContainerFor(ContainerTarget.PARAMETER)
-public class ParameterMetadata implements Comparable<ParameterMetadata>
-{
+public class ParameterMetadata implements Comparable<ParameterMetadata> {
 	// indica se o parametro contem a anotacao @Param
 	@ContainsAnnotation(Param.class)
 	private boolean annotatedWithParam;
-	
+
+	@ContainsAnnotation(Combo.class)
+	private boolean annotatedWithCombo;
+
 	// rotulo para o parametro
 	@AnnotationProperty(annotation = Param.class, property = "label")
 	private String label;
@@ -34,112 +37,114 @@ public class ParameterMetadata implements Comparable<ParameterMetadata>
 	@AnnotationProperty(annotation = Param.class, property = "required")
 	private boolean required;
 
+	// se o parametro eh obrigatorio ou nao
+	@AnnotationProperty(annotation = Combo.class, property = "value")
+	private boolean comboValue;
+
 	// parametro
 	@ReflectionReference
 	private Parameter parameter;
-	
+
 	// nome do parametro
 	@ElementName
 	private String parameterName;
-	
+
 	// posicao do parametro no metodo
 	private int index = -1;
 
-	
 	/**
 	 * Construtor padrao.
 	 */
-	public ParameterMetadata()
-	{
+	public ParameterMetadata() {
 	}
 
-	public boolean isAnnotatedWithParam()
-	{
+	public boolean isAnnotatedWithParam() {
 		return annotatedWithParam;
 	}
 
-	public void setAnnotatedWithParam(boolean annotatedWithParam)
-	{
+	public void setAnnotatedWithParam(boolean annotatedWithParam) {
 		this.annotatedWithParam = annotatedWithParam;
 	}
 
-	public String getLabel()
-	{
+	public String getLabel() {
 		return label;
 	}
 
-	public void setLabel(String label)
-	{
+	public void setLabel(String label) {
 		this.label = label;
 	}
 
-	public ParamAttribute[] getFieldsMetadata()
-	{
+	public ParamAttribute[] getFieldsMetadata() {
 		return fieldsMetadata;
 	}
 
-	public void setFieldsMetadata(ParamAttribute[] fieldsMetadata)
-	{
+	public void setFieldsMetadata(ParamAttribute[] fieldsMetadata) {
 		this.fieldsMetadata = fieldsMetadata;
 	}
 
-	public boolean isRequired()
-	{
+	public boolean isRequired() {
 		return required;
 	}
 
-	public void setRequired(boolean required)
-	{
+	public void setRequired(boolean required) {
 		this.required = required;
 	}
 
-	public Parameter getParameter()
-	{
+	public Parameter getParameter() {
 		return parameter;
 	}
 
-	public void setParameter(Parameter parameter)
-	{
+	public void setParameter(Parameter parameter) {
 		this.parameter = parameter;
-		
+
 		// verifica a posicaso do parametro no metodo
-		if ( this.parameter != null )
-		{
+		if (this.parameter != null) {
 			Parameter[] params = this.parameter.getDeclaringExecutable().getParameters();
-			for (int i = 0; i < params.length; i++ )
-				if ( this.parameter.equals(params[i]) )
-				{
+			for (int i = 0; i < params.length; i++)
+				if (this.parameter.equals(params[i])) {
 					this.index = i;
 					break;
 				}
-		}
-		else
+		} else
 			this.index = -1;
 	}
 
-	public String getParameterName()
-	{
+	public String getParameterName() {
 		return parameterName;
 	}
 
-	public void setParameterName(String parameterName)
-	{
+	public void setParameterName(String parameterName) {
 		this.parameterName = parameterName;
 	}
 
-	public int getIndex()
-	{
+	public int getIndex() {
 		return index;
 	}
 
-	public void setIndex(int index)
-	{
+	public void setIndex(int index) {
 		this.index = index;
 	}
 
+	public boolean isAnnotatedWithCombo() {
+		return annotatedWithCombo;
+	}
+
+	public void setAnnotatedWithCombo(boolean annotatedWithCombo) {
+		this.annotatedWithCombo = annotatedWithCombo;
+	}
+
+	
+	
+	public boolean isComboValue() {
+		return comboValue;
+	}
+
+	public void setComboValue(boolean comboValue) {
+		this.comboValue = comboValue;
+	}
+
 	@Override
-	public int compareTo(ParameterMetadata o)
-	{
+	public int compareTo(ParameterMetadata o) {
 		return Integer.valueOf(this.index).compareTo(o.index);
 	}
 }

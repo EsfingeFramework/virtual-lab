@@ -13,6 +13,8 @@ import org.esfinge.virtuallab.demo.chart.lines.xray.Header;
 import org.esfinge.virtuallab.demo.chart.lines.xray.Station;
 import org.esfinge.virtuallab.demo.chart.lines.xray.StationEquipament;
 import org.esfinge.virtuallab.demo.chart.lines.xray.XrayDataLow;
+import org.esfinge.virtuallab.demo.corona.CoronaData;
+import org.esfinge.virtuallab.demo.corona.CoronaVirus;
 import org.esfinge.virtuallab.demo.dao.DaoDemo;
 import org.esfinge.virtuallab.demo.dao.Temperatura;
 import org.esfinge.virtuallab.demo.json.Disciplina;
@@ -36,8 +38,8 @@ public class Main
 	{
 //		TestUtils.createJar("tarefa.jar", TarefaService.class, Tarefa.class);
 //		TestUtils.createJar("matematica.jar", MatematicaService.class, MatematicaInvokerProxy.class, Ponto.class);
-		TestUtils.createJar("satelite.jar", DaoSatelite.class, PollsSatelitetelemetry.class);
-		TestUtils.createJar("LineChartDemo.jar", AltitudeGraf.class);
+		TestUtils.createJar("corona.jar", CoronaVirus.class, CoronaData.class);
+//		TestUtils.createJar("LineChartDemo.jar", AltitudeGraf.class);
 //		TestUtils.createJar("temperaturaDAO.jar", TemperaturaService.class, TemperaturaServiceProxy.class, Temperatura.class);
 //		TestUtils.createJar("topicDAO.jar", TopicService.class, Topic.class);
 		//TestUtils.createJar("INPE_Goes.jar", DaoXrayLow.class, XrayDataLow.class);

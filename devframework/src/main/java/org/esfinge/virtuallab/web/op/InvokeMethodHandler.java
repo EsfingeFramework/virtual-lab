@@ -29,6 +29,7 @@ public class InvokeMethodHandler implements IJsonRequestHandler
 		{
 			// obtem a string do objeto JSON do request
 			String jsonString = this.getJsonParameter(request);
+			System.err.println(jsonString);
 			// obtem o descritor do metodo
 			MethodDescriptor methodDescriptor = JsonUtils.getPropertyAs(jsonString, "methodDescriptor", MethodDescriptor.class);
 			
@@ -45,7 +46,8 @@ public class InvokeMethodHandler implements IJsonRequestHandler
 						{
 							// obtem o valor do parametro (como JSON)
 							JsonNode jsonNode = JsonUtils.fromStringToJsonNode(jsonParamValues).get(p.getName());
-							System.out.println();
+							
+							System.out.println(jsonNode);
 							String data =p.getDataType();
 							// converte o valor JSON para o tipo correto
 							return JsonUtils.convertTo(jsonNode.toString(), ReflectionUtils.findClass(data));
