@@ -1,12 +1,16 @@
 package org.esfinge.virtuallab.descriptors;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.esfinge.virtuallab.api.annotations.ComboMethod;
 import org.esfinge.virtuallab.api.annotations.ParamAttribute;
+import org.esfinge.virtuallab.metadata.MethodMetadata;
 import org.esfinge.virtuallab.metadata.ParameterMetadata;
+import org.esfinge.virtuallab.services.InvokerService;
 import org.esfinge.virtuallab.utils.JsonUtils;
 import org.esfinge.virtuallab.utils.ReflectionUtils;
 import org.esfinge.virtuallab.utils.Utils;
@@ -50,7 +54,7 @@ public class ParameterDescriptor implements Comparable<ParameterDescriptor>
 	/**
 	 * Construtor a partir dos metadados de uma classe.
 	 */
-	public ParameterDescriptor(ParameterMetadata parameterMetadata)
+	public ParameterDescriptor(ParameterMetadata parameterMetadata, MethodMetadata md)
 	{
 		Class<?> paramType = parameterMetadata.getParameter().getType(); 
 
@@ -67,9 +71,39 @@ public class ParameterDescriptor implements Comparable<ParameterDescriptor>
 		schema.setTitle(String.format("%s (%s)", this.label, this.dataType));
 		schema.setRequired(this.required);
 		
+		if(parameterMetadata.isAnnotatedWithCombo()) {
+			System.out.println("IMPLEMENTAR");
+			System.out.println(schema);
+			//Selecionar classe.
+			Class classe = md.getMethod().getDeclaringClass();
+			System.out.println(classe);
+			System.out.println("IMPLEMENTAR");
+			for (Method annotedMethod : classe.getDeclaredMethods()) {
+				if(annotedMethod.isAnnotationPresent(ComboMethod.class))
+				{
+					System.out.println("IFon");
+					ComboMethod comboMethod = 
+							annotedMethod.getDeclaredAnnotation(ComboMethod.class);
+					System.out.println(comboMethod.value());
+					if(comboMethod.value().equals(parameterMetadata.getComboValue()))
+					{
+						System.out.println("VALUE");
+						System.out.println(annotedMethod.getName());
+						schema.setSelectElement((Map<String, String>) InvokerService.getInstance().call(annotedMethod));
+						System.out.println(schema.getSelectElement());
+						System.out.println(schema);
+						System.out.println("VALUE");
+					}
+					System.out.println("IFon");
+				}
+			}
+		}
+		
+
 		// schema JSON dos campos do parametro (se houver)
 		Map<String,ParamAttribute> fieldsMetadataMap = new HashMap<>();
 		ParamAttribute[] fieldsMetadata = parameterMetadata.getFieldsMetadata();
+		
 		
 		if (! Utils.isNullOrEmpty(fieldsMetadata) )
 			Arrays.asList(fieldsMetadata).forEach(p -> fieldsMetadataMap.put(p.name(), p));
@@ -84,11 +118,13 @@ public class ParameterDescriptor implements Comparable<ParameterDescriptor>
 				if ( fieldSchema != null )
 				{
 					// tenta obter o metadado do campo
-					ParamAttribute fieldMetadata = fieldsMetadataMap.get(field.getName());
 					
+					ParamAttribute fieldMetadata = fieldsMetadataMap.get(field.getName());
 					String fieldLabel = (fieldMetadata != null) && (fieldMetadata.label() != null) ? fieldMetadata.label() : field.getName();
 					String fieldDataType =  field.getType().getCanonicalName();
 					fieldSchema.setTitle(String.format("%s (%s)", fieldLabel, fieldDataType));
+
+					
 					fieldSchema.setRequired((fieldMetadata != null) ? fieldMetadata.required() : this.required);
 				}				
 			}

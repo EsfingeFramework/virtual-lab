@@ -56,7 +56,7 @@ public class MethodDescriptor
 		// processa os parametros do metodo
 		this.parameters = new ArrayList<ParameterDescriptor>();
 		for (ParameterMetadata param : methodMetadata.getParameters())
-			this.parameters.add(new ParameterDescriptor(param));
+			this.parameters.add(new ParameterDescriptor(param, methodMetadata));
 	}
 
 	public String getClassName()

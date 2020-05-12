@@ -27,7 +27,7 @@ public class ServiceClassMetadata implements ClassMetadata
 	// lista dos metodos anotados com @ServiceMethod
 	@AllMethodsWith(ServiceMethod.class)
 	private List<MethodMetadata> methodsWithServiceMethod;
-
+	
 	// rotulo para a classe
 	@AnnotationProperty(annotation = ServiceClass.class, property = "label")
 	private String label;

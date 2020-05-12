@@ -1,7 +1,9 @@
 package org.esfinge.virtuallab.metadata.processors;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 
@@ -54,6 +56,7 @@ public class TableReturnProcessor extends MethodReturnProcessor<TableReturn>
 				{
 					// adiciona na lista de campos
 					returnFields.add(fields[i]);
+					System.err.println(fields[i]);
 					
 					// adiciona ao header
 					returnObj.header.add(headers[i]);
@@ -63,9 +66,24 @@ public class TableReturnProcessor extends MethodReturnProcessor<TableReturn>
 			for ( Object obj : collection )
 			{
 				List<Object> row = new ArrayList<>();
-							
-				for ( String fieldName : returnFields )
-					row.add(ReflectionUtils.getFieldValue(obj, fieldName));
+				
+				for ( String fieldName : returnFields ) {
+					
+					if(ReflectionUtils.getFieldValue(obj, fieldName) instanceof Calendar)
+					{
+						String calendar;
+						SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
+						Calendar c = (Calendar) ReflectionUtils.getFieldValue(obj, fieldName);
+						calendar = s.format(c.getTime());
+						row.add(calendar);
+					}
+					else
+					{
+						row.add(ReflectionUtils.getFieldValue(obj, fieldName));
+					}
+					
+					
+				}
 				
 				returnObj.addRow(row);
 			}
@@ -75,7 +93,6 @@ public class TableReturnProcessor extends MethodReturnProcessor<TableReturn>
 		}
 		
 		// retorna o objeto JSON
-		System.out.println(JsonUtils.fromObjectToJsonData(returnObj));;
 		return JsonUtils.fromObjectToJsonData(returnObj);
 	}
 	

@@ -23,6 +23,8 @@ public class MethodMetadata
 	// indica se o metodo contem a anotacao @ServiceMethod
 	@ContainsAnnotation(ServiceMethod.class)
 	private boolean annotatedWithServiceMethod;
+	
+
 
 	// rotulo para o metodo
 	@AnnotationProperty(annotation = ServiceMethod.class, property = "label")
@@ -32,6 +34,9 @@ public class MethodMetadata
 	@AnnotationProperty(annotation=ServiceMethod.class, property = "description")
 	private String description;
 
+	
+
+	
 	// metodo
 	@ReflectionReference
 	private Method method;
@@ -112,4 +117,6 @@ public class MethodMetadata
 	{
 		this.parameters = parameters;
 	}
+	
+	
 }

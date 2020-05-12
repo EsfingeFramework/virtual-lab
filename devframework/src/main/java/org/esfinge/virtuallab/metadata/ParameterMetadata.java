@@ -39,7 +39,7 @@ public class ParameterMetadata implements Comparable<ParameterMetadata> {
 
 	// se o parametro eh obrigatorio ou nao
 	@AnnotationProperty(annotation = Combo.class, property = "value")
-	private boolean comboValue;
+	private String comboValue;
 
 	// parametro
 	@ReflectionReference
@@ -135,11 +135,11 @@ public class ParameterMetadata implements Comparable<ParameterMetadata> {
 
 	
 	
-	public boolean isComboValue() {
+	public String getComboValue() {
 		return comboValue;
 	}
 
-	public void setComboValue(boolean comboValue) {
+	public void setComboValue(String comboValue) {
 		this.comboValue = comboValue;
 	}
 

@@ -201,6 +201,8 @@ public class InvokerService implements InvokerProxy, InvocationHandler
 		// CGLIB
 		Enhancer proxy = new Enhancer();
 //		proxy.setClassLoader(ClassLoaderService.class.getClassLoader());
+
+		
 		proxy.setClassLoader(ClassLoaderService.getInstance().getService(superclass.getCanonicalName()).getClassLoader());
 		proxy.setSuperclass(superclass);
 		proxy.setCallback(InvokerService.getInstance());

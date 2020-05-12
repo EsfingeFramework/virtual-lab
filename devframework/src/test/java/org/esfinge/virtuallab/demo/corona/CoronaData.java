@@ -2,7 +2,7 @@ package org.esfinge.virtuallab.demo.corona;
 
 import java.util.Calendar;
 
-public class CoronaData {
+public class CoronaData{
 
 	private Calendar data;
 	private String location;
@@ -42,9 +42,7 @@ public class CoronaData {
 	}
 	public void setTotalDeaths(int totalDeaths) {
 		this.totalDeaths = totalDeaths;
-	}
-
-	
+	}	
 	
 }
 

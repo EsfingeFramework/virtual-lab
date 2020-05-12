@@ -19,7 +19,7 @@ import net.sf.esfinge.querybuilder.annotation.LesserOrEquals;
 	description = "Demonstração da anotação @ServiceDAO.",
 	url = "jdbc:postgresql://localhost:5432/postgres", 
 	user = "postgres", 
-	password = "postgres", 
+	password = "marco12", 
 	dialect = "org.hibernate.dialect.PostgreSQLDialect")
 public interface DaoDemo extends Repository<Temperatura>
 {

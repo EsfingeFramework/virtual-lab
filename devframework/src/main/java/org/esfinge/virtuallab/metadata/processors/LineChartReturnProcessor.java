@@ -161,7 +161,7 @@ public class LineChartReturnProcessor extends MethodReturnProcessor<LineChartRet
  	 			try
 	 	 		{
  	 				// tenta acessar a propriedade do objeto
- 	 				//labels.add(ReflectionUtils.getFieldValue(collection.get(i), this.annotation.dataLabelsField()).toString());
+ 	 				labels.add(ReflectionUtils.getFieldValue(collection.get(i), this.annotation.dataLabelsField()).toString());
 	 	 		}
 	 	 		catch ( Exception e )
 	 	 		{
