@@ -65,7 +65,6 @@ public class MappingRestController {
 		for (ClassDescriptor classDescriptor : classesList) {
 			if(classDescriptor.getQualifiedName().contains(className))
 			{
-				System.out.println("VAi Aqui");
 				md = PersistenceService.getInstance().listServiceMethods(classDescriptor.getQualifiedName());
 				
 			}

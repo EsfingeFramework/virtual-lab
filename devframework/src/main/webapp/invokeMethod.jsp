@@ -12,9 +12,9 @@
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
 			    	<li class="breadcrumb-item">
-			    		<a href="./">Classes</a>
+			    		<a href="./">Class</a>
 			    		<i class="fas fa-angle-right mx-2" aria-hidden="true"></i>
-			    	
+			    		
 			    	</li>
 			    	<li class="breadcrumb-item active" aria-current="page">
 			    		<a href="methods.jsp" id="breadcrumbClassName"/></a>
@@ -26,7 +26,7 @@
 
 			<section class="jumbotron text-center">
 				<div class="container">
-					<h1 class="jumbotron-heading">Serviço: <strong id="headerMethodName"></strong> do Módulo: <strong id="headerClassName"></strong> </h1>
+					<h1 class="jumbotron-heading">Service: <strong id="headerMethodName"></strong> of the Module: <strong id="headerClassName"></strong> </h1>
 				</div>
 			</section>
 			<div class="clearfix my-1">&nbsp;</div>
@@ -35,7 +35,7 @@
 					<div class="col-md-12">
 						<div class="card">
 	  						<div class="card-header">
-								Entre com os parâmetro do método <strong>"<span id="InvokeMethodName"></span>"</strong> :
+								Enter the method parameters <strong>"<span id="InvokeMethodName"></span>"</strong> :
 							</div>
 							<div class="card-body">
 								<form id="formParam" data-url="invokeMethod.op"></form>
@@ -48,7 +48,7 @@
 					<div class="col-md-12">
 						<div class="card" id="tabResult">
 	  						<div class="card-header">
-								Resultado :
+								Result :
 							</div>
 							<div class="card-body">
 								<div id="result"></div>
@@ -71,22 +71,9 @@
 	
 	<jsp:attribute name="js_custom">
 		<!-- load chartjs library -->
-		
-		<script type="text/javascript" src="webjars/modernizr/2.8.3/modernizr.min.js"></script>
 		<script type="text/javascript" src="webjars/momentjs/2.24.0/moment.js"></script>
 		<script type="text/javascript" src="webjars/chartjs/2.8.0/Chart.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/RenderResult.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/InvokeMethod.js"></script>
-		
-		<script>
-		    $(function(){
-		         // Find any date inputs and override their functionality
-		         $('input[type="datetime-local"]').flatpickr({
-		        	    enableTime: true,
-		        	    dateFormat: "d-m-Y H:i",
-		        	});
-		    });
-		</script>
-		
 	</jsp:attribute>
 </tags:_Layout>

@@ -23,29 +23,28 @@ public interface CoronaDao extends Repository<CoronaDados>
 	{
 		
 		@ServiceMethod(
-			label = "Listar todas temperaturas",
-			description = "Retorna todos as temperaturas cadastradas no Banco de Dados.")
+			label = "",
+			description = "")
 		@TableReturn
 		public List<CoronaDados> getCoronaDados();
 		
 		@ServiceMethod(
-				label = "Listar todas temperaturas",
-				description = "Retorna todos as temperaturas cadastradas no Banco de Dados.")
+				label = "",
+				description = "")
 		@TableReturn
-		public List<CoronaDados> getCoronaDadosByLocation(String location);
+		public List<CoronaDados> getCoronaDadosByLocation(String location);		
 		
 		@ServiceMethod(
-				label = "Listar todas temperaturas",
-				description = "Retorna todos as temperaturas cadastradas no Banco de Dados.")
+				label = "",
+				description = "")
 		@TableReturn
-		public List<CoronaDados> getCoronaDadosByDataOrderByTotalDeathsDesc(@GreaterOrEquals Calendar data);
+		public List<CoronaDados> getCoronaDadosByDataOrderByTotalDeathsDesc(@GreaterOrEquals Calendar data);		
 		
 		@ServiceMethod(
-				label = "Listar todas temperaturas",
-				description = "Retorna todos as temperaturas cadastradas no Banco de Dados.")
+				label = "",
+				description = "")
 		@TableReturn
-		public List<CoronaDados> getCoronaDadosByDataOrderByNewDeathsDesc(@GreaterOrEquals Calendar data);
+		public List<CoronaDados> getCoronaDadosByDataOrderByNewDeathsDesc(@GreaterOrEquals Calendar data);		
 
-		
 		
 	}

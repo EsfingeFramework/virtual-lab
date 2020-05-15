@@ -13,15 +13,6 @@
 		<link href="webjars/datatables/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
 		<link href="webjars/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" type="text/css">
 		<link href="webjars/leaflet/1.5.1/leaflet.css" rel="stylesheet" type="text/css">
-		
-		
-			<script type="text/javascript" src="webjars/jquery/3.3.1/jquery.min.js"></script>
-	      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-				
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-		<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-		  
 		<link href="${pageContext.request.contextPath}/resources/css/app.css" rel="stylesheet" type="text/css">
      	<jsp:invoke fragment="css_custom"/>
  	</head>
@@ -46,17 +37,15 @@
         	<span class="menu-title font-esfinge"> <strong>Esfinge Virtual Lab</strong></span>
 	        <ul>
 	            <li><a href="./"><i class="fas fa-home"></i>Home</a></li>
-	            <li><a href="document.jsp"><i class="fas fa-book"></i>Documentação</a></li>
-	            <li><a href="about.jsp"><i class="fas fa-info-circle"></i>Sobre</a></li>
+	            <li><a href="document.jsp"><i class="fas fa-book"></i>Documentation</a></li>
+	            <li><a href="about.jsp"><i class="fas fa-info-circle"></i>About</a></li>
 	        </ul>
 	    </div>
 		
     	<jsp:invoke fragment="content"/>
     	
     <!-- load jQuery library -->
-
-
-	
+	<script type="text/javascript" src="webjars/jquery/3.3.1/jquery.min.js"></script>
 	<!-- load Bootstrap library -->
 	<script type="text/javascript" src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<!-- load dataTables library -->
@@ -78,6 +67,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/alert.bootstrap.js"></script>
 	<!-- load javascript.app -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/Initialize.js"></script>
+ 	
  	<jsp:invoke fragment="js_custom"/>
     
  	</body>

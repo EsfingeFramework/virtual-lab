@@ -79,7 +79,7 @@ app.Classes = {
                     }else{
                     	alertBt({
        	        	      messageText: result.message,
-       	        	      headerText: "Alerta",
+       	        	      headerText: "Alert",
        	        	      alertType: "danger"
        	        	    });
                     }
@@ -87,10 +87,10 @@ app.Classes = {
                 },
                 error: function (e) {
                 	var $msg = $(e.responseText).filter('title').text();
-                	if ($msg == '') $msg = "Ocorreu um erro.<br/>";
+                	if ($msg == '') $msg = "An error has occurred.<br/>";
                     alertBt({
    	        	      messageText: $msg,
-   	        	      headerText: "Erro",
+   	        	      headerText: "Error",
    	        	      alertType: "danger"
    	        	    });
         			app.settings.loading.hide();
@@ -150,8 +150,8 @@ app.Classes = {
     		// confirma apagar o servico
     		var promise = alertBt({
     		  type: "confirm",
-      	      messageText: "Deseja realmente apagar o m&oacute;dulo '" + classDesc.label + "'?",
-      	      headerText: "Alerta",
+      	      messageText: "Do you really want to delete the module? '" + classDesc.label + "'?",
+      	      headerText: "Alert",
       	      alertType: "warning"
       	    });
     		
@@ -174,7 +174,7 @@ app.Classes = {
     	                    if (result.success){
     	                        alertBt({
     	         	        	      messageText: result.message,
-    	         	        	      headerText: "Confirma&ccedil;&atilde;o",
+    	         	        	      headerText: "Confirmation",
     	         	        	      alertType: "success"
     	         	        	    });
     	                        
@@ -183,17 +183,17 @@ app.Classes = {
     	                      }else{
     	                      	alertBt({
     	           	        	      messageText: result.message,
-    	           	        	      headerText: "Alerta",
+    	           	        	      headerText: "Alert",
     	           	        	      alertType: "warning"
     	           	        	    });
     	                      }
     	    	        },
     	    			error:function(data,status,er) {
     	                    var $msg = $(er.responseText).filter('title').text();
-    	                	if ($msg == '') $msg = "Ocorreu um erro.<br/><br/><b>Erro</b>: " + er + ".";
+    	                	if ($msg == '') $msg = "An error has occurred.<br/><br/><b>Erro</b>: " + er + ".";
     	                    alertBt({
     	   	        	      messageText: $msg,
-    	   	        	      headerText: "Erro",
+    	   	        	      headerText: "Error",
     	   	        	      alertType: "danger"
     	   	        	    });
     	                }
@@ -209,8 +209,8 @@ app.Classes = {
             
             if ($('#uploadFile').val() == ""){
             	alertBt({
-	        	      messageText: "Selecione uma classe java, arquivo do tipo " + app.Classes.validExts.toString() + ".",
-	        	      headerText: "Alerta",
+	        	      messageText: "Select a java class, file of type " + app.Classes.validExts.toString() + ".",
+	        	      headerText: "Alert",
 	        	      alertType: "warning"
 	        	    });
             	return false;
@@ -219,8 +219,8 @@ app.Classes = {
                 $fileExt = $fileExt.substring($fileExt.lastIndexOf('.'));
                 if (app.Classes.validExts.indexOf($fileExt) < 0) {
 					alertBt({
-	        	      messageText: "O arquivo selecionado &eacute; inv&aacute;lido. Selecione apenas arquivos do tipo " + app.Classes.validExts.toString() + ".",
-	        	      headerText: "Alerta",
+	        	      messageText: "The selected file is invalid. Select only files of type " + app.Classes.validExts.toString() + ".",
+	        	      headerText: "Alert",
 	        	      alertType: "warning"
 	        	    });
 					$("#inputGroupFile01").text("Selecione uma classe java");
@@ -247,11 +247,11 @@ app.Classes = {
                     
                     if (result.success){
                     	$('#uploadFile').replaceWith($('#uploadFile').val('').clone(true));
-                        $("#inputGroupFile01").text("Selecione uma classe java");
+                        $("#inputGroupFile01").text("Select a java class");
                         $('#classModal').modal('hide');
                         alertBt({
        	        	      messageText: result.message,
-       	        	      headerText: "Confirma&ccedil;&atilde;o",
+       	        	      headerText: "Confirmation",
        	        	      alertType: "success"
        	        	    });
                         
@@ -260,7 +260,7 @@ app.Classes = {
                     }else{
                     	alertBt({
          	        	      messageText: result.message,
-         	        	      headerText: "Alerta",
+         	        	      headerText: "Alert",
          	        	      alertType: "warning"
          	        	    });
                     }                    
@@ -268,14 +268,14 @@ app.Classes = {
                 error: function (e) {
                     $("#btnSubmit").attr("disabled", false);
                     $('#uploadFile').replaceWith($('#uploadFile').val('').clone(true));
-                    $("#inputGroupFile01").text("Selecione uma classe java");
+                    $("#inputGroupFile01").text("Select a java class");
                     $('#classModal').modal('hide');
 
                     var $msg = $(e.responseText).filter('title').text();
-                	if ($msg == '') $msg = "Ocorreu um erro.<br/><br/><b>Erro</b>: " + e + ".";
+                	if ($msg == '') $msg = "An error has occurred.<br/><br/><b>Erro</b>: " + e + ".";
                     alertBt({
    	        	      messageText: $msg,
-   	        	      headerText: "Erro",
+   	        	      headerText: "Error",
    	        	      alertType: "danger"
    	        	    });
                 }

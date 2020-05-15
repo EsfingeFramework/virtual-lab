@@ -49,7 +49,10 @@ public class LineChartReturnProcessor extends MethodReturnProcessor<LineChartRet
 			}
 		
 				
-		
+		System.out.println(JsonUtils.fromObjectToJsonData(returnObj));
+		System.out.println(JsonUtils.fromObjectToJsonData(returnObj));
+		System.out.println(JsonUtils.fromObjectToJsonData(returnObj));
+
 		return JsonUtils.fromObjectToJsonData(returnObj);
 		
 	}
@@ -606,9 +609,12 @@ public class LineChartReturnProcessor extends MethodReturnProcessor<LineChartRet
 				{
 					JsonObject time = new JsonObject();
 					JsonObject displayFormats = new JsonObject();
-					displayFormats.addProperty("minute", "DD/MM/YYYY HH:mm");
+					
+					//FORMATAR e adicionar parametros.........
+					//TODO REFATORAR
+					displayFormats.addProperty("day", "DD/MM/YYYY");
 
-					time.addProperty("unit", "minute");
+					time.addProperty("unit", "day");
 					time.addProperty("displayFormats", displayFormats);
 					time.addProperty("tooltipFormat",displayFormats );
 					//xAxes.addProperty("distribution", "series");

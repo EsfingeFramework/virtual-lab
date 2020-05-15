@@ -9,11 +9,11 @@
 		<main role="main">
 			<section class="jumbotron text-center">
 				<div class="container">
-					<h1 class="jumbotron-heading">Lista de Classes</h1>
-					<p class="lead">Selecione o botão abaixo para cadastrar novas classes java.</p>
+					<h1 class="jumbotron-heading">List of Classes</h1>
+					<p class="lead">Select the button below to register new java classes.</p>
 					<p>
 						<button type="button" class="btn btn-primary" data-toggle="modal"
-						data-target="#classModal">Adicionar Nova Classe Java</button>
+						data-target="#classModal">Add New Java Class</button>
 					</p>
 				</div>
 			</section>
@@ -26,10 +26,10 @@
 							<table id="classTable" class="table table-striped table-bordered" data-url="listClasses.op">
 								<thead>
 									<tr>
-										<th style="width:15%">Módulo</th>
-										<th style="width:30%">Classe</th>
-										<th style="width:50%">Descrição</th>
-										<th style="width:5%" align="center">Remover</th>
+										<th style="width:15%">Module</th>
+										<th style="width:30%">Class</th>
+										<th style="width:50%">Description</th>
+										<th style="width:5%" align="center">Delete</th>
 									</tr>
 								</thead>
 								<tbody>

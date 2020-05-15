@@ -3,13 +3,13 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>CAP 385-3 - Dev Framework 2019</title>
+	<title>Esfinge VirtualLab</title>
 </head>
 <body>
-	<h2>Dev Framework - Erro!</h2>
+	<h2>Dev Framework - Error!</h2>
 	<p>
 	<font color="red">${erro}</font>
 	<p>
-	<a href="index.jsp">Voltar</a>
+	<a href="index.jsp">Return</a>
 </body>
 </html>

@@ -16,14 +16,12 @@
 			    		
 			    		
 			    	</li>
-			    	<li class="breadcrumb-item active" aria-current="page">Documentação</li>
-				</ol>
+ 			    	<li class="breadcrumb-item active" aria-current="page">Documentation</li> 				</ol>
 			</nav>
 
 			<section class="jumbotron text-center">
 				<div class="container">
-					<h1 class="jumbotron-heading"><strong>Documentação</strong> </h1>
-				</div>
+ 					<h1 class="jumbotron-heading"><strong>Documentation</strong> </h1> 				</div>
 			</section>
 	
 			<div class="container">

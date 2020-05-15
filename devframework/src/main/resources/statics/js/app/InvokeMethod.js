@@ -23,16 +23,16 @@ app.InvokeMethod = {
 			    "*",
 			    {
 			      "type": "submit",
-			      "title": "Executar"
+			      "title": "Run"
 			    }    
 			],
 			onSubmit: function (errors, values) {
-				app.settings.setLoadSubmit('btn', 'Aguarde...', 'disabled');
+				app.settings.setLoadSubmit('btn', 'Wait...', 'disabled');
 				if (errors) {
 					app.settings.setLoadSubmit('btn', 'Executar', '');
 					alertBt({
-		        	      messageText: "Ocorreu um erro!",
-		        	      headerText: "Erro",
+		        	      messageText: "An error has occurred!",
+		        	      headerText: "Error",
 		        	      alertType: "danger"
 		        	    });
 				} else {
@@ -58,7 +58,7 @@ app.InvokeMethod = {
 								app.settings.setLoadSubmit('btn', 'Executar', '');
 								alertBt({
 					        	      messageText: result.message,
-					        	      headerText: "Erro",
+					        	      headerText: "Error",
 					        	      alertType: "danger"
 					        	    });
 							} else {
