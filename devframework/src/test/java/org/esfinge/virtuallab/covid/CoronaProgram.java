@@ -34,7 +34,7 @@ public class CoronaProgram
 	@TableReturn
 	public List<CoronaDados> listAllData()
 	{
-		List<CoronaDados> retorno =  this.cd.getCoronaDados();
+		List<CoronaDados> retorno =  this.cd.getCoronaDadosOrderByData();
 
 		return retorno;
 	}
@@ -45,7 +45,7 @@ public class CoronaProgram
 		@TableReturn
 		public List<CoronaDados> listByLocation(@Combo(value = "location") String location)
 		{	
-			List<CoronaDados> retorno = this.cd.getCoronaDadosByLocation(location);
+			List<CoronaDados> retorno = this.cd.getCoronaDadosByLocationOrderByData(location);
 			return retorno;
 		}
 	
@@ -95,7 +95,7 @@ public class CoronaProgram
 			yAxis= {"newCases"})
 		public List<CoronaDados> graphByLocation(@Combo(value = "location") String location)
 		{	
-			List<CoronaDados> retorno = this.cd.getCoronaDadosByLocation(location);
+			List<CoronaDados> retorno = this.cd.getCoronaDadosByLocationOrderByData(location);
 			List<CoronaDados> retorno2 = new ArrayList<CoronaDados>();
 			for (int i = retorno.size()-50; i < retorno.size(); i++) {
 				retorno2.add(retorno.get(i));

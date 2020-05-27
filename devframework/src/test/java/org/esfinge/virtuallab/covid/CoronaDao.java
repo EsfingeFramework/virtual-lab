@@ -26,13 +26,13 @@ public interface CoronaDao extends Repository<CoronaDados>
 			label = "",
 			description = "")
 		@TableReturn
-		public List<CoronaDados> getCoronaDados();
+		public List<CoronaDados> getCoronaDadosOrderByData();
 		
 		@ServiceMethod(
 				label = "",
 				description = "")
 		@TableReturn
-		public List<CoronaDados> getCoronaDadosByLocation(String location);		
+		public List<CoronaDados> getCoronaDadosByLocationOrderByData(String location);		
 		
 		@ServiceMethod(
 				label = "",
@@ -46,5 +46,17 @@ public interface CoronaDao extends Repository<CoronaDados>
 		@TableReturn
 		public List<CoronaDados> getCoronaDadosByDataOrderByNewDeathsDesc(@GreaterOrEquals Calendar data);		
 
-		
+		@ServiceMethod(
+				label = "",
+				description = "")
+		@TableReturn
+		public List<CoronaDados> getCoronaDadosByDataOrderByNewCasesDesc(@GreaterOrEquals Calendar data);		
+
+		@ServiceMethod(
+				label = "",
+				description = "")
+		@TableReturn
+		public List<CoronaDados> getCoronaDadosByDataOrderByTotalCasesDesc(@GreaterOrEquals Calendar data);		
+
+	
 	}
