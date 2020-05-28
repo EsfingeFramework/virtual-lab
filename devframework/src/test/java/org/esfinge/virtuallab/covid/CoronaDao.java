@@ -19,44 +19,44 @@ import net.sf.esfinge.querybuilder.annotation.GreaterOrEquals;
 		user = "postgres", 
 		password = "marco12", 
 		dialect = "org.hibernate.dialect.PostgreSQLDialect")
-public interface CoronaDao extends Repository<CoronaDados>
+public interface CoronaDao extends Repository<CoronaData>
 	{
 		
 		@ServiceMethod(
 			label = "",
 			description = "")
 		@TableReturn
-		public List<CoronaDados> getCoronaDadosOrderByData();
+		public List<CoronaData> getCoronaDadosOrderByData();
 		
 		@ServiceMethod(
 				label = "",
 				description = "")
 		@TableReturn
-		public List<CoronaDados> getCoronaDadosByLocationOrderByData(String location);		
+		public List<CoronaData> getCoronaDadosByLocationOrderByData(String location);		
 		
 		@ServiceMethod(
 				label = "",
 				description = "")
 		@TableReturn
-		public List<CoronaDados> getCoronaDadosByDataOrderByTotalDeathsDesc(@GreaterOrEquals Calendar data);		
+		public List<CoronaData> getCoronaDadosByDataOrderByTotalDeathsDesc(@GreaterOrEquals Calendar data);		
 		
 		@ServiceMethod(
 				label = "",
 				description = "")
 		@TableReturn
-		public List<CoronaDados> getCoronaDadosByDataOrderByNewDeathsDesc(@GreaterOrEquals Calendar data);		
+		public List<CoronaData> getCoronaDadosByDataOrderByNewDeathsDesc(@GreaterOrEquals Calendar data);		
 
 		@ServiceMethod(
 				label = "",
 				description = "")
 		@TableReturn
-		public List<CoronaDados> getCoronaDadosByDataOrderByNewCasesDesc(@GreaterOrEquals Calendar data);		
+		public List<CoronaData> getCoronaDadosByDataOrderByNewCasesDesc(@GreaterOrEquals Calendar data);		
 
 		@ServiceMethod(
 				label = "",
 				description = "")
 		@TableReturn
-		public List<CoronaDados> getCoronaDadosByDataOrderByTotalCasesDesc(@GreaterOrEquals Calendar data);		
+		public List<CoronaData> getCoronaDadosByDataOrderByTotalCasesDesc(@GreaterOrEquals Calendar data);		
 
 	
 	}

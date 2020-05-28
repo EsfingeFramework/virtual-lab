@@ -2,7 +2,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.esfinge.virtuallab.TestUtils;
-import org.esfinge.virtuallab.covid.CoronaDados;
+import org.esfinge.virtuallab.covid.CoronaData;
 import org.esfinge.virtuallab.covid.CoronaDao;
 import org.esfinge.virtuallab.covid.CoronaProgram;
 import org.esfinge.virtuallab.demo.chart.bars.BarChartDemo;
@@ -16,8 +16,6 @@ import org.esfinge.virtuallab.demo.chart.lines.xray.Header;
 import org.esfinge.virtuallab.demo.chart.lines.xray.Station;
 import org.esfinge.virtuallab.demo.chart.lines.xray.StationEquipament;
 import org.esfinge.virtuallab.demo.chart.lines.xray.XrayDataLow;
-import org.esfinge.virtuallab.demo.corona.CoronaData;
-import org.esfinge.virtuallab.demo.corona.CoronaVirus;
 import org.esfinge.virtuallab.demo.corona.brasil.CoronaDataBrasil;
 import org.esfinge.virtuallab.demo.corona.brasil.CoronaVirusBrasil;
 import org.esfinge.virtuallab.demo.dao.DaoDemo;
@@ -43,10 +41,8 @@ public class Main
 	{
 //		TestUtils.createJar("tarefa.jar", TarefaService.class, Tarefa.class);
 //		TestUtils.createJar("matematica.jar", MatematicaService.class, MatematicaInvokerProxy.class, Ponto.class);
-		TestUtils.createJar("corona.jar", CoronaVirus.class, CoronaData.class);
-		TestUtils.createJar("coronaBrasil.jar", CoronaVirusBrasil.class, CoronaDataBrasil.class);
 		
-		TestUtils.createJar("coronaDao.jar", CoronaDao.class, CoronaDados.class);
+		TestUtils.createJar("coronaDao.jar", CoronaDao.class, CoronaData.class);
 		TestUtils.createJar("coronaProgram.jar", CoronaProgram.class);
 
 
