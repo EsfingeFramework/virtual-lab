@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.esfinge.virtuallab.api.annotations.BarChartReturn;
 import org.esfinge.virtuallab.api.annotations.Combo;
 import org.esfinge.virtuallab.api.annotations.ComboMethod;
 import org.esfinge.virtuallab.api.annotations.Inject;
@@ -29,23 +30,23 @@ public class CoronaProgram
 	 * Utiliza a anotacao sem parametros.
 	 *-------------------------------------------------------------------------*/
 	@ServiceMethod(
-		label = "Retorna os dados do coronavirus",
-		description = "sem parâmetros.")
+		label = "Returns coronavirus data by date",
+		description = "Returns coronavirus data by date")
 	@TableReturn
-	public List<CoronaData> listAllData()
+	public List<CoronaVirusData> listAllData()
 	{
-		List<CoronaData> retorno =  this.cd.getCoronaDadosOrderByData();
+		List<CoronaVirusData> retorno =  this.cd.getCoronaVirusDataOrderByData();
 
 		return retorno;
 	}
 	
 	@ServiceMethod(
-			label = "Retorna os dados do coronavirus por pais que for selecionado",
-			description = "Seleciona os casos dos países")
+			label = "Returns coronavirus data by selected country",
+			description = "Returns coronavirus data by selected country")
 		@TableReturn
-		public List<CoronaData> listByLocation(@Combo(value = "location") String location)
+		public List<CoronaVirusData> listByLocation(@Combo(value = "location") String location)
 		{	
-			List<CoronaData> retorno = this.cd.getCoronaDadosByLocationOrderByData(location);
+			List<CoronaVirusData> retorno = this.cd.getCoronaVirusDataByLocationOrderByData(location);
 			return retorno;
 		}
 	
@@ -53,7 +54,7 @@ public class CoronaProgram
 	public Map<String,String> locationCombo()
 	{
 		Map<String, String> paisMap = new HashMap<String, String>();
-		for (CoronaData iterable_element : listAllData()) {
+		for (CoronaVirusData iterable_element : listAllData()) {
 			paisMap.put(iterable_element.getLocation(), iterable_element.getLocation());
 		}
 		
@@ -61,17 +62,17 @@ public class CoronaProgram
 	}
 	
 	@ServiceMethod(
-			label = "Retorna os dados do coronavirus por pais que for selecionado",
-			description = "Seleciona os casos dos países")
+			label = "Returns the top 10 coronavirus by country in table",
+			description = "Returns the top 10 coronavirus by country in table")
 		@TableReturn
 
-	public List<CoronaData> listByPerNumberOfDeathsToday()
+	public List<CoronaVirusData> listByPerNumberOfDeathsToday()
 	{
 		Calendar dataAtual = Calendar.getInstance();
 		dataAtual.add(Calendar.DAY_OF_MONTH, -1);
-		List<CoronaData> value = cd.getCoronaDadosByDataOrderByNewDeathsDesc(dataAtual);
+		List<CoronaVirusData> value = cd.getCoronaVirusDataByDataOrderByNewDeathsDesc(dataAtual);
 		
-		List<CoronaData> coronatTop10= new ArrayList<CoronaData>();
+		List<CoronaVirusData> coronatTop10= new ArrayList<CoronaVirusData>();
 		
 		for (int i = 1; i <= 10; i++) {
 			coronatTop10.add(value.get(i));
@@ -81,29 +82,59 @@ public class CoronaProgram
 	}
 	
 	@ServiceMethod(
-			label = "Retorna os dados do coronavirus por pais que for selecionado",
-			description = "Seleciona os casos dos países")
+			label = "Returns the top 10 coronavirus by country in bar chart.",
+			description = "Returns the top 10 coronavirus by country in bar chart.")
+	@BarChartReturn(
+			dataValuesField = "totalDeaths",
+			dataLabelsField = "location",
+			xAxisLabel ="Location",
+			yAxisLabel = "Total Deaths")
+
+	public List<CoronaVirusData> listByPerNumberGraphOfDeathsToday()
+	{
+		
+		Calendar dataAtual = Calendar.getInstance();
+		dataAtual.add(Calendar.DAY_OF_MONTH, -1);
+		List<CoronaVirusData> value = cd.getCoronaVirusDataByDataOrderByNewDeathsDesc(dataAtual);
+		
+		List<CoronaVirusData> coronatTop10= new ArrayList<CoronaVirusData>();
+		
+		for (int i = 1; i <= 10; i++) {
+			coronatTop10.add(value.get(i));
+		}
+		
+		return coronatTop10;
+	}
+	
+	
+	@ServiceMethod(
+			label ="Returns the line graph of CoronaDao.java \n" +
+					"CoronaProgram.java \n" +
+					"CoronaVirusData.java of coronavirus by parents that is selected",
+			description = "Returns the line graph of CoronaDao.java \n" +
+					"CoronaProgram.java \n" +
+					"CoronaVirusData.java of coronavirus by parents that is selected")
 	@LineChartReturn(typeOfChart = "line",
 			dataLabels = "eventDateTime",
 			temporalSeries = true,
 			multipleDataset = true,
 			xAxisShowGridlines = true, 
-			title = "Novos Casos de Corona Virus no pais",
-			yAxisLabel = "Casos",
-			xAxisLabel = "Data",
+			title = "New Cases of Corona Virus in the country",
+			yAxisLabel = "Cases",
+			xAxisLabel = "Date",
 			xAxis = {"data"},
 			yAxis= {"newCases"})
-		public List<CoronaData> graphByLocation(@Combo(value = "location") String location)
+		public List<CoronaVirusData> graphByLocation(@Combo(value = "location") String location)
 		{	
-			List<CoronaData> retorno = this.cd.getCoronaDadosByLocationOrderByData(location);
-			List<CoronaData> retorno2 = new ArrayList<CoronaData>();
+			List<CoronaVirusData> retorno = this.cd.getCoronaVirusDataByLocationOrderByData(location);
+			List<CoronaVirusData> retorno2 = new ArrayList<CoronaVirusData>();
 			for (int i = retorno.size()-50; i < retorno.size(); i++) {
 				
 				if(i>=2)
 				{
-					CoronaData cd1 = retorno.get(i);
-					CoronaData cd2 = retorno.get(i-1);
-					CoronaData cd3 = retorno.get(i-2);
+					CoronaVirusData cd1 = retorno.get(i);
+					CoronaVirusData cd2 = retorno.get(i-1);
+					CoronaVirusData cd3 = retorno.get(i-2);
 					
 					int value = cd1.getNewCases()+cd2.getNewCases()+cd3.getNewCases();
 					

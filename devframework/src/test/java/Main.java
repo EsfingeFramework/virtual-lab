@@ -2,7 +2,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.esfinge.virtuallab.TestUtils;
-import org.esfinge.virtuallab.covid.CoronaData;
+import org.esfinge.virtuallab.covid.CoronaVirusData;
 import org.esfinge.virtuallab.covid.CoronaDao;
 import org.esfinge.virtuallab.covid.CoronaProgram;
 import org.esfinge.virtuallab.demo.chart.bars.BarChartDemo;
@@ -42,7 +42,7 @@ public class Main
 //		TestUtils.createJar("tarefa.jar", TarefaService.class, Tarefa.class);
 //		TestUtils.createJar("matematica.jar", MatematicaService.class, MatematicaInvokerProxy.class, Ponto.class);
 		
-		TestUtils.createJar("coronaDao.jar", CoronaDao.class, CoronaData.class);
+		TestUtils.createJar("coronaDao.jar", CoronaDao.class, CoronaVirusData.class);
 		TestUtils.createJar("coronaProgram.jar", CoronaProgram.class);
 
 

@@ -10,7 +10,7 @@ import java.util.Calendar;
 
 
 @Entity
-public class CoronaData{
+public class CoronaVirusData{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,7 +27,7 @@ public class CoronaData{
 
 	private int totalDeaths;
 
-	public CoronaData() {
+	public CoronaVirusData() {
 	}
 
 	public Long getId() {
