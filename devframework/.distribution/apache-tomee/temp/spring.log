@@ -1,0 +1,21 @@
+2024-05-11 10:26:26.692  INFO   --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization started
+2024-05-11 10:26:28.563  INFO   --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2024-05-11 10:26:28.851  INFO   --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.3.10.Final}
+2024-05-11 10:26:28.857  INFO   --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2024-05-11 10:26:29.319  INFO   --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2024-05-11 10:26:29.797  INFO   --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-05-11 10:26:30.222  INFO   --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-05-11 10:26:30.270  INFO   --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-05-11 10:26:30.768  INFO   --- [main] org.hibernate.orm.beans                  : HHH10005002: No explicit CDI BeanManager reference was passed to Hibernate, but CDI is available on the Hibernate ClassLoader.
+2024-05-11 10:26:30.992  INFO   --- [main] o.e.v.spring.EntityManagerFactoryHelper  : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-05-11 10:26:31.908  INFO   --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext initialized in 5206 ms
+2024-05-11 10:26:31.916  INFO   --- [main] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcher'
+2024-05-11 10:26:31.941  INFO   --- [main] o.s.web.servlet.DispatcherServlet        : Completed initialization in 25 ms
+2024-05-11 10:26:40.033  INFO   --- [http-nio-8080-exec-4] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2024-05-11 10:26:40.072  INFO   --- [http-nio-8080-exec-4] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2024-05-11 10:26:40.085  INFO   --- [http-nio-8080-exec-4] org.hibernate.orm.beans                  : HHH10005002: No explicit CDI BeanManager reference was passed to Hibernate, but CDI is available on the Hibernate ClassLoader.
+2024-05-11 10:26:40.111  INFO   --- [http-nio-8080-exec-4] o.e.v.spring.EntityManagerFactoryHelper  : Initialized JPA EntityManagerFactory for persistence unit 'default'

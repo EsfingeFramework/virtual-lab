@@ -1,0 +1,83 @@
+11-May-2024 10:26:14.757 INFORMAÇÕES [main] jdk.internal.reflect.NativeMethodAccessorImpl.invoke Server version name:   Apache Tomcat (TomEE)/9.0.82 (8.0.16)
+11-May-2024 10:26:14.758 INFORMAÇÕES [main] jdk.internal.reflect.NativeMethodAccessorImpl.invoke Server built:          Oct 11 2023 13:15:08 UTC
+11-May-2024 10:26:14.758 INFORMAÇÕES [main] jdk.internal.reflect.NativeMethodAccessorImpl.invoke Server version number: 9.0.82.0
+11-May-2024 10:26:14.758 INFORMAÇÕES [main] jdk.internal.reflect.NativeMethodAccessorImpl.invoke OS Name:               Windows 10
+11-May-2024 10:26:14.758 INFORMAÇÕES [main] jdk.internal.reflect.NativeMethodAccessorImpl.invoke OS Version:            10.0
+11-May-2024 10:26:14.758 INFORMAÇÕES [main] jdk.internal.reflect.NativeMethodAccessorImpl.invoke Architecture:          amd64
+11-May-2024 10:26:14.759 INFORMAÇÕES [main] jdk.internal.reflect.NativeMethodAccessorImpl.invoke Java Home:             C:\DEV\jdks\jdk17
+11-May-2024 10:26:14.759 INFORMAÇÕES [main] jdk.internal.reflect.NativeMethodAccessorImpl.invoke JVM Version:           17.0.10+7
+11-May-2024 10:26:14.759 INFORMAÇÕES [main] jdk.internal.reflect.NativeMethodAccessorImpl.invoke JVM Vendor:            Eclipse Adoptium
+11-May-2024 10:26:14.759 INFORMAÇÕES [main] jdk.internal.reflect.NativeMethodAccessorImpl.invoke CATALINA_BASE:         D:\fernando.projetos\virtual-lab\devframework\.distribution\apache-tomee
+11-May-2024 10:26:14.759 INFORMAÇÕES [main] jdk.internal.reflect.NativeMethodAccessorImpl.invoke CATALINA_HOME:         D:\fernando.projetos\virtual-lab\devframework\.distribution\apache-tomee
+11-May-2024 10:26:14.775 INFORMAÇÕES [main] jdk.internal.reflect.NativeMethodAccessorImpl.invoke Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+11-May-2024 10:26:14.775 INFORMAÇÕES [main] jdk.internal.reflect.NativeMethodAccessorImpl.invoke Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+11-May-2024 10:26:14.775 INFORMAÇÕES [main] jdk.internal.reflect.NativeMethodAccessorImpl.invoke Command line argument: --add-opens=java.base/java.util=ALL-UNNAMED
+11-May-2024 10:26:14.775 INFORMAÇÕES [main] jdk.internal.reflect.NativeMethodAccessorImpl.invoke Command line argument: --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+11-May-2024 10:26:14.776 INFORMAÇÕES [main] jdk.internal.reflect.NativeMethodAccessorImpl.invoke Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+11-May-2024 10:26:14.776 INFORMAÇÕES [main] jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Djava.util.logging.config.file=D:\fernando.projetos\virtual-lab\devframework\.distribution\apache-tomee\conf\logging.properties
+11-May-2024 10:26:14.776 INFORMAÇÕES [main] jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+11-May-2024 10:26:14.777 INFORMAÇÕES [main] jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -javaagent:D:\fernando.projetos\virtual-lab\devframework\.distribution\apache-tomee\lib\openejb-javaagent.jar
+11-May-2024 10:26:14.777 INFORMAÇÕES [main] jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+11-May-2024 10:26:14.777 INFORMAÇÕES [main] jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+11-May-2024 10:26:14.777 INFORMAÇÕES [main] jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Dorg.apache.catalina.STRICT_SERVLET_COMPLIANCE=false
+11-May-2024 10:26:14.778 INFORMAÇÕES [main] jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Dopenejb.session.manager=org.apache.tomee.catalina.session.QuickSessionManager
+11-May-2024 10:26:14.778 INFORMAÇÕES [main] jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Dtomee.remote.support=true
+11-May-2024 10:26:14.778 INFORMAÇÕES [main] jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Dopenejb.system.apps=false
+11-May-2024 10:26:14.778 INFORMAÇÕES [main] jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Dtomee.noshutdownhook=true
+11-May-2024 10:26:14.778 INFORMAÇÕES [main] jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Dtomee.jsp-development=true
+11-May-2024 10:26:14.779 INFORMAÇÕES [main] jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Dignore.endorsed.dirs=
+11-May-2024 10:26:14.779 INFORMAÇÕES [main] jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Dcatalina.base=D:\fernando.projetos\virtual-lab\devframework\.distribution\apache-tomee
+11-May-2024 10:26:14.779 INFORMAÇÕES [main] jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Dcatalina.home=D:\fernando.projetos\virtual-lab\devframework\.distribution\apache-tomee
+11-May-2024 10:26:14.779 INFORMAÇÕES [main] jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Djava.io.tmpdir=D:\fernando.projetos\virtual-lab\devframework\.distribution\apache-tomee\temp
+11-May-2024 10:26:14.798 INFORMAÇÕES [main] jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke The Apache Tomcat Native library which allows using OpenSSL was not found on the java.library.path: [C:\DEV\jdks\jdk17\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\DEV\cmder\vendor\conemu-maximus5\ConEmu\Scripts;C:\DEV\cmder\vendor\conemu-maximus5;C:\DEV\cmder\vendor\conemu-maximus5\ConEmu;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Git\cmd;C:\DEV\Gpg4win\..\GnuPG\bin;C:\Users\fernando.pereira\AppData\Local\Microsoft\WindowsApps;C:\DEV\git-scm\bin;C:\DEV\jdks\jdk17\bin;C:\DEV\wildfly\bin;C:\DEV\netbeans\bin;C:\DEV\nodejs;C:\DEV\netbeans\java\maven\bin;C:\DEV\gradle\bin;C:\DEV\GnuPG\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\DEV\cmder\vendor\bin;C:\DEV\cmder;.]
+11-May-2024 10:26:15.159 INFORMAÇÕES [main] jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke Initializing ProtocolHandler ["http-nio-8080"]
+11-May-2024 10:26:15.450 INFORMAÇÕES [main] org.apache.openejb.util.OptionsLog.info Using 'tomee.remote.support=true'
+11-May-2024 10:26:15.463 INFORMAÇÕES [main] org.apache.openejb.util.OptionsLog.info Using 'openejb.jdbc.datasource-creator=org.apache.tomee.jdbc.TomEEDataSourceCreator'
+11-May-2024 10:26:15.553 INFORMAÇÕES [main] org.apache.openejb.OpenEJB$Instance.<init> ********************************************************************************
+11-May-2024 10:26:15.554 INFORMAÇÕES [main] org.apache.openejb.OpenEJB$Instance.<init> OpenEJB https://tomee.apache.org/
+11-May-2024 10:26:15.554 INFORMAÇÕES [main] org.apache.openejb.OpenEJB$Instance.<init> Startup: Sat May 11 10:26:15 BRT 2024
+11-May-2024 10:26:15.554 INFORMAÇÕES [main] org.apache.openejb.OpenEJB$Instance.<init> Copyright 1999-2023 (C) Apache TomEE Project, All Rights Reserved.
+11-May-2024 10:26:15.554 INFORMAÇÕES [main] org.apache.openejb.OpenEJB$Instance.<init> Version: 8.0.16
+11-May-2024 10:26:15.554 INFORMAÇÕES [main] org.apache.openejb.OpenEJB$Instance.<init> Build date: 20231029
+11-May-2024 10:26:15.554 INFORMAÇÕES [main] org.apache.openejb.OpenEJB$Instance.<init> Build time: 12:20
+11-May-2024 10:26:15.554 INFORMAÇÕES [main] org.apache.openejb.OpenEJB$Instance.<init> ********************************************************************************
+11-May-2024 10:26:15.555 INFORMAÇÕES [main] org.apache.openejb.OpenEJB$Instance.<init> openejb.home = D:\fernando.projetos\virtual-lab\devframework\.distribution\apache-tomee
+11-May-2024 10:26:15.555 INFORMAÇÕES [main] org.apache.openejb.OpenEJB$Instance.<init> openejb.base = D:\fernando.projetos\virtual-lab\devframework\.distribution\apache-tomee
+11-May-2024 10:26:15.556 INFORMAÇÕES [main] org.apache.openejb.cdi.CdiBuilder.initializeOWB Created new singletonService org.apache.openejb.cdi.ThreadSingletonServiceImpl@34c01041
+11-May-2024 10:26:15.560 INFORMAÇÕES [main] org.apache.openejb.cdi.CdiBuilder.initializeOWB Succeeded in installing singleton service
+11-May-2024 10:26:15.592 INFORMAÇÕES [main] org.apache.openejb.config.ConfigurationFactory.init TomEE configuration file is 'D:\fernando.projetos\virtual-lab\devframework\.distribution\apache-tomee\conf\tomee.xml'
+11-May-2024 10:26:15.627 INFORMAÇÕES [main] org.apache.openejb.config.ConfigurationFactory.configureService Configuring Service(id=Tomcat Security Service, type=SecurityService, provider-id=Tomcat Security Service)
+11-May-2024 10:26:15.629 INFORMAÇÕES [main] org.apache.openejb.config.ConfigurationFactory.configureService Configuring Service(id=Default Transaction Manager, type=TransactionManager, provider-id=Default Transaction Manager)
+11-May-2024 10:26:15.632 INFORMAÇÕES [main] org.apache.openejb.util.OptionsLog.info Using 'openejb.system.apps=false'
+11-May-2024 10:26:15.632 INFORMAÇÕES [main] org.apache.openejb.util.OptionsLog.info Using 'openejb.deployments.classpath=false'
+11-May-2024 10:26:15.636 INFORMAÇÕES [main] org.apache.openejb.assembler.classic.Assembler.createRecipe Creating TransactionManager(id=Default Transaction Manager)
+11-May-2024 10:26:15.703 INFORMAÇÕES [main] org.apache.openejb.assembler.classic.Assembler.createRecipe Creating SecurityService(id=Tomcat Security Service)
+11-May-2024 10:26:15.806 INFORMAÇÕES [main] org.apache.openejb.server.ServiceManager.initServer Creating ServerService(id=cxf-rs)
+11-May-2024 10:26:16.070 INFORMAÇÕES [main] org.apache.openejb.server.SimpleServiceManager.start   ** Bound Services **
+11-May-2024 10:26:16.070 INFORMAÇÕES [main] org.apache.openejb.server.SimpleServiceManager.printRow   NAME                 IP              PORT  
+11-May-2024 10:26:16.070 INFORMAÇÕES [main] org.apache.openejb.server.SimpleServiceManager.start -------
+11-May-2024 10:26:16.071 INFORMAÇÕES [main] org.apache.openejb.server.SimpleServiceManager.start Ready!
+11-May-2024 10:26:16.071 INFORMAÇÕES [main] org.apache.openejb.util.OptionsLog.info Using 'tomee.noshutdownhook=true'
+11-May-2024 10:26:16.072 INFORMAÇÕES [main] jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke Server initialization in [1601] milliseconds
+11-May-2024 10:26:16.117 INFORMAÇÕES [main] org.apache.tomee.catalina.OpenEJBNamingContextListener.bindResource Importing a Tomcat Resource with id 'UserDatabase' of type 'org.apache.catalina.UserDatabase'.
+11-May-2024 10:26:16.117 INFORMAÇÕES [main] org.apache.openejb.assembler.classic.Assembler.createRecipe Creating Resource(id=UserDatabase)
+11-May-2024 10:26:16.138 INFORMAÇÕES [main] jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke Starting service [Catalina]
+11-May-2024 10:26:16.138 INFORMAÇÕES [main] jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke Starting Servlet engine: [Apache Tomcat (TomEE)/9.0.82 (8.0.16)]
+11-May-2024 10:26:16.165 INFORMAÇÕES [main] jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke Deploying web application archive [D:\fernando.projetos\virtual-lab\devframework\.distribution\apache-tomee\webapps\virtuallab.war]
+11-May-2024 10:26:16.172 INFORMAÇÕES [main] org.apache.tomee.catalina.TomcatWebAppBuilder.init ------------------------- localhost -> /virtuallab
+11-May-2024 10:26:16.174 INFORMAÇÕES [main] org.apache.openejb.util.JarExtractor.extract Extracting jar: D:\fernando.projetos\virtual-lab\devframework\.distribution\apache-tomee\webapps\virtuallab.war
+11-May-2024 10:26:18.307 INFORMAÇÕES [main] org.apache.openejb.util.JarExtractor.extract Extracted path: D:\fernando.projetos\virtual-lab\devframework\.distribution\apache-tomee\webapps\virtuallab
+11-May-2024 10:26:18.307 INFORMAÇÕES [main] org.apache.openejb.util.OptionsLog.info Using 'openejb.session.manager=org.apache.tomee.catalina.session.QuickSessionManager'
+11-May-2024 10:26:24.318 INFORMAÇÕES [main] org.apache.openejb.config.ConfigurationFactory.configureApplication Configuring enterprise application: D:\fernando.projetos\virtual-lab\devframework\.distribution\apache-tomee\webapps\virtuallab
+11-May-2024 10:26:24.849 INFORMAÇÕES [main] org.apache.openejb.config.ConfigurationFactory.configureService Configuring Service(id=Default Managed Container, type=Container, provider-id=Default Managed Container)
+11-May-2024 10:26:24.850 INFORMAÇÕES [main] org.apache.openejb.config.AutoConfig.createContainer Auto-creating a container for bean virtuallab.Comp1341781781: Container(type=MANAGED, id=Default Managed Container)
+11-May-2024 10:26:24.850 INFORMAÇÕES [main] org.apache.openejb.assembler.classic.Assembler.createRecipe Creating Container(id=Default Managed Container)
+11-May-2024 10:26:24.856 INFORMAÇÕES [main] org.apache.openejb.core.managed.SimplePassivater.init Using directory D:\fernando.projetos\virtual-lab\devframework\.distribution\apache-tomee\temp for stateful session passivation
+11-May-2024 10:26:24.944 INFORMAÇÕES [main] org.apache.openejb.config.AppInfoBuilder.build Enterprise application "D:\fernando.projetos\virtual-lab\devframework\.distribution\apache-tomee\webapps\virtuallab" loaded.
+11-May-2024 10:26:25.023 INFORMAÇÕES [main] org.apache.openejb.assembler.classic.Assembler.createApplication Assembling app: D:\fernando.projetos\virtual-lab\devframework\.distribution\apache-tomee\webapps\virtuallab
+11-May-2024 10:26:25.194 INFORMAÇÕES [main] org.apache.openejb.assembler.classic.Assembler.createApplication Deployed Application(path=D:\fernando.projetos\virtual-lab\devframework\.distribution\apache-tomee\webapps\virtuallab)
+11-May-2024 10:26:25.781 INFORMAÇÕES [main] org.apache.myfaces.ee.MyFacesContainerInitializer.onStartup Using org.apache.myfaces.ee.MyFacesContainerInitializer
+11-May-2024 10:26:26.488 INFORMAÇÕES [main] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+11-May-2024 10:26:31.985 INFORMAÇÕES [main] jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke Deployment of web application archive [D:\fernando.projetos\virtual-lab\devframework\.distribution\apache-tomee\webapps\virtuallab.war] has finished in [15.819] ms
+11-May-2024 10:26:32.049 INFORMAÇÕES [main] jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke Starting ProtocolHandler ["http-nio-8080"]
+11-May-2024 10:26:32.068 INFORMAÇÕES [main] jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke Server startup in [15996] milliseconds
