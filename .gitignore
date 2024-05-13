@@ -2,3 +2,4 @@
 /Servers/
 /bin/
 **/.DS_Store
+/virtuallab-lib/target/
