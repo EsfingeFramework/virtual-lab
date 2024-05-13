@@ -1,9 +1,8 @@
 package org.esfinge.virtuallab.domain;
 
-import esfinge.querybuilder.core.Repository;
-import esfinge.querybuilder.core.annotation.LesserOrEquals;
 import java.util.List;
-
+import net.sf.esfinge.querybuilder.Repository;
+import net.sf.esfinge.querybuilder.annotation.LesserOrEquals;
 import org.esfinge.virtuallab.api.annotations.ServiceDAO;
 
 @ServiceDAO(label = "DAO Temperaturas",

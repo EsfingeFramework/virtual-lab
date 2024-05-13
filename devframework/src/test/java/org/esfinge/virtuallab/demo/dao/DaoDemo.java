@@ -1,10 +1,9 @@
 package org.esfinge.virtuallab.demo.dao;
 
-import esfinge.querybuilder.core.Repository;
-import esfinge.querybuilder.core.annotation.GreaterOrEquals;
-import esfinge.querybuilder.core.annotation.LesserOrEquals;
 import java.util.List;
-
+import net.sf.esfinge.querybuilder.Repository;
+import net.sf.esfinge.querybuilder.annotation.GreaterOrEquals;
+import net.sf.esfinge.querybuilder.annotation.LesserOrEquals;
 import org.esfinge.virtuallab.api.annotations.ServiceDAO;
 import org.esfinge.virtuallab.api.annotations.ServiceMethod;
 import org.esfinge.virtuallab.api.annotations.TableReturn;

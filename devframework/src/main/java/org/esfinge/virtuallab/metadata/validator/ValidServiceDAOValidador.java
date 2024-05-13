@@ -1,18 +1,15 @@
 package org.esfinge.virtuallab.metadata.validator;
 
-import esfinge.querybuilder.core.Repository;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Method;
 import java.util.List;
-
 import javax.persistence.Entity;
-
-import org.esfinge.virtuallab.utils.ReflectionUtils;
-import org.esfinge.virtuallab.utils.Utils;
-
 import net.sf.esfinge.metadata.AnnotationValidationException;
 import net.sf.esfinge.metadata.AnnotationValidator;
+import net.sf.esfinge.querybuilder.Repository;
+import org.esfinge.virtuallab.utils.ReflectionUtils;
+import org.esfinge.virtuallab.utils.Utils;
 
 /**
  * Valida classes anotadas com @ServiceDAO.
@@ -31,7 +28,7 @@ public class ValidServiceDAOValidador implements AnnotationValidator {
         // verifica se eh uma interface e estende Repository (do QueryBuilder)
         if (!clazz.isInterface() || !Repository.class.isAssignableFrom(clazz)) {
             throw new AnnotationValidationException(String.format(
-                    "A classe '%s' deve ser uma interface que estende 'net.sf.esfinge.querybuilder.Repository' do Esfinge QueryBuilder!", clazz.getCanonicalName()));
+                    "A classe '%s' deve ser uma interface que estende 'esfinge.querybuilder.core.Repository' do Esfinge QueryBuilder!", clazz.getCanonicalName()));
         }
 
         // verifica se a entidade implementa a anotacao JPA @Entity

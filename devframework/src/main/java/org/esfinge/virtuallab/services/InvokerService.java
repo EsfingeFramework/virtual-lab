@@ -1,9 +1,8 @@
 package org.esfinge.virtuallab.services;
 
-import esfinge.querybuilder.core.QueryBuilder;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-
+import net.sf.esfinge.querybuilder.QueryBuilder;
 import org.apache.commons.lang3.ClassUtils;
 import org.esfinge.virtuallab.api.InvokerProxy;
 import org.esfinge.virtuallab.descriptors.MethodDescriptor;

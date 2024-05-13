@@ -1,9 +1,8 @@
 package org.esfinge.virtuallab.demo.chart.lines;
 
-import esfinge.querybuilder.core.Repository;
-import esfinge.querybuilder.core.annotation.GreaterOrEquals;
 import java.util.List;
-
+import net.sf.esfinge.querybuilder.Repository;
+import net.sf.esfinge.querybuilder.annotation.GreaterOrEquals;
 import org.esfinge.virtuallab.api.annotations.ServiceDAO;
 import org.esfinge.virtuallab.api.annotations.ServiceMethod;
 import org.esfinge.virtuallab.api.annotations.TableReturn;
