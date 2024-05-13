@@ -1,3 +1,0 @@
-13-May-2024 16:08:22.670 INFORMAÇÕES [main] org.apache.catalina.core.ApplicationContext.log 1 Spring WebApplicationInitializers detected on classpath
-13-May-2024 16:08:22.768 INFORMAÇÕES [main] org.apache.catalina.core.ApplicationContext.log Initializing Spring root WebApplicationContext
-13-May-2024 16:08:27.065 INFORMAÇÕES [main] org.apache.catalina.core.ApplicationContext.log Initializing Spring DispatcherServlet 'dispatcher'
