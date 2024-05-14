@@ -3,61 +3,51 @@ package org.esfinge.virtuallab.web;
 import org.esfinge.virtuallab.web.json.JsonData;
 
 /**
- * Armazena as informacoes de resposta para as requisicoes, 
- * retornado para a UI como umo objeto JSON.
+ * Armazena as informacoes de resposta para as requisicoes, retornado para a UI como umo objeto JSON.
  */
-public class JsonReturn
-{
-	// o tipo do objeto de resposta
-	private String type;
+public class JsonReturn {
+    // o tipo do objeto de resposta
 
-	// o resultado da requisicao
-	private boolean success;
+    private String type;
 
-	// mensagem de retorno relacionada a requisicao
-	private String message;
+    // o resultado da requisicao
+    private boolean success;
 
-	// os dados de retorno da requisicao
-	private JsonData data;
+    // mensagem de retorno relacionada a requisicao
+    private String message;
 
-	
-	public String getType()
-	{
-		return type;
-	}
+    // os dados de retorno da requisicao
+    private JsonData data;
 
-	public void setType(String type)
-	{
-		this.type = type;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public boolean isSuccess()
-	{
-		return success;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public void setSuccess(boolean success)
-	{
-		this.success = success;
-	}
+    public boolean isSuccess() {
+        return success;
+    }
 
-	public String getMessage()
-	{
-		return message;
-	}
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
 
-	public void setMessage(String message)
-	{
-		this.message = message;
-	}
+    public String getMessage() {
+        return message;
+    }
 
-	public JsonData getData()
-	{
-		return data;
-	}
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-	public void setData(JsonData data)
-	{
-		this.data = data;
-	}
+    public JsonData getData() {
+        return data;
+    }
+
+    public void setData(JsonData data) {
+        this.data = data;
+    }
 }

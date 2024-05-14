@@ -1,7 +1,6 @@
 package org.esfinge.virtuallab.services;
 
 import java.util.Arrays;
-
 import org.esfinge.virtuallab.descriptors.MethodDescriptor;
 import org.esfinge.virtuallab.descriptors.ParameterDescriptor;
 import org.esfinge.virtuallab.exceptions.ClassLoaderException;
@@ -25,17 +24,17 @@ public class InvokerServiceTest {
 
     // gera o MethodDescriptor do metodo valido da classe de teste valida
     private MethodDescriptor createMethodDescriptor() {
-        ParameterDescriptor pd1 = new ParameterDescriptor();
+        var pd1 = new ParameterDescriptor();
         pd1.setIndex(0);
         pd1.setName("param1");
         pd1.setDataType(String.class.getCanonicalName());
 
-        ParameterDescriptor pd2 = new ParameterDescriptor();
+        var pd2 = new ParameterDescriptor();
         pd2.setIndex(1);
         pd2.setName("param2");
         pd2.setDataType(int.class.getCanonicalName());
 
-        MethodDescriptor md = new MethodDescriptor();
+        var md = new MethodDescriptor();
         md.setClassName(InvokerValidClass.class.getCanonicalName());
         md.setName("validMethod");
         md.setReturnType(String.class.getCanonicalName());
@@ -56,7 +55,7 @@ public class InvokerServiceTest {
         thrown.expectCause(IsInstanceOf.instanceOf(ClassNotFoundException.class));
 
         // especifica um nome de classe inexistente
-        MethodDescriptor md = this.createMethodDescriptor();
+        var md = this.createMethodDescriptor();
         md.setClassName("a.invalid.Class");
 
         InvokerService.getInstance().call(md, "TEST", 777);
@@ -70,7 +69,7 @@ public class InvokerServiceTest {
         thrown.expectCause(IsInstanceOf.instanceOf(ClassLoaderException.class));
 
         // especifica uma classe com construtor privado
-        MethodDescriptor md = this.createMethodDescriptor();
+        var md = this.createMethodDescriptor();
         md.setClassName(InvokerInvalidClass.class.getCanonicalName());
 
         InvokerService.getInstance().call(md, "TEST", 777);
@@ -83,7 +82,7 @@ public class InvokerServiceTest {
         thrown.expectCause(IsInstanceOf.instanceOf(IllegalArgumentException.class));
 
         // especifica um metodo inexistente
-        MethodDescriptor md = this.createMethodDescriptor();
+        var md = this.createMethodDescriptor();
         md.setName("missingMethod");
 
         InvokerService.getInstance().call(md, "TEST", 777);
@@ -96,7 +95,7 @@ public class InvokerServiceTest {
         thrown.expectCause(IsInstanceOf.instanceOf(IllegalArgumentException.class));
 
         // especifica um metodo privado
-        MethodDescriptor md = this.createMethodDescriptor();
+        var md = this.createMethodDescriptor();
         md.setName("privateMethod");
 
         InvokerService.getInstance().call(md, "TEST", 777);
@@ -109,7 +108,7 @@ public class InvokerServiceTest {
         thrown.expectCause(IsInstanceOf.instanceOf(IllegalArgumentException.class));
 
         // especifica os parametros na ordem invertida
-        MethodDescriptor md = this.createMethodDescriptor();
+        var md = this.createMethodDescriptor();
         md.getParameters().forEach(pd -> pd.setIndex(pd.getIndex() == 0 ? 1 : 0));
 
         InvokerService.getInstance().call(md, "TEST", 777);
@@ -122,7 +121,7 @@ public class InvokerServiceTest {
         thrown.expect(InvocationException.class);
         thrown.expectCause(IsInstanceOf.instanceOf(IllegalArgumentException.class));
 
-        MethodDescriptor md = this.createMethodDescriptor();
+        var md = this.createMethodDescriptor();
 
         // inverte a ordem dos valores
         InvokerService.getInstance().call(md, 777, "TEST");
@@ -135,7 +134,7 @@ public class InvokerServiceTest {
         thrown.expect(InvocationException.class);
         thrown.expectCause(IsInstanceOf.instanceOf(IllegalArgumentException.class));
 
-        MethodDescriptor md = this.createMethodDescriptor();
+        var md = this.createMethodDescriptor();
 
         // especifica somente o valor do primeiro parametro
         InvokerService.getInstance().call(md, "TESTE");
@@ -148,7 +147,7 @@ public class InvokerServiceTest {
         thrown.expect(InvocationException.class);
         thrown.expectCause(IsInstanceOf.instanceOf(IllegalArgumentException.class));
 
-        MethodDescriptor md = this.createMethodDescriptor();
+        var md = this.createMethodDescriptor();
 
         System.out.println(md);
         // especifica valor a mais de parametros
@@ -159,8 +158,8 @@ public class InvokerServiceTest {
     @Ignore("Classe de servico nao carregada")
     @Test
     public void testInvokeValidMethod() throws Exception {
-        MethodDescriptor md = this.createMethodDescriptor();
-        Object result = InvokerService.getInstance().call(md, "TESTE", 777);
+        var md = this.createMethodDescriptor();
+        var result = InvokerService.getInstance().call(md, "TESTE", 777);
         Assert.assertEquals("TESTE777", result);
     }
 }

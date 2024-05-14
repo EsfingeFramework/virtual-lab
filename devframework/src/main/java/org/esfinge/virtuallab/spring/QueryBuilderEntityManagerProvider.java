@@ -1,10 +1,10 @@
 package org.esfinge.virtuallab.spring;
 
+import esfinge.querybuilder.jpa1.EntityManagerProvider;
 import java.util.HashMap;
 import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import net.sf.esfinge.querybuilder.jpa1.EntityManagerProvider;
 import org.esfinge.virtuallab.services.DataSourceService;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -36,7 +36,7 @@ public class QueryBuilderEntityManagerProvider implements EntityManagerProvider,
         props.put("hibernate.dialect", DataSourceService.getCurrentDataBase().getDialect());
 
         // recupera o ultimo EntityManager criado
-        EntityManager em = _openEM.get();
+        var em = _openEM.get();
         if (em != null) {
             // fecha o EM para liberar a conexao
             em.close();

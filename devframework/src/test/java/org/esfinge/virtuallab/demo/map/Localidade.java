@@ -1,64 +1,53 @@
 package org.esfinge.virtuallab.demo.map;
 
-public class Localidade
-{
-	private String nome;
-	private String observacoes;
-	private double posLat;
-	private double posLong;
-	
-	
-	public Localidade()
-	{
-		
-	}
+public class Localidade {
 
-	public Localidade(String nome, String observacoes, double posLat, double posLong)
-	{
-		super();
-		this.nome = nome;
-		this.observacoes = observacoes;
-		this.posLat = posLat;
-		this.posLong = posLong;
-	}
+    private String nome;
+    private String observacoes;
+    private double posLat;
+    private double posLong;
 
-	public String getNome()
-	{
-		return nome;
-	}
+    public Localidade() {
 
-	public void setNome(String nome)
-	{
-		this.nome = nome;
-	}
+    }
 
-	public String getObservacoes()
-	{
-		return observacoes;
-	}
+    public Localidade(String nome, String observacoes, double posLat, double posLong) {
+        super();
+        this.nome = nome;
+        this.observacoes = observacoes;
+        this.posLat = posLat;
+        this.posLong = posLong;
+    }
 
-	public void setObservacoes(String observacoes)
-	{
-		this.observacoes = observacoes;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public double getPosLat()
-	{
-		return posLat;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public void setPosLat(double posLat)
-	{
-		this.posLat = posLat;
-	}
+    public String getObservacoes() {
+        return observacoes;
+    }
 
-	public double getPosLong()
-	{
-		return posLong;
-	}
+    public void setObservacoes(String observacoes) {
+        this.observacoes = observacoes;
+    }
 
-	public void setPosLong(double posLong)
-	{
-		this.posLong = posLong;
-	}
+    public double getPosLat() {
+        return posLat;
+    }
+
+    public void setPosLat(double posLat) {
+        this.posLat = posLat;
+    }
+
+    public double getPosLong() {
+        return posLong;
+    }
+
+    public void setPosLong(double posLong) {
+        this.posLong = posLong;
+    }
 }

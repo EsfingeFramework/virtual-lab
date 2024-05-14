@@ -14,20 +14,21 @@ import org.springframework.web.servlet.resource.PathResourceResolver;
 @EnableWebMvc
 @ComponentScan(basePackages = "org.esfinge.virtuallab.*")
 @SuppressWarnings("deprecation")
-public class MappingConfiguration extends WebMvcConfigurerAdapter
-{
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry)
-	{
-		// mapeamento para os recursos do Spring WebJars
-		if (!registry.hasMappingForPattern("/webjars/**"))
-			registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+public class MappingConfiguration extends WebMvcConfigurerAdapter {
 
-		// mapeamento para os recursos da aplicacao (figuras, css, js..)
-		if (!registry.hasMappingForPattern("/resources/**"))
-			registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/statics/")
-					.setCachePeriod(3600).resourceChain(true).addResolver(new PathResourceResolver());
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        // mapeamento para os recursos do Spring WebJars
+        if (!registry.hasMappingForPattern("/webjars/**")) {
+            registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+        }
 
-		registry.setOrder(1);
-	}
+        // mapeamento para os recursos da aplicacao (figuras, css, js..)
+        if (!registry.hasMappingForPattern("/resources/**")) {
+            registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/statics/")
+                    .setCachePeriod(3600).resourceChain(true).addResolver(new PathResourceResolver());
+        }
+
+        registry.setOrder(1);
+    }
 }

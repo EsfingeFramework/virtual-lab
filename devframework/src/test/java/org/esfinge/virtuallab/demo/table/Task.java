@@ -1,64 +1,53 @@
 package org.esfinge.virtuallab.demo.table;
 
-public class Task
-{
-	private int id;
-	private int priority;
-	private String name;
-	private boolean completed;
-	
+public class Task {
 
-	public Task()
-	{
+    private int id;
+    private int priority;
+    private String name;
+    private boolean completed;
 
-	}
+    public Task() {
 
-	public Task(int id, int priority, String name, boolean completed)
-	{
-		super();
-		this.id = id;
-		this.priority = priority;
-		this.name = name;
-		this.completed = completed;
-	}
+    }
 
-	public int getId()
-	{
-		return id;
-	}
+    public Task(int id, int priority, String name, boolean completed) {
+        super();
+        this.id = id;
+        this.priority = priority;
+        this.name = name;
+        this.completed = completed;
+    }
 
-	public void setId(int id)
-	{
-		this.id = id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public int getPriority()
-	{
-		return priority;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setPriority(int priority)
-	{
-		this.priority = priority;
-	}
+    public int getPriority() {
+        return priority;
+    }
 
-	public String getName()
-	{
-		return name;
-	}
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
 
-	public void setName(String name)
-	{
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public boolean isCompleted()
-	{
-		return completed;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setCompleted(boolean completed)
-	{
-		this.completed = completed;
-	}
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
 }

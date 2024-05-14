@@ -13,7 +13,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import net.sf.esfinge.classmock.ClassMock;
-import net.sf.esfinge.classmock.api.IClassWriter;
 
 /**
  * Testes unitarios para a classe ClassLoaderService.
@@ -22,7 +21,7 @@ public class ClassLoaderServiceTest {
 
     private void createClass(String name, boolean valid, boolean service) throws IOException {
         // cria uma classe com a anotacao @ServiceClass
-        IClassWriter mock = ClassMock.of(name);
+        var mock = ClassMock.of(name);
         if (service) {
             mock.annotation(ServiceClass.class);
         }
@@ -50,18 +49,17 @@ public class ClassLoaderServiceTest {
     @Test
     public void testLoadClassFromPath() throws Exception {
         // cria um nome para a classe de teste
-        String className = TestUtils.createMockClassName();
+        var className = TestUtils.createMockClassName();
 
         // assegura que a classe nao esta carregada
         TestUtils.assertClassNotLoaded(className);
 
         // cria a classe de teste
         this.createClass(className, true, true);
-        String classPath = TestUtils.pathFromTestDir(className + ".class");
-
+        var classPath = TestUtils.pathFromTestDir(className + ".class");
         // verifica se a classe foi carregada
         //Corrigida
-        Class<?> clazz = ClassLoaderService.getInstance().loadService(new File(classPath));
+        var clazz = ClassLoaderService.getInstance().loadService(new File(classPath));
         Assert.assertNotNull(clazz);
         Assert.assertEquals(className, clazz.getCanonicalName());
     }
@@ -70,18 +68,18 @@ public class ClassLoaderServiceTest {
     @Test
     public void testLoadClassFromStream() throws Exception {
         // cria um nome para a classe de teste
-        String className = TestUtils.createMockClassName();
+        var className = TestUtils.createMockClassName();
 
         // assegura que a classe nao esta carregada
         TestUtils.assertClassNotLoaded(className);
 
         // cria a classe de teste
         this.createClass(className, true, true);
-        String classPath = TestUtils.pathFromTestDir(className + ".class");
+        var classPath = TestUtils.pathFromTestDir(className + ".class");
 
         // verifica se a classe foi carregada
         ClassLoaderService.getInstance().loadService(new File(classPath));
-        Class<?> clazz = ClassLoaderService.getInstance().getService(className);
+        var clazz = ClassLoaderService.getInstance().getService(className);
         Assert.assertNotNull(clazz);
         Assert.assertEquals(className, clazz.getCanonicalName());
     }
@@ -92,9 +90,9 @@ public class ClassLoaderServiceTest {
         TestUtils.assertTestDirIsEmpty();
 
         // cria umas classes de teste
-        String className1 = TestUtils.createMockClassName();
-        String className2 = TestUtils.createMockClassName();
-        String className3 = TestUtils.createMockClassName();
+        var className1 = TestUtils.createMockClassName();
+        var className2 = TestUtils.createMockClassName();
+        var className3 = TestUtils.createMockClassName();
         System.out.println(className1 + className2 + className3);
 
         this.createClass(className1, true, true);
@@ -104,7 +102,7 @@ public class ClassLoaderServiceTest {
         // cria o jar
         Assert.assertTrue(TestUtils.createJar("someJar.jar", className1, className2, className3));
 
-        String jarPath = TestUtils.pathFromTestDir("someJar.jar");
+        var jarPath = TestUtils.pathFromTestDir("someJar.jar");
 
         // assegura que as classes nao estao carregadas
         TestUtils.assertClassNotLoaded(className1);
@@ -113,7 +111,7 @@ public class ClassLoaderServiceTest {
 
         // verifica se as classes foram carregadas
         ClassLoaderService.getInstance().loadService(jarPath);
-        Class<?> clazz = ClassLoaderService.getInstance().getService(className1);
+        var clazz = ClassLoaderService.getInstance().getService(className1);
         Assert.assertEquals(className1, clazz.getCanonicalName());
         TestUtils.assertClassNotLoaded(className2);
         TestUtils.assertClassNotLoaded(className3);
@@ -132,9 +130,9 @@ public class ClassLoaderServiceTest {
         TestUtils.assertTestDirIsEmpty();
 
         // cria umas classes de teste
-        String className1 = TestUtils.createMockClassName();
-        String className2 = TestUtils.createMockClassName();
-        String className3 = TestUtils.createMockClassName();
+        var className1 = TestUtils.createMockClassName();
+        var className2 = TestUtils.createMockClassName();
+        var className3 = TestUtils.createMockClassName();
 
         this.createClass(className1, true, true);
         this.createClass(className2, true, false);
@@ -142,7 +140,7 @@ public class ClassLoaderServiceTest {
 
         // cria o jar
         Assert.assertTrue(TestUtils.createJar("someJar.jar", className1, className2, className3));
-        String jarPath = TestUtils.pathFromTestDir("someJar.jar");
+        var jarPath = TestUtils.pathFromTestDir("someJar.jar");
 
         // assegura que as classes nao estao carregadas
         TestUtils.assertClassNotLoaded(className1);
@@ -151,7 +149,7 @@ public class ClassLoaderServiceTest {
 
         // verifica se as classes foram carregadas
         ClassLoaderService.getInstance().loadService(new File((jarPath)));
-        Class<?> clazz = ClassLoaderService.getInstance().getService(className1);
+        var clazz = ClassLoaderService.getInstance().getService(className1);
         Assert.assertEquals(className1, clazz.getCanonicalName());
         TestUtils.assertClassNotLoaded(className2);
         TestUtils.assertClassNotLoaded(className3);

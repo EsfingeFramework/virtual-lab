@@ -1,52 +1,43 @@
 package org.esfinge.virtuallab.demo.chart.bars;
 
-public class Votes
-{
-	private int total;
-	private String region;
-	private String color;
+public class Votes {
 
-	
-	public Votes()
-	{
+    private int total;
+    private String region;
+    private String color;
 
-	}
+    public Votes() {
 
-	public Votes(int total, String region, String color)
-	{
-		super();
-		this.total = total;
-		this.region = region;
-		this.color = color;
-	}
+    }
 
-	public int getTotal()
-	{
-		return total;
-	}
+    public Votes(int total, String region, String color) {
+        super();
+        this.total = total;
+        this.region = region;
+        this.color = color;
+    }
 
-	public void setTotal(int total)
-	{
-		this.total = total;
-	}
+    public int getTotal() {
+        return total;
+    }
 
-	public String getRegion()
-	{
-		return region;
-	}
+    public void setTotal(int total) {
+        this.total = total;
+    }
 
-	public void setRegion(String region)
-	{
-		this.region = region;
-	}
+    public String getRegion() {
+        return region;
+    }
 
-	public String getColor()
-	{
-		return color;
-	}
+    public void setRegion(String region) {
+        this.region = region;
+    }
 
-	public void setColor(String color)
-	{
-		this.color = color;
-	}
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 }

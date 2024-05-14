@@ -1,13 +1,11 @@
 package org.esfinge.virtuallab.metadata.validator;
 
+import esfinge.querybuilder.core.Repository;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
-import java.lang.reflect.Method;
-import java.util.List;
 import javax.persistence.Entity;
 import net.sf.esfinge.metadata.AnnotationValidationException;
 import net.sf.esfinge.metadata.AnnotationValidator;
-import net.sf.esfinge.querybuilder.Repository;
 import org.esfinge.virtuallab.utils.ReflectionUtils;
 import org.esfinge.virtuallab.utils.Utils;
 
@@ -23,7 +21,7 @@ public class ValidServiceDAOValidador implements AnnotationValidator {
     @Override
     public void validate(Annotation toValidate, AnnotatedElement annotated) throws AnnotationValidationException {
         // cast para a classe
-        Class<?> clazz = (Class<?>) annotated;
+        var clazz = (Class<?>) annotated;
 
         // verifica se eh uma interface e estende Repository (do QueryBuilder)
         if (!clazz.isInterface() || !Repository.class.isAssignableFrom(clazz)) {
@@ -32,14 +30,14 @@ public class ValidServiceDAOValidador implements AnnotationValidator {
         }
 
         // verifica se a entidade implementa a anotacao JPA @Entity
-        List<Class<?>> entityList = ReflectionUtils.getActualTypesFromGenericInterface(Repository.class, clazz);
+        var entityList = ReflectionUtils.getActualTypesFromGenericInterface(Repository.class, clazz);
         if (!entityList.get(0).isAnnotationPresent(Entity.class)) {
             throw new AnnotationValidationException(String.format(
                     "A classe '%s' deve ser uma entidade JPA anotada com 'javax.persistence.Entity'!", entityList.get(0).getCanonicalName()));
         }
 
         // obtem os metodos declarados (por ser interface, todos sao publicos)
-        Method[] methods = clazz.getDeclaredMethods();
+        var methods = clazz.getDeclaredMethods();
 
         // verifica se possui metodos declarados
         if (Utils.isNullOrEmpty(methods)) {
@@ -48,8 +46,8 @@ public class ValidServiceDAOValidador implements AnnotationValidator {
         }
 
         // verifica se os metodos utilizam tipos validos
-        ValidServiceMethodValidator methodValidator = new ValidServiceMethodValidator();
-        for (Method method : methods) {
+        var methodValidator = new ValidServiceMethodValidator();
+        for (var method : methods) {
             methodValidator.validate(null, method);
         }
     }

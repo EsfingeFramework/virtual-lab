@@ -105,8 +105,8 @@ public class ParameterMetadata implements Comparable<ParameterMetadata>
 		// verifica a posicaso do parametro no metodo
 		if ( this.parameter != null )
 		{
-			Parameter[] params = this.parameter.getDeclaringExecutable().getParameters();
-			for (int i = 0; i < params.length; i++ )
+			var params = this.parameter.getDeclaringExecutable().getParameters();
+			for (var i = 0; i < params.length; i++ )
 				if ( this.parameter.equals(params[i]) )
 				{
 					this.index = i;

@@ -2,17 +2,12 @@ package org.esfinge.virtuallab.services;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Constructor;
 import java.nio.file.Paths;
-import java.util.List;
 import net.sf.esfinge.classmock.ClassMock;
-import net.sf.esfinge.classmock.api.IClassWriter;
 import org.apache.commons.io.FileUtils;
 import org.esfinge.virtuallab.TestUtils;
 import org.esfinge.virtuallab.api.annotations.ServiceClass;
 import org.esfinge.virtuallab.api.annotations.ServiceMethod;
-import org.esfinge.virtuallab.descriptors.ClassDescriptor;
-import org.esfinge.virtuallab.descriptors.MethodDescriptor;
 import org.esfinge.virtuallab.exceptions.PersistenceException;
 import org.esfinge.virtuallab.utils.Utils;
 import org.junit.AfterClass;
@@ -32,7 +27,7 @@ public class PersistenceServiceTest {
 
     private void createClass(String name, boolean valid) throws IOException {
         // cria uma classe com a anotacao @ServiceClass
-        IClassWriter mock = ClassMock.of(name);
+        var mock = ClassMock.of(name);
         mock.annotation(ServiceClass.class);
 
         // adiciona um metodo valido/invalido com a anotacao @ServiceMethod
@@ -49,9 +44,9 @@ public class PersistenceServiceTest {
     private PersistenceService getPersistenceService() throws Exception {
         // a lista de classes eh criada no construtor privado da classe PersistenceService
         // por isso precisamos ter acesso via reflection
-        Constructor<PersistenceService> c = PersistenceService.class.getDeclaredConstructor();
+        var c = PersistenceService.class.getDeclaredConstructor();
         c.setAccessible(true);
-        PersistenceService p = c.newInstance();
+        var p = c.newInstance();
         return p;
     }
 
@@ -103,13 +98,13 @@ public class PersistenceServiceTest {
         TestUtils.assertTestDirIsEmpty();
 
         // cria 2 classes validas
-        String validClass1 = TestUtils.createMockClassName();
-        String validClass2 = TestUtils.createMockClassName();
+        var validClass1 = TestUtils.createMockClassName();
+        var validClass2 = TestUtils.createMockClassName();
 
         this.createClass(validClass1, true);
         this.createClass(validClass2, true);
 
-        List<ClassDescriptor> classList = this.getPersistenceService().listServiceClasses();
+        var classList = this.getPersistenceService().listServiceClasses();
         Assert.assertEquals(2, classList.size());
         Assert.assertNotNull(Utils.getFromCollection(classList, c -> c.getQualifiedName().equals(validClass1)));
         Assert.assertNotNull(Utils.getFromCollection(classList, c -> c.getQualifiedName().equals(validClass2)));
@@ -121,14 +116,14 @@ public class PersistenceServiceTest {
         TestUtils.assertTestDirIsEmpty();
 
         // cria 2 classes invalidas
-        String invalidClass1 = TestUtils.createMockClassName();
-        String invalidClass2 = TestUtils.createMockClassName();
+        var invalidClass1 = TestUtils.createMockClassName();
+        var invalidClass2 = TestUtils.createMockClassName();
 
         this.createClass(invalidClass1, false);
         this.createClass(invalidClass2, false);
         Assert.assertEquals(2, TestUtils.listTestDir().size());
 
-        List<ClassDescriptor> classList = this.getPersistenceService().listServiceClasses();
+        var classList = this.getPersistenceService().listServiceClasses();
         Assert.assertEquals(0, classList.size());
     }
 
@@ -143,7 +138,7 @@ public class PersistenceServiceTest {
         this.createFile("File2.txt");
         Assert.assertEquals(2, TestUtils.listTestDir().size());
 
-        List<ClassDescriptor> classList = this.getPersistenceService().listServiceClasses();
+        var classList = this.getPersistenceService().listServiceClasses();
     }
 
     @Ignore
@@ -156,15 +151,15 @@ public class PersistenceServiceTest {
         this.createFile("File2.txt");
 
         // cria 2 classes validas
-        String validClass1 = TestUtils.createMockClassName();
-        String validClass2 = TestUtils.createMockClassName();
+        var validClass1 = TestUtils.createMockClassName();
+        var validClass2 = TestUtils.createMockClassName();
 
         this.createClass(validClass1, true);
         this.createClass(validClass2, true);
         Assert.assertEquals(4, TestUtils.listTestDir().size());
 
         //Não está gerando o ClassDercriptor
-        List<ClassDescriptor> classList = this.getPersistenceService().listServiceClasses();
+        var classList = this.getPersistenceService().listServiceClasses();
         Assert.assertEquals(2, classList.size());
         Assert.assertNotNull(Utils.getFromCollection(classList, c -> c.getQualifiedName().equals(validClass1)));
         Assert.assertNotNull(Utils.getFromCollection(classList, c -> c.getQualifiedName().equals(validClass2)));
@@ -176,21 +171,21 @@ public class PersistenceServiceTest {
         TestUtils.assertTestDirIsEmpty();
 
         // cria 2 classes validas
-        String validClass1 = TestUtils.createMockClassName();
-        String validClass2 = TestUtils.createMockClassName();
+        var validClass1 = TestUtils.createMockClassName();
+        var validClass2 = TestUtils.createMockClassName();
 
         this.createClass(validClass1, true);
         this.createClass(validClass2, true);
 
         // cria 2 classes invalidas
-        String invalidClass1 = TestUtils.createMockClassName();
-        String invalidClass2 = TestUtils.createMockClassName();
+        var invalidClass1 = TestUtils.createMockClassName();
+        var invalidClass2 = TestUtils.createMockClassName();
 
         this.createClass(invalidClass1, false);
         this.createClass(invalidClass2, false);
         Assert.assertEquals(4, TestUtils.listTestDir().size());
 
-        List<ClassDescriptor> classList = this.getPersistenceService().listServiceClasses();
+        var classList = this.getPersistenceService().listServiceClasses();
         Assert.assertEquals(2, classList.size());
         Assert.assertNotNull(Utils.getFromCollection(classList, c -> c.getQualifiedName().equals(validClass1)));
         Assert.assertNotNull(Utils.getFromCollection(classList, c -> c.getQualifiedName().equals(validClass2)));
@@ -202,15 +197,15 @@ public class PersistenceServiceTest {
         TestUtils.assertTestDirIsEmpty();
 
         // cria 2 classes validas
-        String validClass1 = TestUtils.createMockClassName();
-        String validClass2 = TestUtils.createMockClassName();
+        var validClass1 = TestUtils.createMockClassName();
+        var validClass2 = TestUtils.createMockClassName();
 
         this.createClass(validClass1, true);
         this.createClass(validClass2, true);
 
         // cria 2 classes invalidas
-        String invalidClass1 = TestUtils.createMockClassName();
-        String invalidClass2 = TestUtils.createMockClassName();
+        var invalidClass1 = TestUtils.createMockClassName();
+        var invalidClass2 = TestUtils.createMockClassName();
 
         this.createClass(invalidClass1, false);
         this.createClass(invalidClass2, false);
@@ -222,7 +217,7 @@ public class PersistenceServiceTest {
         TestUtils.deleteFromTestDir("class");
         Assert.assertEquals(1, TestUtils.listTestDir().size());
 
-        List<ClassDescriptor> classList = this.getPersistenceService().listServiceClasses();
+        var classList = this.getPersistenceService().listServiceClasses();
         Assert.assertEquals(2, classList.size());
         Assert.assertNotNull(Utils.getFromCollection(classList, c -> c.getQualifiedName().equals(validClass1)));
         Assert.assertNotNull(Utils.getFromCollection(classList, c -> c.getQualifiedName().equals(validClass2)));
@@ -234,8 +229,8 @@ public class PersistenceServiceTest {
         TestUtils.assertTestDirIsEmpty();
 
         // cria 2 classes invalidas
-        String invalidClass1 = TestUtils.createMockClassName();
-        String invalidClass2 = TestUtils.createMockClassName();
+        var invalidClass1 = TestUtils.createMockClassName();
+        var invalidClass2 = TestUtils.createMockClassName();
 
         this.createClass(invalidClass1, false);
         this.createClass(invalidClass2, false);
@@ -247,7 +242,7 @@ public class PersistenceServiceTest {
         TestUtils.deleteFromTestDir("class");
         Assert.assertEquals(1, TestUtils.listTestDir().size());
 
-        List<ClassDescriptor> classList = this.getPersistenceService().listServiceClasses();
+        var classList = this.getPersistenceService().listServiceClasses();
         Assert.assertEquals(0, classList.size());
     }
 
@@ -257,15 +252,15 @@ public class PersistenceServiceTest {
         TestUtils.assertTestDirIsEmpty();
 
         // cria 2 classes validas
-        String validClass1 = TestUtils.createMockClassName();
-        String validClass2 = TestUtils.createMockClassName();
+        var validClass1 = TestUtils.createMockClassName();
+        var validClass2 = TestUtils.createMockClassName();
 
         this.createClass(validClass1, true);
         this.createClass(validClass2, true);
 
         // cria 2 classes invalidas
-        String invalidClass1 = TestUtils.createMockClassName();
-        String invalidClass2 = TestUtils.createMockClassName();
+        var invalidClass1 = TestUtils.createMockClassName();
+        var invalidClass2 = TestUtils.createMockClassName();
 
         this.createClass(invalidClass1, false);
         this.createClass(invalidClass2, false);
@@ -279,8 +274,8 @@ public class PersistenceServiceTest {
         Assert.assertEquals(2, TestUtils.listTestDir().size());
 
         // cria +1 classe valida/invalida
-        String validClass3 = TestUtils.createMockClassName();
-        String invalidClass3 = TestUtils.createMockClassName();
+        var validClass3 = TestUtils.createMockClassName();
+        var invalidClass3 = TestUtils.createMockClassName();
 
         this.createClass(validClass3, true);
         this.createClass(invalidClass3, false);
@@ -291,12 +286,13 @@ public class PersistenceServiceTest {
         // 2 jars, 2 classes, 1 arquivo texto
         Assert.assertEquals(5, TestUtils.listTestDir().size());
 
-        List<ClassDescriptor> classList = this.getPersistenceService().listServiceClasses();
+        var classList = this.getPersistenceService().listServiceClasses();
         Assert.assertEquals(3, classList.size());
         Assert.assertNotNull(Utils.getFromCollection(classList, c -> c.getQualifiedName().equals(validClass1)));
         Assert.assertNotNull(Utils.getFromCollection(classList, c -> c.getQualifiedName().equals(validClass2)));
         Assert.assertNotNull(Utils.getFromCollection(classList, c -> c.getQualifiedName().equals(validClass3)));
     }
+
     @Ignore
 
     @Test
@@ -319,7 +315,7 @@ public class PersistenceServiceTest {
         Assert.assertEquals(0, TestUtils.listTestDir().size());
 
         // cria 1 classe valida
-        String validClass = TestUtils.createMockClassName();
+        var validClass = TestUtils.createMockClassName();
         this.createClass("my.package." + validClass, true);
         Assert.assertEquals(1, TestUtils.listTestDir().size());
 
@@ -332,11 +328,11 @@ public class PersistenceServiceTest {
         TestUtils.assertTestDirIsEmpty();
 
         // cria 1 classe valida
-        String validClass = TestUtils.createMockClassName();
+        var validClass = TestUtils.createMockClassName();
         this.createClass("my.package." + validClass, true);
         Assert.assertEquals(1, TestUtils.listTestDir().size());
 
-        List<MethodDescriptor> methodList = this.getPersistenceService().listServiceMethods("my.package." + validClass);
+        var methodList = this.getPersistenceService().listServiceMethods("my.package." + validClass);
         Assert.assertEquals(1, methodList.size());
         Assert.assertNotNull(Utils.getFromCollection(methodList, m -> m.getName().equals("method")));
     }
@@ -349,16 +345,16 @@ public class PersistenceServiceTest {
         TestUtils.assertTestDirIsEmpty();
 
         // cria 1 classe invalida
-        String invalidClass = TestUtils.createMockClassName();
+        var invalidClass = TestUtils.createMockClassName();
         this.createClass(invalidClass, false);
         Assert.assertEquals(1, TestUtils.listTestDir().size());
 
-        String fileName = String.format("%s.class", invalidClass);
+        var fileName = String.format("%s.class", invalidClass);
 
         //exeption
         this.getPersistenceService().saveUploadedFile(this.createStreamForUploadFile(fileName), fileName);
 
-        List<ClassDescriptor> classList = this.getPersistenceService().listServiceClasses();
+        var classList = this.getPersistenceService().listServiceClasses();
         Assert.assertEquals(0, classList.size());
     }
 
@@ -368,14 +364,14 @@ public class PersistenceServiceTest {
         TestUtils.assertTestDirIsEmpty();
 
         // cria 1 classe valida
-        String validClass = TestUtils.createMockClassName();
+        var validClass = TestUtils.createMockClassName();
         this.createClass(validClass, true);
         Assert.assertEquals(1, TestUtils.listTestDir().size());
 
-        String fileName = String.format("%s.class", validClass);
+        var fileName = String.format("%s.class", validClass);
         this.getPersistenceService().saveUploadedFile(this.createStreamForUploadFile(fileName), fileName);
 
-        List<ClassDescriptor> classList = this.getPersistenceService().listServiceClasses();
+        var classList = this.getPersistenceService().listServiceClasses();
         Assert.assertEquals(1, classList.size());
         Assert.assertNotNull(Utils.getFromCollection(classList, c -> c.getQualifiedName().equals(validClass)));
     }
@@ -386,8 +382,8 @@ public class PersistenceServiceTest {
         TestUtils.assertTestDirIsEmpty();
 
         // cria 2 classes invalidas
-        String invalidClass1 = TestUtils.createMockClassName();
-        String invalidClass2 = TestUtils.createMockClassName();
+        var invalidClass1 = TestUtils.createMockClassName();
+        var invalidClass2 = TestUtils.createMockClassName();
 
         this.createClass(invalidClass1, false);
         this.createClass(invalidClass2, false);
@@ -401,7 +397,7 @@ public class PersistenceServiceTest {
         Assert.assertEquals(1, TestUtils.listTestDir().size());
 
         this.getPersistenceService().saveUploadedFile(this.createStreamForUploadFile("invalidJar.jar"), "invalidJar.jar");
-        List<ClassDescriptor> classList = this.getPersistenceService().listServiceClasses();
+        var classList = this.getPersistenceService().listServiceClasses();
         Assert.assertEquals(0, classList.size());
     }
 
@@ -411,8 +407,8 @@ public class PersistenceServiceTest {
         TestUtils.assertTestDirIsEmpty();
 
         // cria 2 classes validas
-        String validClass1 = TestUtils.createMockClassName();
-        String validClass2 = TestUtils.createMockClassName();
+        var validClass1 = TestUtils.createMockClassName();
+        var validClass2 = TestUtils.createMockClassName();
 
         this.createClass(validClass1, true);
         this.createClass(validClass2, true);
@@ -425,7 +421,7 @@ public class PersistenceServiceTest {
         Assert.assertEquals(1, TestUtils.listTestDir().size());
 
         this.getPersistenceService().saveUploadedFile(this.createStreamForUploadFile("validJar.jar"), "validJar.jar");
-        List<ClassDescriptor> classList = this.getPersistenceService().listServiceClasses();
+        var classList = this.getPersistenceService().listServiceClasses();
         Assert.assertEquals(2, classList.size());
         Assert.assertNotNull(Utils.getFromCollection(classList, c -> c.getQualifiedName().equals(validClass1)));
         Assert.assertNotNull(Utils.getFromCollection(classList, c -> c.getQualifiedName().equals(validClass2)));

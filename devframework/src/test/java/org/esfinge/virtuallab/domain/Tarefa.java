@@ -1,50 +1,41 @@
 package org.esfinge.virtuallab.domain;
 
-public class Tarefa
-{
-	private int id;
-	private int prioridade;
-	private String nome;
-	private boolean completada;
-	
-	
-	public int getId()
-	{
-		return id;
-	}
+public class Tarefa {
 
-	public void setId(int id)
-	{
-		this.id = id;
-	}
+    private int id;
+    private int prioridade;
+    private String nome;
+    private boolean completada;
 
-	public int getPrioridade()
-	{
-		return prioridade;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setPrioridade(int prioridade)
-	{
-		this.prioridade = prioridade;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getNome()
-	{
-		return nome;
-	}
+    public int getPrioridade() {
+        return prioridade;
+    }
 
-	public void setNome(String nome)
-	{
-		this.nome = nome;
-	}
+    public void setPrioridade(int prioridade) {
+        this.prioridade = prioridade;
+    }
 
-	public boolean isCompletada()
-	{
-		return completada;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setCompletada(boolean completada)
-	{
-		this.completada = completada;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public boolean isCompletada() {
+        return completada;
+    }
+
+    public void setCompletada(boolean completada) {
+        this.completada = completada;
+    }
 }

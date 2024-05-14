@@ -1,14 +1,13 @@
 package org.esfinge.virtuallab.services;
 
+import esfinge.querybuilder.core.QueryBuilder;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import net.sf.esfinge.querybuilder.QueryBuilder;
 import org.apache.commons.lang3.ClassUtils;
 import org.esfinge.virtuallab.api.InvokerProxy;
 import org.esfinge.virtuallab.descriptors.MethodDescriptor;
 import org.esfinge.virtuallab.descriptors.ParameterDescriptor;
 import org.esfinge.virtuallab.exceptions.InvocationException;
-import org.esfinge.virtuallab.metadata.ClassMetadata;
 import org.esfinge.virtuallab.metadata.MetadataHelper;
 import org.esfinge.virtuallab.utils.ReflectionUtils;
 import org.esfinge.virtuallab.utils.Utils;
@@ -19,8 +18,8 @@ import org.springframework.cglib.proxy.InvocationHandler;
  * Invoca metodos em classes de servico.
  */
 public class InvokerService implements InvokerProxy, InvocationHandler {
-    // instancia unica da classe
 
+    // instancia unica da classe
     private static InvokerService _instance;
 
     /**
@@ -50,7 +49,7 @@ public class InvokerService implements InvokerProxy, InvocationHandler {
 
         try {
             // obtem o metodo a ser invocado
-            Method method = ReflectionUtils.getMethod(methodDescriptor);
+            var method = ReflectionUtils.getMethod(methodDescriptor);
 
             // tenta invocar o metodo
             return this.call(method, paramValues);
@@ -78,8 +77,8 @@ public class InvokerService implements InvokerProxy, InvocationHandler {
             ValidationService.getInstance().assertValidMethod(method);
 
             // recupera a classe do metodo a ser invocado
-            Class<?> clazz = ClassLoaderService.getInstance().getService(method.getDeclaringClass().getCanonicalName());
-            ClassMetadata classMetadata = MetadataHelper.getInstance().getClassMetadata(clazz);
+            var clazz = ClassLoaderService.getInstance().getService(method.getDeclaringClass().getCanonicalName());
+            var classMetadata = MetadataHelper.getInstance().getClassMetadata(clazz);
 
             // cria um objeto da classe cujo metodo sera invocado
             Object obj;
@@ -137,14 +136,14 @@ public class InvokerService implements InvokerProxy, InvocationHandler {
     @SuppressWarnings("unchecked")
     public <E> E invoke(String qualifiedClassName, String methodName, Class<E> returnType, Object... paramValues) throws InvocationException {
         // cria o descritor do metodo a ser invocado
-        MethodDescriptor md = new MethodDescriptor();
+        var md = new MethodDescriptor();
         md.setClassName(qualifiedClassName);
         md.setName(methodName);
 
         // monta os descritores dos parametros
         if (!Utils.isNullOrEmpty(paramValues)) {
-            for (int i = 0; i < paramValues.length; i++) {
-                ParameterDescriptor pd = new ParameterDescriptor();
+            for (var i = 0; i < paramValues.length; i++) {
+                var pd = new ParameterDescriptor();
                 pd.setIndex(i);
                 pd.setDataType(paramValues[i].getClass().getCanonicalName());
                 md.getParameters().add(pd);
@@ -152,7 +151,7 @@ public class InvokerService implements InvokerProxy, InvocationHandler {
         }
 
         // tenta invocar o metodo
-        Object result = this.call(md, paramValues);
+        var result = this.call(md, paramValues);
 
         // cast do resultado para o tipo de retorno informado
         if (returnType.isPrimitive()) {
@@ -172,7 +171,7 @@ public class InvokerService implements InvokerProxy, InvocationHandler {
      */
     private <E> E createProxyFor(Class<E> superclass) {
         // CGLIB
-        Enhancer proxy = new Enhancer();
+        var proxy = new Enhancer();
 //		proxy.setClassLoader(ClassLoaderService.class.getClassLoader());
         proxy.setClassLoader(ClassLoaderService.getInstance().getService(superclass.getCanonicalName()).getClassLoader());
         proxy.setSuperclass(superclass);

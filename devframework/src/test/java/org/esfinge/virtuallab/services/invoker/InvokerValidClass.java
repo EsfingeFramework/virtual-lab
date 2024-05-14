@@ -5,21 +5,18 @@ import org.esfinge.virtuallab.api.annotations.ServiceMethod;
 
 @SuppressWarnings("unused")
 @ServiceClass
-public class InvokerValidClass
-{
-	public InvokerValidClass()
-	{
-	}
-	
-	@ServiceMethod
-	public String validMethod(String param1, int param2)
-	{
-		return param1 + param2;
-	}
-	
-	// metodo privado, InvokerService nao deve conseguir invocar
-	private String privateMethod(String param1, int param2)
-	{
-		return param1 + param2;
-	}
+public class InvokerValidClass {
+
+    public InvokerValidClass() {
+    }
+
+    @ServiceMethod
+    public String validMethod(String param1, int param2) {
+        return param1 + param2;
+    }
+
+    // metodo privado, InvokerService nao deve conseguir invocar
+    private String privateMethod(String param1, int param2) {
+        return param1 + param2;
+    }
 }

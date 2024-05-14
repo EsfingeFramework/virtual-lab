@@ -1,82 +1,68 @@
 package org.esfinge.virtuallab.demo.json;
 
-public class Disciplina implements Comparable<Disciplina>
-{
-	private String codigo;
-	private String nome;
-	private String docente;
-	private int periodo;
-	private int creditos;
-		
-	
-	public Disciplina()
-	{
-		
-	}
+public class Disciplina implements Comparable<Disciplina> {
 
-	public Disciplina(String codigo, String nome, String docente, int periodo, int creditos)
-	{
-		super();
-		this.codigo = codigo;
-		this.nome = nome;
-		this.docente = docente;
-		this.periodo = periodo;
-		this.creditos = creditos;
-	}
+    private String codigo;
+    private String nome;
+    private String docente;
+    private int periodo;
+    private int creditos;
 
-	public String getCodigo()
-	{
-		return codigo;
-	}
+    public Disciplina() {
 
-	public void setCodigo(String codigo)
-	{
-		this.codigo = codigo;
-	}
+    }
 
-	public String getNome()
-	{
-		return nome;
-	}
+    public Disciplina(String codigo, String nome, String docente, int periodo, int creditos) {
+        super();
+        this.codigo = codigo;
+        this.nome = nome;
+        this.docente = docente;
+        this.periodo = periodo;
+        this.creditos = creditos;
+    }
 
-	public void setNome(String nome)
-	{
-		this.nome = nome;
-	}
+    public String getCodigo() {
+        return codigo;
+    }
 
-	public String getDocente()
-	{
-		return docente;
-	}
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
 
-	public void setDocente(String docente)
-	{
-		this.docente = docente;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public int getPeriodo()
-	{
-		return periodo;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public void setPeriodo(int periodo)
-	{
-		this.periodo = periodo;
-	}
+    public String getDocente() {
+        return docente;
+    }
 
-	public int getCreditos()
-	{
-		return creditos;
-	}
+    public void setDocente(String docente) {
+        this.docente = docente;
+    }
 
-	public void setCreditos(int creditos)
-	{
-		this.creditos = creditos;
-	}
+    public int getPeriodo() {
+        return periodo;
+    }
 
-	@Override
-	public int compareTo(Disciplina o)
-	{
-		return this.codigo.compareTo(o.codigo);
-	}
+    public void setPeriodo(int periodo) {
+        this.periodo = periodo;
+    }
+
+    public int getCreditos() {
+        return creditos;
+    }
+
+    public void setCreditos(int creditos) {
+        this.creditos = creditos;
+    }
+
+    @Override
+    public int compareTo(Disciplina o) {
+        return this.codigo.compareTo(o.codigo);
+    }
 }

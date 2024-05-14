@@ -10,16 +10,16 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)
-public @interface Param
-{
-	// rotulo para o parametroØ
-	// por padrao usa o nome do parametro
-	String label() default "";
-	
-	// os metadados para os campos da classe do parametro (se houver)
-	ParamAttribute[] fields() default {};
-	
-	// se o parametro eh obrigatorio ou permite que o valor nao seja informado, assumindo NULL.
-	// por padrao todos os parametros sao obrigatorios
-	boolean required() default true;	
+public @interface Param {
+    // rotulo para o parametroØ
+    // por padrao usa o nome do parametro
+
+    String label() default "";
+
+    // os metadados para os campos da classe do parametro (se houver)
+    ParamAttribute[] fields() default {};
+
+    // se o parametro eh obrigatorio ou permite que o valor nao seja informado, assumindo NULL.
+    // por padrao todos os parametros sao obrigatorios
+    boolean required() default true;
 }
