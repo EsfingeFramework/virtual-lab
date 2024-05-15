@@ -25,6 +25,8 @@ public final class ValidationService {
 
     /**
      * Singleton.
+     *
+     * @return
      */
     public synchronized static ValidationService getInstance() {
         if (_instance == null) {
@@ -36,6 +38,9 @@ public final class ValidationService {
 
     /**
      * Verifica se eh um arquivo de servico valido, retornando os metadados da classe de servico.
+     *
+     * @param file
+     * @return
      */
     public ClassMetadata validateUploadedFile(File file) throws ValidationException {
         try {
@@ -54,6 +59,8 @@ public final class ValidationService {
 
     /**
      * Assegura que a classe de servico seja valida.
+     *
+     * @param clazz
      */
     public void assertValidService(Class<?> clazz) throws ValidationException {
         //
@@ -77,6 +84,8 @@ public final class ValidationService {
 
     /**
      * Assegura que o metodo de servico seja valido.
+     *
+     * @param method
      */
     public void assertValidMethod(Method method) throws ValidationException {
         //

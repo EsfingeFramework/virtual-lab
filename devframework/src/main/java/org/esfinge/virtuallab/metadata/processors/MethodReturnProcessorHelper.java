@@ -16,6 +16,8 @@ public class MethodReturnProcessorHelper {
 
     /**
      * Singleton.
+     *
+     * @return
      */
     public static MethodReturnProcessorHelper getInstance() {
         if (_instance == null) {
@@ -33,6 +35,10 @@ public class MethodReturnProcessorHelper {
 
     /**
      * Retorna o processador apropriado para o retorno do metodo.
+     *
+     * @param methodDescriptor
+     * @return
+     * @throws java.lang.Exception
      */
     public MethodReturnProcessor<?> findProcessor(MethodDescriptor methodDescriptor) throws Exception {
         // obtem o metodo a partir do descritor
@@ -43,6 +49,10 @@ public class MethodReturnProcessorHelper {
 
     /**
      * Retorna o processador apropriado para o retorno do metodo.
+     *
+     * @param method
+     * @return
+     * @throws java.lang.Exception
      */
     public MethodReturnProcessor<?> findProcessor(Method method) throws Exception {
         // verifica se tem alguma anotacao de MethodReturn

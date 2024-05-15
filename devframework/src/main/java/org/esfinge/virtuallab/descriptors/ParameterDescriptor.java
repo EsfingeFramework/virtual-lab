@@ -44,6 +44,8 @@ public class ParameterDescriptor implements Comparable<ParameterDescriptor> {
 
     /**
      * Construtor a partir dos metadados de uma classe.
+     *
+     * @param parameterMetadata
      */
     public ParameterDescriptor(ParameterMetadata parameterMetadata) {
         var paramType = parameterMetadata.getParameter().getType();

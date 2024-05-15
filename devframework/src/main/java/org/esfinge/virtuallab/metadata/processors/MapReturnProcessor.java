@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.List;
 import org.apache.commons.jexl3.JexlBuilder;
 import org.apache.commons.jexl3.JexlContext;
-import org.apache.commons.jexl3.JexlEngine;
-import org.apache.commons.jexl3.JexlExpression;
 import org.apache.commons.jexl3.MapContext;
 import org.esfinge.virtuallab.api.annotations.MapReturn;
 import org.esfinge.virtuallab.utils.JsonUtils;
@@ -27,28 +25,28 @@ public class MapReturnProcessor extends MethodReturnProcessor<MapReturn> {
     @Override
     public JsonData process(Object value) throws Exception {
         // objeto de retorno
-        MapObject returnObj = new MapObject();
+        var returnObj = new MapObject();
 
         // informacoes do mapa
         returnObj.setInitialZoom(this.annotation.mapZoom());
 
         // lat/long do centro do mapa
-        Double mapLat = this.checkLatitude(this.annotation.mapCenterLat());
-        Double mapLong = this.checkLongitude(this.annotation.mapCenterLong());
-        returnObj.setLatitude(mapLat == INVALID_COORDINATE ? DEFAULT_LAT : mapLat.doubleValue());
-        returnObj.setLongitude(mapLong == INVALID_COORDINATE ? DEFAULT_LONG : mapLong.doubleValue());
+        var mapLat = this.checkLatitude(this.annotation.mapCenterLat());
+        var mapLong = this.checkLongitude(this.annotation.mapCenterLong());
+        returnObj.setLatitude(mapLat == INVALID_COORDINATE ? DEFAULT_LAT : mapLat);
+        returnObj.setLongitude(mapLong == INVALID_COORDINATE ? DEFAULT_LONG : mapLong);
 
         // informacoes do(s) marcador(es)
         if (value instanceof Collection) {
-            for (Object obj : Collection.class.cast(value)) {
-                MarkerObject marker = this.parseMarker(obj);
+            for (var obj : Collection.class.cast(value)) {
+                var marker = this.parseMarker(obj);
 
                 if (marker != null) {
                     returnObj.getMarkers().add(marker);
                 }
             }
         } else {
-            MarkerObject marker = this.parseMarker(value);
+            var marker = this.parseMarker(value);
 
             if (marker != null) {
                 returnObj.getMarkers().add(marker);
@@ -68,12 +66,10 @@ public class MapReturnProcessor extends MethodReturnProcessor<MapReturn> {
      * Verifica se a latitude eh valida.
      */
     private Double checkLatitude(double latitude) {
-        Double coord = new Double(latitude);
-
-        if ((coord.compareTo(new Double(90)) > 0) || (coord.compareTo(new Double(-90)) < 0)) {
+        var coord = latitude;
+        if ((coord > 90.0d) || (coord < -90.0d)) {
             return INVALID_COORDINATE;
         }
-
         return latitude;
     }
 
@@ -81,9 +77,9 @@ public class MapReturnProcessor extends MethodReturnProcessor<MapReturn> {
      * Verifica se a longitude eh valida.
      */
     private Double checkLongitude(double longitude) {
-        Double coord = new Double(longitude);
+        var coord = longitude;
 
-        if ((coord.compareTo(new Double(180)) > 0) || (coord.compareTo(new Double(-180)) < 0)) {
+        if ((coord > 180) || (coord < -180)) {
             return INVALID_COORDINATE;
         }
 
@@ -103,16 +99,16 @@ public class MapReturnProcessor extends MethodReturnProcessor<MapReturn> {
             return null;
         }
 
-        MarkerObject marker = new MarkerObject();
-        marker.setLatitude(lat.doubleValue());
-        marker.setLongitude(lng.doubleValue());
+        var marker = new MarkerObject();
+        marker.setLatitude(lat);
+        marker.setLongitude(lng);
 
         // popup do marcador
-        StringBuilder popup = new StringBuilder();
+        var popup = new StringBuilder();
 
         // titulo do marcador
         if (!Utils.isNullOrEmpty(this.annotation.markerTitle())) {
-            String title = this.parseEL(this.annotation.markerTitle(), obj);
+            var title = this.parseEL(this.annotation.markerTitle(), obj);
             if (title != null) {
                 popup.append(String.format("<b>%s</b><br/>", title.toString()));
             }
@@ -120,7 +116,7 @@ public class MapReturnProcessor extends MethodReturnProcessor<MapReturn> {
 
         // texto do marcador
         if (!Utils.isNullOrEmpty(this.annotation.markerText())) {
-            String text = this.parseEL(this.annotation.markerText(), obj);
+            var text = this.parseEL(this.annotation.markerText(), obj);
             if (text != null) {
                 popup.append(text.toString());
             }
@@ -139,10 +135,10 @@ public class MapReturnProcessor extends MethodReturnProcessor<MapReturn> {
         // verifica se foi especificado o campo
         if (Utils.isNullOrEmpty(field)) {
             // tenta encontrar o campo de latitude
-            for (String name : new String[]{"latitude", "lat", "latid", "ltd"}) {
+            for (var name : new String[]{"latitude", "lat", "latid", "ltd"}) {
                 try {
                     // le o valor
-                    Object lat = ReflectionUtils.getFieldValue(obj, name);
+                    var lat = ReflectionUtils.getFieldValue(obj, name);
 
                     // troca virgula por ponto e verifica se o valor eh valido
                     if (lat != null) {
@@ -154,7 +150,7 @@ public class MapReturnProcessor extends MethodReturnProcessor<MapReturn> {
         } else {
             try {
                 // le o valor
-                Object lat = ReflectionUtils.getFieldValue(obj, field);
+                var lat = ReflectionUtils.getFieldValue(obj, field);
 
                 // troca virgula por ponto e verifica se o valor eh valido
                 if (lat != null) {
@@ -176,10 +172,10 @@ public class MapReturnProcessor extends MethodReturnProcessor<MapReturn> {
         // verifica se foi especificado o campo
         if (Utils.isNullOrEmpty(field)) {
             // tenta encontrar o campo de longitude
-            for (String name : new String[]{"longitude", "longit", "lng", "lgd"}) {
+            for (var name : new String[]{"longitude", "longit", "lng", "lgd"}) {
                 try {
                     // le o valor
-                    Object lng = ReflectionUtils.getFieldValue(obj, name);
+                    var lng = ReflectionUtils.getFieldValue(obj, name);
 
                     // troca virgula por ponto e verifica se o valor eh valido
                     if (lng != null) {
@@ -191,7 +187,7 @@ public class MapReturnProcessor extends MethodReturnProcessor<MapReturn> {
         } else {
             try {
                 // le o valor
-                Object lng = ReflectionUtils.getFieldValue(obj, field);
+                var lng = ReflectionUtils.getFieldValue(obj, field);
 
                 // troca virgula por ponto e verifica se o valor eh valido
                 if (lng != null) {
@@ -210,7 +206,7 @@ public class MapReturnProcessor extends MethodReturnProcessor<MapReturn> {
      */
     private String parseEL(String text, Object obj) {
         // procura por aspas simples (') e escapa (\')
-        String textEL = text.trim().replaceAll("'", "\\\\'");
+        var textEL = text.trim().replaceAll("'", "\\\\'");
 
         // processa os campos de EL ${}
         textEL = textEL.replaceAll("\\$\\{(.+?)\\}", "' + $1 + '");
@@ -219,8 +215,8 @@ public class MapReturnProcessor extends MethodReturnProcessor<MapReturn> {
         textEL = "'" + textEL + "'";
 
         // Apache Commons JEXL
-        JexlEngine jexl = new JexlBuilder().cache(512).silent(true).create();
-        JexlExpression exp = jexl.createExpression(textEL);
+        var jexl = new JexlBuilder().cache(512).silent(true).create();
+        var exp = jexl.createExpression(textEL);
         JexlContext context = new MapContext();
         context.set("obj", obj);
 

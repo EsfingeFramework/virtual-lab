@@ -47,6 +47,10 @@ public abstract class TestUtils {
 
     /**
      * Cria um arquivo jar no diretorio de teste com as classes especificadas.
+     *
+     * @param name
+     * @param classes
+     * @return
      */
     public static boolean createJar(String name, Class<?>... classes) {
         return createJar(name, Arrays.asList(classes).stream().map(c -> c.getCanonicalName()).toArray(String[]::new));
@@ -54,6 +58,10 @@ public abstract class TestUtils {
 
     /**
      * Cria um arquivo jar no diretorio de teste com as classes especificadas.
+     *
+     * @param name
+     * @param qualifiedClassNames
+     * @return
      */
     public static boolean createJar(String name, String... qualifiedClassNames) {
         try {
@@ -61,25 +69,25 @@ public abstract class TestUtils {
             var manifest = new Manifest();
             manifest.getMainAttributes().put(Attributes.Name.MANIFEST_VERSION, "1.0");
 
-            // arquivo jar
-            var jarFile = new JarOutputStream(new FileOutputStream(TEST_DIR + "/" + name), manifest);
             // adiciona as classes ao jar
-            for (var clazz : qualifiedClassNames) {
-                var classPath = clazz.replace(".", "/") + ".class";
-                jarFile.putNextEntry(new JarEntry(classPath));
+            try ( // arquivo jar
+                    var jarFile = new JarOutputStream(new FileOutputStream(TEST_DIR + "/" + name), manifest)) {
+                // adiciona as classes ao jar
+                for (var clazz : qualifiedClassNames) {
+                    var classPath = clazz.replace(".", "/") + ".class";
+                    jarFile.putNextEntry(new JarEntry(classPath));
 
-                // caminho para o arquivo da classe
-                classPath = Paths.get("target", "test-classes", classPath).toAbsolutePath().toString();
-                if (!Paths.get(classPath).toFile().exists()) {
-                    classPath = pathFromTestDir(FilenameUtils.getBaseName(classPath) + ".class");
+                    // caminho para o arquivo da classe
+                    classPath = Paths.get("target", "test-classes", classPath).toAbsolutePath().toString();
+                    if (!Paths.get(classPath).toFile().exists()) {
+                        classPath = pathFromTestDir(FilenameUtils.getBaseName(classPath) + ".class");
+                    }
+
+                    jarFile.write(FileUtils.readFileToByteArray(new File(classPath)));
+                    jarFile.closeEntry();
                 }
-
-                jarFile.write(FileUtils.readFileToByteArray(new File(classPath)));
-                jarFile.closeEntry();
+                // fecha o arquivo jar
             }
-
-            // fecha o arquivo jar
-            jarFile.close();
 
             return true;
         } catch (Exception e) {
@@ -90,6 +98,8 @@ public abstract class TestUtils {
 
     /**
      * Apaga o conteudo do diretorio de teste.
+     *
+     * @return
      */
     public static boolean cleanTestDir() {
         try {
@@ -103,6 +113,8 @@ public abstract class TestUtils {
 
     /**
      * Apaga os arquivos do diretorio de teste que contenham as extensoes informadas.
+     *
+     * @param fileExtensions
      */
     public static void deleteFromTestDir(String... fileExtensions) {
         for (var file : FileUtils.listFiles(TEST_DIR_FILE, fileExtensions, false)) {
@@ -112,6 +124,8 @@ public abstract class TestUtils {
 
     /**
      * Retorna os arquivos contidos no diretorio de teste.
+     *
+     * @return
      */
     public static List<File> listTestDir() {
         return new ArrayList<>(FileUtils.listFiles(TestUtils.TEST_DIR_FILE, TrueFileFilter.INSTANCE, null));
@@ -119,6 +133,9 @@ public abstract class TestUtils {
 
     /**
      * Copia as classes especificadas para o diretorio de teste.
+     *
+     * @param classes
+     * @return
      */
     public static boolean copyToTestDir(Class<?>... classes) {
         try {
@@ -137,6 +154,9 @@ public abstract class TestUtils {
 
     /**
      * Obtem o caminho para o recurso a partir do diretorio de teste.
+     *
+     * @param resourceName
+     * @return
      */
     public static String pathFromTestDir(String resourceName) {
         // retorna o caminho a partir do diretorio de teste
@@ -145,6 +165,10 @@ public abstract class TestUtils {
 
     /**
      * Obtem o stream para o recurso a partir do diretorio de teste.
+     *
+     * @param resourceName
+     * @return
+     * @throws java.io.IOException
      */
     public static InputStream streamFromTestDir(String resourceName) throws IOException {
         // retorna um stream a partir do diretorio de teste
@@ -153,6 +177,9 @@ public abstract class TestUtils {
 
     /**
      * Cria o arquivo .CLASS da classe mock no diretorio de testes.
+     *
+     * @param mock
+     * @throws java.io.IOException
      */
     public static void saveClassToTestDir(ClassMock mock) throws IOException {
         var parserASM = new ParseASM(mock);
@@ -162,6 +189,8 @@ public abstract class TestUtils {
 
     /**
      * Cria um nome unico para a classe de teste.
+     *
+     * @return
      */
     public static String createMockClassName() {
         return String.format("TestClass_%03d", counter++);
@@ -169,6 +198,8 @@ public abstract class TestUtils {
 
     /**
      * Assegura que a classe de teste nao esta carregada.
+     *
+     * @param className
      */
     public static void assertClassNotLoaded(String className) {
         try {

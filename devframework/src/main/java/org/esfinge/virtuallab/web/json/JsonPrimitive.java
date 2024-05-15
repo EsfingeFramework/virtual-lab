@@ -7,6 +7,8 @@ import org.esfinge.virtuallab.utils.JsonUtils;
 
 /**
  * Classe representando tipos escalares JSON (string, number, boolean e null).
+ *
+ * @param <E>
  */
 public class JsonPrimitive<E> extends JsonData {
 
@@ -23,6 +25,8 @@ public class JsonPrimitive<E> extends JsonData {
 
     /**
      * Cria o primitivo JSON com o valor informado.
+     *
+     * @param value
      */
     @JsonCreator
     public JsonPrimitive(E value) {
@@ -31,6 +35,8 @@ public class JsonPrimitive<E> extends JsonData {
 
     /**
      * Atribui o valor do JSON.
+     *
+     * @param value
      */
     public void setValue(E value) {
         try {
@@ -51,6 +57,8 @@ public class JsonPrimitive<E> extends JsonData {
 
     /**
      * Retorna o valor do JSON.
+     *
+     * @return
      */
     @JsonValue
     public Object getValue() {

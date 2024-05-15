@@ -26,6 +26,9 @@ public class JsonObject extends JsonData {
 
     /**
      * Adiciona uma propriedade ao objeto JSON.
+     *
+     * @param name
+     * @param value
      */
     @JsonAnySetter
     public void addProperty(String name, Object value) {
@@ -34,6 +37,9 @@ public class JsonObject extends JsonData {
 
     /**
      * Remove uma propriedade do objeto JSON.
+     *
+     * @param name
+     * @return
      */
     public Object removeProperty(String name) {
         return jsonObject.remove(name);
@@ -41,6 +47,9 @@ public class JsonObject extends JsonData {
 
     /**
      * Retorna uma propriedade do objeto JSON.
+     *
+     * @param name
+     * @return
      */
     public Object getProperty(String name) {
         return jsonObject.get(name);
@@ -48,6 +57,8 @@ public class JsonObject extends JsonData {
 
     /**
      * Retorna os elementos do objeto JSON em forma de mapa.
+     *
+     * @return
      */
     @JsonAnyGetter
     public Map<String, Object> toMap() {

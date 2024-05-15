@@ -31,6 +31,8 @@ public class InvokerService implements InvokerProxy, InvocationHandler {
 
     /**
      * Singleton.
+     *
+     * @return
      */
     public static InvokerService getInstance() {
         if (_instance == null) {
@@ -42,6 +44,10 @@ public class InvokerService implements InvokerProxy, InvocationHandler {
 
     /**
      * Invoca o metodo com os parametros informados.
+     *
+     * @param methodDescriptor
+     * @param paramValues
+     * @return
      */
     public synchronized Object call(MethodDescriptor methodDescriptor, Object... paramValues) throws InvocationException {
         // verifica se foi especificado um descritor de metodo
@@ -67,6 +73,10 @@ public class InvokerService implements InvokerProxy, InvocationHandler {
 
     /**
      * Invoca o metodo com os parametros informados.
+     *
+     * @param method
+     * @param paramValues
+     * @return
      */
     public synchronized Object call(Method method, Object... paramValues) throws InvocationException {
         // verifica se foi especificado um descritor de metodo

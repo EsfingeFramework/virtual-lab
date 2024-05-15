@@ -81,6 +81,8 @@ public class PersistenceService {
 
     /**
      * Singleton.
+     *
+     * @return
      */
     public static PersistenceService getInstance() {
         if (_instance == null) {
@@ -92,6 +94,9 @@ public class PersistenceService {
 
     /**
      * Salva o arquivo (classe/jar) no diretorio de upload se o mesmo for valido.
+     *
+     * @param fileStream
+     * @param fileName
      */
     public synchronized void saveUploadedFile(InputStream fileStream, String fileName) throws PersistenceException {
         try {
@@ -112,6 +117,8 @@ public class PersistenceService {
 
     /**
      * Lista as classes do diretorio de upload com servicos validos.
+     *
+     * @return
      */
     public List<ClassDescriptor> listServiceClasses() {
         return this.serviceCache.values().stream()
@@ -120,6 +127,9 @@ public class PersistenceService {
 
     /**
      * Lista os servicos validos da classe informada.
+     *
+     * @param classQualifiedName
+     * @return
      */
     public List<MethodDescriptor> listServiceMethods(String classQualifiedName) {
         // obtem as informacoes da classe informada
@@ -142,6 +152,9 @@ public class PersistenceService {
 
     /**
      * Remove os servicos da classe informada.
+     *
+     * @param classQualifiedName
+     * @return
      */
     public boolean removeServiceClass(String classQualifiedName) {
         try {
@@ -178,6 +191,8 @@ public class PersistenceService {
 
     /**
      * Retorna os arquivos de classes/jar do diretorio de upload.
+     *
+     * @return
      */
     public List<File> getUploadedFiles() {
         return new ArrayList<>(FileUtils.listFiles(new File(Utils.getInstance().getUploadDir()),

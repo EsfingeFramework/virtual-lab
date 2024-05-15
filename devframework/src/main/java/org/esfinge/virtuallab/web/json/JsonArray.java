@@ -11,6 +11,8 @@ import org.esfinge.virtuallab.utils.JsonUtils;
 
 /**
  * Classe representando arrays JSON.
+ *
+ * @param <E>
  */
 public class JsonArray<E> extends JsonData {
     // armazena os elementos que serao transformados em JSON
@@ -27,6 +29,8 @@ public class JsonArray<E> extends JsonData {
 
     /**
      * Cria o array JSON com os valores informados.
+     *
+     * @param values
      */
     @JsonCreator
     @SuppressWarnings("unchecked")
@@ -37,6 +41,8 @@ public class JsonArray<E> extends JsonData {
 
     /**
      * Adiciona os elementos ao array JSON.
+     *
+     * @param values
      */
     public JsonArray(Collection<E> values) {
         this();
@@ -45,6 +51,8 @@ public class JsonArray<E> extends JsonData {
 
     /**
      * Adiciona os elementos ao array JSON.
+     *
+     * @param values
      */
     @SuppressWarnings("unchecked")
     public void add(E... values) {
@@ -53,6 +61,9 @@ public class JsonArray<E> extends JsonData {
 
     /**
      * Remove um elemento do array JSON.
+     *
+     * @param index
+     * @return
      */
     public E remove(int index) {
         return this.jsonArray.remove(index);
@@ -60,6 +71,9 @@ public class JsonArray<E> extends JsonData {
 
     /**
      * Retorna um elemento o array JSON.
+     *
+     * @param index
+     * @return
      */
     public E getAt(int index) {
         return this.jsonArray.get(index);
@@ -67,6 +81,8 @@ public class JsonArray<E> extends JsonData {
 
     /**
      * Retorna os elementos do array JSON em forma de lista.
+     *
+     * @return
      */
     public List<E> toList() {
         return this.jsonArray;
@@ -74,6 +90,8 @@ public class JsonArray<E> extends JsonData {
 
     /**
      * Retorna os elementos do array JSON em forma de array JAVA.
+     *
+     * @return
      */
     @SuppressWarnings("unchecked")
     @JsonValue

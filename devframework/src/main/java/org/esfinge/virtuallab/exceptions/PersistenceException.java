@@ -3,24 +3,26 @@ package org.esfinge.virtuallab.exceptions;
 /**
  * Excecao relacionada ao PersistenceService.
  */
-public class PersistenceException extends RuntimeException
-{
-	private static final long serialVersionUID = 6395251397295069505L;
+public class PersistenceException extends RuntimeException {
 
-	
-	/**
-	 * Cria uma nova excecao com a mensagem informada.
-	 */
-	public PersistenceException(String msg)
-	{
-		super(msg);
-	}
+    private static final long serialVersionUID = 6395251397295069505L;
 
-	/**
-	 * Cria uma nova excecao com a mensagem e causa informadas.
-	 */
-	public PersistenceException(String msg, Throwable cause)
-	{
-		super(msg, cause);
-	}
+    /**
+     * Cria uma nova excecao com a mensagem informada.
+     *
+     * @param msg
+     */
+    public PersistenceException(String msg) {
+        super(msg);
+    }
+
+    /**
+     * Cria uma nova excecao com a mensagem e causa informadas.
+     *
+     * @param msg
+     * @param cause
+     */
+    public PersistenceException(String msg, Throwable cause) {
+        super(msg, cause);
+    }
 }

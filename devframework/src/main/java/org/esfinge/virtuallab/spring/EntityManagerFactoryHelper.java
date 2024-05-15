@@ -33,6 +33,8 @@ public class EntityManagerFactoryHelper extends LocalContainerEntityManagerFacto
 
     /**
      * Singleton.
+     *
+     * @return
      */
     public static EntityManagerFactoryHelper getInstance() {
         if (_instance == null) {
@@ -44,6 +46,8 @@ public class EntityManagerFactoryHelper extends LocalContainerEntityManagerFacto
 
     /**
      * Mapeia as entidades JPA contidas no JAR.
+     *
+     * @param jarURL
      */
     public void mapEntitiesFromJar(URL jarURL) {
         if (Utils.isNullOrEmpty(jarURL)) {
@@ -55,6 +59,8 @@ public class EntityManagerFactoryHelper extends LocalContainerEntityManagerFacto
 
     /**
      * Remove as entidades JPA contidas no JAR.
+     *
+     * @param jarURL
      */
     public void unmapEntitiesFromJar(URL jarURL) {
         if (Utils.isNullOrEmpty(jarURL)) {

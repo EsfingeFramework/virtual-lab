@@ -1,11 +1,7 @@
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import org.esfinge.virtuallab.TestUtils;
 import org.esfinge.virtuallab.demo.table.TableDemo;
 import org.esfinge.virtuallab.demo.table.Task;
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.util.TraceClassVisitor;
 
 public class Main {
 
@@ -72,18 +68,18 @@ public class Main {
         return str;
     }
 
-    /**
-     * Retorna uma String com as informacoes de bytecode de uma classe.
-     *
-     * @param classBytecode os bytecodes da classe
-     * @return as informacoes de bytecode da classe informada
-     */
-    public static String inspectToString(byte[] classBytecode) {
-        var classReader = new ClassReader(classBytecode);
-        var buffer = new StringWriter();
-        var tracer = new TraceClassVisitor(new PrintWriter(buffer));
-        classReader.accept(tracer, 0);
-
-        return (buffer.toString());
-    }
+//    /**
+//     * Retorna uma String com as informacoes de bytecode de uma classe.
+//     *
+//     * @param classBytecode os bytecodes da classe
+//     * @return as informacoes de bytecode da classe informada
+//     */
+//    public static String inspectToString(byte[] classBytecode) {
+//        var classReader = new ClassReader(classBytecode);
+//        var buffer = new StringWriter();
+//        var tracer = new TraceClassVisitor(new PrintWriter(buffer));
+//        classReader.accept(tracer, 0);
+//
+//        return (buffer.toString());
+//    }
 }

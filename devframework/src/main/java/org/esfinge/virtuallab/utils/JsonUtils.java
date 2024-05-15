@@ -1,9 +1,16 @@
 package org.esfinge.virtuallab.utils;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.module.jsonSchema.JsonSchemaGenerator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.esfinge.virtuallab.web.json.JsonArray;
 import org.esfinge.virtuallab.web.json.JsonData;
 import org.esfinge.virtuallab.web.json.JsonDataException;
@@ -13,12 +20,6 @@ import org.esfinge.virtuallab.web.json.JsonSchema;
 import org.esfinge.virtuallab.web.json.JsonSchemaArray;
 import org.esfinge.virtuallab.web.json.JsonSchemaElement;
 import org.esfinge.virtuallab.web.json.JsonSchemaObject;
-
-import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kjetland.jackson.jsonSchema.JsonSchemaGenerator;
 
 /**
  * Metodos utilitarios para manipular strings representando objetos JSON.
@@ -38,6 +39,9 @@ public class JsonUtils {
 
     /**
      * Converte a string JSON para JsonNode.
+     *
+     * @param jsonString
+     * @return
      */
     public static JsonNode fromStringToJsonNode(String jsonString) throws JsonDataException {
         try {
@@ -49,6 +53,9 @@ public class JsonUtils {
 
     /**
      * Converte o objeto para JsonNode.
+     *
+     * @param object
+     * @return
      */
     public static JsonNode fromObjectToJsonNode(Object object) throws JsonDataException {
         try {
@@ -60,6 +67,9 @@ public class JsonUtils {
 
     /**
      * Converte o objeto para JsonData.
+     *
+     * @param object
+     * @return
      */
     public static JsonData fromObjectToJsonData(Object object) throws JsonDataException {
         return convertToJsonData(stringify(object));
@@ -67,6 +77,10 @@ public class JsonUtils {
 
     /**
      * Converte a string JSON para a classe informada.
+     *
+     * @param jsonString
+     * @param typeClass
+     * @return
      */
     public static <E> E convertTo(String jsonString, Class<E> typeClass) throws JsonDataException {
         try {
@@ -78,6 +92,9 @@ public class JsonUtils {
 
     /**
      * Converte a string JSON para um mapa.
+     *
+     * @param jsonString
+     * @return
      */
     public static Map<String, String> convertToMap(String jsonString) throws JsonDataException {
         Map<String, String> map = new HashMap<>();
@@ -91,6 +108,10 @@ public class JsonUtils {
 
     /**
      * Converte a string JSON para uma lista do tipo da classe informada.
+     *
+     * @param jsonString
+     * @param typeClass
+     * @return
      */
     public static <E> List<E> convertToList(String jsonString, Class<E> typeClass) throws JsonDataException {
         try {
@@ -103,6 +124,10 @@ public class JsonUtils {
 
     /**
      * Converte a string JSON para um array do tipo da classe informada.
+     *
+     * @param jsonString
+     * @param typeClass
+     * @return
      */
     public static <E> E[] convertToArray(String jsonString, Class<E> typeClass) throws JsonDataException {
         try {
@@ -115,6 +140,9 @@ public class JsonUtils {
 
     /**
      * Converte a string JSON para um objeto JsonData.
+     *
+     * @param jsonString
+     * @return
      */
     public static JsonData convertToJsonData(String jsonString) throws JsonDataException {
         // obtem o JsonNode
@@ -139,6 +167,10 @@ public class JsonUtils {
 
     /**
      * Converte a string JSON para um objeto JsonPrimitive do tipo da classe informada.
+     *
+     * @param jsonString
+     * @param typeClass
+     * @return
      */
     public static <E> JsonPrimitive<E> convertToJsonPrimitive(String jsonString, Class<E> typeClass) throws JsonDataException {
         try {
@@ -151,6 +183,10 @@ public class JsonUtils {
 
     /**
      * Converte a string JSON para um objeto JsonArray do tipo da classe informada.
+     *
+     * @param jsonString
+     * @param typeClass
+     * @return
      */
     public static <E> JsonArray<E> convertToJsonArray(String jsonString, Class<E> typeClass) throws JsonDataException {
         try {
@@ -163,6 +199,9 @@ public class JsonUtils {
 
     /**
      * Converte a string JSON para um objeto JsonObject.
+     *
+     * @param jsonString
+     * @return
      */
     public static JsonObject convertToJsonObject(String jsonString) throws JsonDataException {
         return convertTo(jsonString, JsonObject.class);
@@ -170,6 +209,10 @@ public class JsonUtils {
 
     /**
      * Retorna o valor de uma propriedade contida na string JSON.
+     *
+     * @param jsonString
+     * @param property
+     * @return
      */
     public static String getProperty(String jsonString, String property) throws JsonDataException {
         var prop = fromStringToJsonNode(jsonString).get(property);
@@ -186,6 +229,10 @@ public class JsonUtils {
 
     /**
      * Retorna o valor de uma propriedade contida na string JSON convertido para mapa.
+     *
+     * @param jsonString
+     * @param property
+     * @return
      */
     public static Map<String, String> getPropertyAsMap(String jsonString, String property) throws JsonDataException {
         return convertToMap(getProperty(jsonString, property));
@@ -193,6 +240,10 @@ public class JsonUtils {
 
     /**
      * Retorna o valor de uma propriedade contida na string JSON convertido para uma lista do tipo da classe informada.
+     *
+     * @param typeClass
+     * @param property
+     * @return
      */
     public static <E> List<E> getPropertyAsList(String jsonString, String property, Class<E> typeClass) throws JsonDataException {
         return convertToList(getProperty(jsonString, property), typeClass);
@@ -200,6 +251,10 @@ public class JsonUtils {
 
     /**
      * Retorna o valor de uma propriedade contida na string JSON convertido para um array do tipo da classe informada.
+     *
+     * @param typeClass
+     * @param property
+     * @return
      */
     public static <E> E[] getPropertyAsArray(String jsonString, String property, Class<E> typeClass) throws JsonDataException {
         return convertToArray(getProperty(jsonString, property), typeClass);
@@ -207,6 +262,10 @@ public class JsonUtils {
 
     /**
      * Retorna o valor de uma propriedade contida na string JSON convertido para um objeto JsonData.
+     *
+     * @param jsonString
+     * @param property
+     * @return
      */
     public static JsonData getPropertyAsJsonData(String jsonString, String property) throws JsonDataException {
         return convertToJsonData(getProperty(jsonString, property));
@@ -215,6 +274,10 @@ public class JsonUtils {
     /**
      * Retorna o valor de uma propriedade contida na string JSON convertido para um objeto JsonPrimitive do tipo da
      * classe informada.
+     *
+     * @param typeClass
+     * @param property
+     * @return
      */
     public static <E> JsonPrimitive<E> getPropertyAsJsonPrimitive(String jsonString, String property, Class<E> typeClass) throws JsonDataException {
         return convertToJsonPrimitive(getProperty(jsonString, property), typeClass);
@@ -223,6 +286,10 @@ public class JsonUtils {
     /**
      * Retorna o valor de uma propriedade contida na string JSON convertido para um objeto JsonArray do tipo da classe
      * informada.
+     *
+     * @param typeClass
+     * @param property
+     * @return
      */
     public static <E> JsonArray<E> getPropertyAsJsonArray(String jsonString, String property, Class<E> typeClass) throws JsonDataException {
         return convertToJsonArray(getProperty(jsonString, property), typeClass);
@@ -230,6 +297,10 @@ public class JsonUtils {
 
     /**
      * Retorna o valor de uma propriedade continda na string JSON convertido para um objeto JsonObject.
+     *
+     * @param jsonString
+     * @param property
+     * @return
      */
     public static JsonObject getPropertyAsJsonObject(String jsonString, String property) throws JsonDataException {
         return convertToJsonObject(getProperty(jsonString, property));
@@ -237,6 +308,10 @@ public class JsonUtils {
 
     /**
      * Retorna o valor de uma propriedade contida na string JSON convertido para a classe informada.
+     *
+     * @param typeClass
+     * @param property
+     * @return
      */
     public static <E> E getPropertyAs(String jsonString, String property, Class<E> typeClass) throws JsonDataException {
         try {
@@ -248,6 +323,9 @@ public class JsonUtils {
 
     /**
      * Converte um objeto para sua representacao JSON.
+     *
+     * @param obj
+     * @return
      */
     public static String stringify(Object obj) throws JsonDataException {
         try {
@@ -259,40 +337,48 @@ public class JsonUtils {
 
     /**
      * Retorna o schema JSON do tipo da classe informada.
+     *
+     * @param typeClass
+     * @return
      */
     public static JsonSchema getJsonSchema(Class<?> typeClass) {
-        // gera a string do schema JSON
-        var schemaString = stringify(_SCHEMA_MAPPER.generateJsonSchema(typeClass));
-        // monta um mapa com as propriedades do schema gerado
-        var schemaMap = convertToMap(schemaString);
+        try {
+            // gera a string do schema JSON
+            var schemaString = stringify(_SCHEMA_MAPPER.generateSchema(typeClass));
+            // monta um mapa com as propriedades do schema gerado
+            var schemaMap = convertToMap(schemaString);
 
-        // verifica se a classe eh do tipo Temporal (Calendar, Timestamp, Date..)
+            // verifica se a classe eh do tipo Temporal (Calendar, Timestamp, Date..)
 //		if( ReflectionUtils.isTemporalType(typeClass) )
 //			schemaMap.put("type", "datetime-local");
-        // monta os schemas dos tipos referenciados (definitions)
-        Map<String, JsonSchema> refsMap = new HashMap<>();
+// monta os schemas dos tipos referenciados (definitions)
+            Map<String, JsonSchema> refsMap = new HashMap<>();
 
-        if (schemaMap.containsKey("definitions")) {
-            var refsSchemaMap = convertToMap(schemaMap.get("definitions"));
-            for (var name : refsSchemaMap.keySet()) {
-                refsMap.put(String.format("#/definitions/%s", name),
-                        parseSchema(name, convertToMap(refsSchemaMap.get(name))));
+            if (schemaMap.containsKey("definitions")) {
+                var refsSchemaMap = convertToMap(schemaMap.get("definitions"));
+                for (var name : refsSchemaMap.keySet()) {
+                    refsMap.put(String.format("#/definitions/%s", name),
+                            parseSchema(name, convertToMap(refsSchemaMap.get(name))));
+                }
+                // substitui os schemas referenciados dentro dos tipos referenciados
+                for (var refSchema : refsMap.values()) {
+                    replaceRefsSchema(refSchema, refsMap);
+                }
             }
-            // substitui os schemas referenciados dentro dos tipos referenciados
-            for (var refSchema : refsMap.values()) {
-                replaceRefsSchema(refSchema, refsMap);
+
+// monta o schema principal
+            var jsonSchema = parseSchema(schemaMap.get("title"), schemaMap);
+
+// substitui os schemas referenciados
+            if (schemaMap.containsKey("definitions")) {
+                replaceRefsSchema(jsonSchema, refsMap);
             }
+
+            return jsonSchema;
+        } catch (JsonMappingException ex) {
+            Logger.getLogger(JsonUtils.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        // monta o schema principal
-        var jsonSchema = parseSchema(schemaMap.get("title"), schemaMap);
-
-        // substitui os schemas referenciados
-        if (schemaMap.containsKey("definitions")) {
-            replaceRefsSchema(jsonSchema, refsMap);
-        }
-
-        return jsonSchema;
+        return null;
     }
 
     /**
@@ -303,17 +389,14 @@ public class JsonUtils {
 
         // verifica o tipo do elemento (type se elemento normal, $ref se fizer referencia a outro elemento)
         var type = Utils.isNullOrEmpty(schemaMap.get("type")) ? schemaMap.get("$ref") : schemaMap.get("type");
-        switch (type) {
-            case "object":
-                schema = new JsonSchemaObject();
-                break;
-            case "array":
-                schema = new JsonSchemaArray();
-                break;
-            default:
-                schema = new JsonSchemaElement();
-                break;
-        }
+        schema = switch (type) {
+            case "object" ->
+                new JsonSchemaObject();
+            case "array" ->
+                new JsonSchemaArray();
+            default ->
+                new JsonSchemaElement();
+        };
 
         // propriedades basicas
         schema.setType(type);

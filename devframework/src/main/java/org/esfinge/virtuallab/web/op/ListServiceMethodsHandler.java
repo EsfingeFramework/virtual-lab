@@ -2,7 +2,6 @@ package org.esfinge.virtuallab.web.op;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.esfinge.virtuallab.descriptors.MethodDescriptor;
 import org.esfinge.virtuallab.services.PersistenceService;
 import org.esfinge.virtuallab.utils.JsonUtils;
 import org.esfinge.virtuallab.utils.Utils;
@@ -26,7 +25,7 @@ public class ListServiceMethodsHandler implements IJsonRequestHandler {
             var methodList = PersistenceService.getInstance().listServiceMethods(clazzQualifiedName);
 
             if (!Utils.isNullOrEmpty(methodList)) {
-                jsonReturn.setData(new JsonArray<MethodDescriptor>(methodList));
+                jsonReturn.setData(new JsonArray<>(methodList));
                 jsonReturn.setSuccess(true);
                 jsonReturn.setMessage("");
             } else {

@@ -29,6 +29,8 @@ public class ClassDescriptor {
 
     /**
      * Construtor a partir dos metadados de uma classe.
+     *
+     * @param classMetadata
      */
     public ClassDescriptor(ClassMetadata classMetadata) {
         this.name = classMetadata.getClazz().getSimpleName();

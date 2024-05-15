@@ -37,6 +37,8 @@ public class MethodDescriptor {
 
     /**
      * Construtor a partir dos metadados de um metodo.
+     *
+     * @param methodMetadata
      */
     public MethodDescriptor(MethodMetadata methodMetadata) {
         this.className = methodMetadata.getMethod().getDeclaringClass().getCanonicalName();

@@ -47,6 +47,8 @@ public class DataSourceService extends AbstractRoutingDataSource {
 
     /**
      * Singleton.
+     *
+     * @return
      */
     public static DataSourceService getInstance() {
         if (_instance == null) {
@@ -63,6 +65,8 @@ public class DataSourceService extends AbstractRoutingDataSource {
 
     /**
      * Seleciona o DataSource relacionado com a classe DAO informada.
+     *
+     * @param clazz
      */
     public static void setDataSourceFor(Class<?> clazz) {
         getInstance().context.set(_instance.keyMap.get(clazz.getCanonicalName()));
@@ -77,6 +81,8 @@ public class DataSourceService extends AbstractRoutingDataSource {
 
     /**
      * Retorna as informacoes do DataSource selecionado.
+     *
+     * @return
      */
     public static DSKey getCurrentDataBase() {
         var key = getInstance().context.get();
@@ -85,6 +91,8 @@ public class DataSourceService extends AbstractRoutingDataSource {
 
     /**
      * Registra um novo DataSource.
+     *
+     * @param dsMetadata
      */
     public static void registerDataSource(ServiceDAOMetadata dsMetadata) {
         if (!Utils.isNullOrEmpty(dsMetadata)) {
@@ -113,6 +121,8 @@ public class DataSourceService extends AbstractRoutingDataSource {
 
     /**
      * Remove o registro do DataSource.
+     *
+     * @param dsMetadata
      */
     public static void unregisterDataSource(ServiceDAOMetadata dsMetadata) {
         // obtem a chave de identificacao do DataSource

@@ -14,6 +14,8 @@ public class DefaultReturnProcessor extends MethodReturnProcessor<Annotation> {
 
     /**
      * Singleton.
+     *
+     * @return
      */
     public static DefaultReturnProcessor getInstance() {
         if (_instance == null) {

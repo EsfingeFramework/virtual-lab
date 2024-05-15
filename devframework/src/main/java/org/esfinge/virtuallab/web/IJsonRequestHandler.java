@@ -13,6 +13,10 @@ public interface IJsonRequestHandler extends IRequestHandler {
 
     /**
      * Executa a requisicao encaminhada pelo FrontControllerServlet.
+     *
+     * @param request
+     * @param response
+     * @throws java.lang.Exception
      */
     public default void handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // executa a logica da funcionalidade requisitada
@@ -30,6 +34,9 @@ public interface IJsonRequestHandler extends IRequestHandler {
     /**
      * Operacao nao suportada por handlers assincronos! Lanca uma excecao UnsupportedOperationException caso este metodo
      * seja invocado.
+     *
+     * @param response
+     * @param request
      */
     public default void callPage(String page, HttpServletRequest request, HttpServletResponse response)
             throws UnsupportedOperationException {
@@ -38,6 +45,10 @@ public interface IJsonRequestHandler extends IRequestHandler {
 
     /**
      * Retorna a string representando o objeto JSON enviado como parametro na requisicao.
+     *
+     * @param request
+     * @return
+     * @throws java.lang.Exception
      */
     @SuppressWarnings("deprecation")
     public default String getJsonParameter(HttpServletRequest request) throws Exception {
@@ -47,6 +58,10 @@ public interface IJsonRequestHandler extends IRequestHandler {
     /**
      * Executa a logica da funcionalidade requisitada. Deve retornar um objeto JSON para ser enviado para a pagina
      * solicitante processa-lo assincronamente.
+     *
+     * @param request
+     * @return
+     * @throws java.lang.Exception
      */
     public JsonReturn handleAsync(HttpServletRequest request) throws Exception;
 }

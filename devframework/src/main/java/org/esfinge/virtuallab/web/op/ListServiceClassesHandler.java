@@ -19,7 +19,7 @@ public class ListServiceClassesHandler implements IJsonRequestHandler {
         var jsonReturn = new JsonReturn();
 
         try {
-            jsonReturn.setData(new JsonArray<ClassDescriptor>(classesList));
+            jsonReturn.setData(new JsonArray<>(classesList));
             jsonReturn.setSuccess(true);
             jsonReturn.setMessage("");
         } catch (Exception e) {

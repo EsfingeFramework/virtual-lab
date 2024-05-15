@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
@@ -53,6 +52,10 @@ public class ReflectionUtils {
 
     /**
      * Retorna o metodo correspondente ao descritor informado.
+     *
+     * @param methodDescriptor
+     * @return
+     * @throws java.lang.Exception
      */
     public static Method getMethod(MethodDescriptor methodDescriptor) throws Exception {
         // obtem a classe que contem o metodo
@@ -93,6 +96,9 @@ public class ReflectionUtils {
 
     /**
      * Retorna todos os campos da classe, incluindo os das superclasses.
+     *
+     * @param clazz
+     * @return
      */
     public static List<Field> getAllFields(Class<?> clazz) {
         return FieldUtils.getAllFieldsList(clazz);
@@ -100,6 +106,9 @@ public class ReflectionUtils {
 
     /**
      * Retorna todos os campos da classe, nao incluindo os das superclasses.
+     *
+     * @param clazz
+     * @return
      */
     public static List<Field> getDeclaredFields(Class<?> clazz) {
         return Arrays.asList(clazz.getDeclaredFields());
@@ -107,6 +116,10 @@ public class ReflectionUtils {
 
     /**
      * Verifica se a classe possui o campo informado.
+     *
+     * @param clazz
+     * @param fieldName
+     * @return
      */
     public static boolean hasField(Class<?> clazz, String fieldName) {
         try {
@@ -123,6 +136,10 @@ public class ReflectionUtils {
 
     /**
      * Retorna o valor do campo especificado.
+     *
+     * @param fieldName
+     * @return
+     * @throws java.lang.Exception
      */
     public static Object getFieldValue(Object obj, String fieldName) throws Exception {
         // tenta ler o campo
@@ -131,6 +148,10 @@ public class ReflectionUtils {
 
     /**
      * Atribui o valor ao campo especificado.
+     *
+     * @param value
+     * @param fieldName
+     * @throws java.lang.Exception
      */
     public static void setFieldValue(Object obj, String fieldName, Object value) throws Exception {
         FieldUtils.writeField(obj, fieldName, value, true);
@@ -138,6 +159,10 @@ public class ReflectionUtils {
 
     /**
      * Retorna todos os campos da classe anotados com a anotacao informada, incluindo os das superclasses.
+     *
+     * @param clazz
+     * @param annotationClazz
+     * @return
      */
     public static List<Field> getAllFieldsAnnotatedWith(Class<?> clazz, Class<? extends Annotation> annotationClazz) {
         return getAllFields(clazz)
@@ -148,6 +173,10 @@ public class ReflectionUtils {
 
     /**
      * Retorna todos os campos da classe anotados com a anotacao informada, nao incluindo os das superclasses.
+     *
+     * @param clazz
+     * @param annotationClazz
+     * @return
      */
     public static List<Field> getDeclaredFieldsAnnotatedWith(Class<?> clazz, Class<? extends Annotation> annotationClazz) {
         return getDeclaredFields(clazz)
@@ -158,6 +187,10 @@ public class ReflectionUtils {
 
     /**
      * Retorna todos os metodos da classe anotados com a anotacao informada, incluindo os das superclasses,
+     *
+     * @param clazz
+     * @param annotationClazz
+     * @return
      */
     public static List<Method> getAllMethodsAnnotatedWith(Class<?> clazz, Class<? extends Annotation> annotationClazz) {
         return MethodUtils.getMethodsListWithAnnotation(clazz, annotationClazz, true, true);
@@ -165,6 +198,10 @@ public class ReflectionUtils {
 
     /**
      * Retorna todos os metodos da classe anotados com a anotacao informada, nao incluindo os das superclasses,
+     *
+     * @param clazz
+     * @param annotationClazz
+     * @return
      */
     public static List<Method> getDeclaredMethodsAnnotatedWith(Class<?> clazz, Class<? extends Annotation> annotationClazz) {
         return MethodUtils.getMethodsListWithAnnotation(clazz, annotationClazz, false, true);
@@ -172,6 +209,10 @@ public class ReflectionUtils {
 
     /**
      * Retorna a classe pelo seu nome qualificado.
+     *
+     * @param classQualifiedName
+     * @return
+     * @throws java.lang.ClassNotFoundException
      */
     public static Class<?> findClass(String classQualifiedName) throws ClassNotFoundException {
         Class<?> clazz = null;
@@ -193,6 +234,9 @@ public class ReflectionUtils {
     /**
      * Verifica se a classe eh do tipo primitivo ou seus wrappers (boolean, byte, char, short, int, long, float,
      * double), do tipo String ou do tipo Temporal (Calendar, Timestamp, Date..).
+     *
+     * @param clazz
+     * @return
      */
     public static boolean isBasicType(Class<?> clazz) {
         return (ClassUtils.isPrimitiveOrWrapper(clazz) || (clazz == String.class) || isTemporalType(clazz));
@@ -200,6 +244,9 @@ public class ReflectionUtils {
 
     /**
      * Verifica se a classe eh um tipo temporal (Calendar, Timestamp, Date..)
+     *
+     * @param clazz
+     * @return
      */
     public static boolean isTemporalType(Class<?> clazz) {
         return (clazz == Calendar.class);
@@ -207,6 +254,9 @@ public class ReflectionUtils {
 
     /**
      * Verifica se a classe eh do tipo colecao (List, Set, Queue, etc.)
+     *
+     * @param clazz
+     * @return
      */
     public static boolean isCollection(Class<?> clazz) {
         return Collection.class.isAssignableFrom(clazz);
@@ -214,6 +264,9 @@ public class ReflectionUtils {
 
     /**
      * Verifica se a classe eh um array.
+     *
+     * @param clazz
+     * @return
      */
     public static boolean isArray(Class<?> clazz) {
         return clazz.isArray();
@@ -221,6 +274,9 @@ public class ReflectionUtils {
 
     /**
      * Verifica se a classe eh um mapa.
+     *
+     * @param clazz
+     * @return
      */
     public static boolean isMap(Class<?> clazz) {
         return Map.class.isAssignableFrom(clazz);
@@ -230,6 +286,9 @@ public class ReflectionUtils {
      * Verifica se a classe eh uma objeto basico valido. Regras: - ter um construtor padrao publico - possuir somente
      * atributos basicos (primitivos/wrappers, String, classes temporais (Calendar, Timestamp, Date..) - ser
      * serializavel pelo framework Jackson JSON
+     *
+     * @param clazz
+     * @return
      */
     public static boolean isFlatObject(Class<?> clazz) {
         try {
@@ -260,6 +319,10 @@ public class ReflectionUtils {
      * - interface Concreta extends Generica<ClasseA, ClasseB>
      *
      * NAO Funciona: - Generica<ClasseA,ClasseB> obj = new Generica<ClasseA, ClasseB>(){}
+     *
+     * @param genericInterface
+     * @param concreteClass
+     * @return
      */
     public static List<Class<?>> getActualTypesFromGenericInterface(Class<?> genericInterface, Class<?> concreteClass) {
         List<Class<?>> types = new ArrayList<>();
@@ -295,6 +358,9 @@ public class ReflectionUtils {
      *
      * NAO Funciona: - class Concreta implements Map<ClasseA, ClasseB> (use o getActualTypesFromGenericInterface) -
      * List<String> list = new ArrayList<String>();
+     *
+     * @param concreteClass
+     * @return
      */
     public static List<Class<?>> getActualTypesFromGenericClass(Class<?> concreteClass) {
         List<Class<?>> types = new ArrayList<>();

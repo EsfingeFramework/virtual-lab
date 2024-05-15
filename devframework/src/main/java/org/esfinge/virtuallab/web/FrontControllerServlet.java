@@ -27,7 +27,7 @@ public class FrontControllerServlet extends HttpServlet {
         super.init(config);
 
         // inicialia o mapa de tratamento de requisicao
-        this.handlerMap = new HashMap<String, IRequestHandler>();
+        this.handlerMap = new HashMap<>();
         this.handlerMap.put("uploadFile.op", new UploadFileHandler());
         this.handlerMap.put("listClasses.op", new ListServiceClassesHandler());
         this.handlerMap.put("listMethods.op", new ListServiceMethodsHandler());

@@ -7,16 +7,13 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import javax.persistence.Entity;
 import org.apache.bcel.classfile.ClassFormatException;
 import org.apache.bcel.classfile.ClassParser;
-import org.apache.bcel.classfile.JavaClass;
 import org.apache.commons.io.FilenameUtils;
 import org.esfinge.virtuallab.api.annotations.ServiceClass;
 import org.esfinge.virtuallab.api.annotations.ServiceDAO;
@@ -36,6 +33,8 @@ public class ClassLoaderService {
 
     /**
      * Singleton.
+     *
+     * @return
      */
     public static ClassLoaderService getInstance() {
         if (_instance == null) {
@@ -55,6 +54,9 @@ public class ClassLoaderService {
 
     /**
      * Carrega o arquivo de classe de servico.
+     *
+     * @param serviceFilePath
+     * @return
      */
     public Class<?> loadService(String serviceFilePath) throws ClassLoaderException {
         return this.loadService(new File(serviceFilePath));
@@ -62,10 +64,13 @@ public class ClassLoaderService {
 
     /**
      * Carrega o arquivo de classe de servico.
+     *
+     * @param serviceFile
+     * @return
      */
     public Class<?> loadService(File serviceFile) throws ClassLoaderException {
         // nome do arquivo
-        String fileName = serviceFile.getName();
+        var fileName = serviceFile.getName();
 
         // verifica se o arquivo eh valido e acessivel
         if (!serviceFile.isFile() || !serviceFile.canRead()) {
@@ -78,18 +83,14 @@ public class ClassLoaderService {
             throw new ClassLoaderException(String.format("Erro ao carregar servico, arquivo invalido: %s", fileName));
         }
 
-        try {
+        try (var cl = new InternalClassLoader(serviceFile.toURI().toURL())) {
             // tenta carregar o arquivo (class/jar)
-            InternalClassLoader cl = new InternalClassLoader(serviceFile.toURI().toURL());
 
             // obtem a classe de servico carregada
-            Class<?> serviceClass = cl.getServiceClass();
+            var serviceClass = cl.getServiceClass();
 
             // mapeia o classloader com a classe de servico
             this.classLoaderMap.put(serviceClass.getCanonicalName(), cl);
-
-            // fecha o classloader
-            cl.close();
 
             // retorna a classe de servico
             return serviceClass;
@@ -100,6 +101,9 @@ public class ClassLoaderService {
 
     /**
      * Descarrega a classe de servico informada.
+     *
+     * @param qualifiedClassName
+     * @return
      */
     public boolean unloadService(String qualifiedClassName) {
         // remove o classloader associado a classe
@@ -108,10 +112,13 @@ public class ClassLoaderService {
 
     /**
      * Retorna a classe de servico informada.
+     *
+     * @param qualifiedClassName
+     * @return
      */
     public Class<?> getService(String qualifiedClassName) throws ClassLoaderException {
         // obtem o classloader associado ao servico
-        InternalClassLoader cl = this.classLoaderMap.get(qualifiedClassName);
+        var cl = this.classLoaderMap.get(qualifiedClassName);
 
         // classe nao mapeada/carregada
         Utils.throwIfNull(cl, ClassLoaderException.class,
@@ -122,6 +129,9 @@ public class ClassLoaderService {
 
     /**
      * Verifica se o servico esta carregado.
+     *
+     * @param qualifiedClassName
+     * @return
      */
     public boolean isServiceLoaded(String qualifiedClassName) {
         return this.classLoaderMap.containsKey(qualifiedClassName);
@@ -129,9 +139,11 @@ public class ClassLoaderService {
 
     /**
      * Retorna os ClassLoaders dos servicos que contem entidades JPA.
+     *
+     * @return
      */
     public List<ClassLoader> getJPAClassLoaders() {
-        return new ArrayList<ClassLoader>(
+        return new ArrayList<>(
                 Utils.filterFromCollection(
                         this.classLoaderMap.values(),
                         InternalClassLoader::hasEntities));
@@ -141,7 +153,7 @@ public class ClassLoaderService {
      * Procura pela classe entre as classes carregadas pelos ClassLoaders dos servicos.
      */
     private Class<?> findClass(String qualifiedClassName, InternalClassLoader caller) throws ClassNotFoundException {
-        for (InternalClassLoader cl : this.classLoaderMap.values()) {
+        for (var cl : this.classLoaderMap.values()) {
             // nao procura no proprio ClassLoader que chamou este metodo
             if (cl == caller) {
                 continue;
@@ -175,7 +187,7 @@ public class ClassLoaderService {
             this.hasEntities = false;
 
             // arquivo (jar ou class) apontado pela URL
-            File file = new File(fileURL.toURI());
+            var file = new File(fileURL.toURI());
 
             if (FilenameUtils.isExtension(file.getName(), "class")) {
                 this.loadServiceClass(file);
@@ -221,9 +233,9 @@ public class ClassLoaderService {
                 jarFile = new JarFile(file);
 
                 // obtem a entrada para as classes do jar
-                Enumeration<JarEntry> jarEntries = jarFile.entries();
+                var jarEntries = jarFile.entries();
                 while (jarEntries.hasMoreElements()) {
-                    JarEntry jarEntry = jarEntries.nextElement();
+                    var jarEntry = jarEntries.nextElement();
 
                     // verifica se eh uma classe
                     if (jarEntry.isDirectory() || !FilenameUtils.isExtension(jarEntry.getName(), "class")) {
@@ -231,7 +243,7 @@ public class ClassLoaderService {
                     }
 
                     // le a entrada no arquivo JAR e carrega a classe
-                    Class<?> clazz = this.loadClassInternal(jarFile.getInputStream(jarEntry), FilenameUtils.getName(jarEntry.getName()));
+                    var clazz = this.loadClassInternal(jarFile.getInputStream(jarEntry), FilenameUtils.getName(jarEntry.getName()));
 
                     // verifica se eh uma classe de servico
                     if (clazz.isAnnotationPresent(ServiceClass.class)
@@ -266,7 +278,7 @@ public class ClassLoaderService {
 
         private Class<?> loadClassInternal(InputStream inputStream, String fileName) throws ClassFormatException, IOException {
             // obtem as informacoes da classe
-            JavaClass jc = new ClassParser(inputStream, fileName).parse();
+            var jc = new ClassParser(inputStream, fileName).parse();
 
             // carrega a classe lendo o seu bytecode
             return this.defineClass(jc.getClassName(), jc.getBytes(), 0, jc.getBytes().length);
