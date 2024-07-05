@@ -119,7 +119,8 @@ public class LineChartReturnProcessor extends MethodReturnProcessor<LineChartRet
 
         // verifica se foi especificada a propriedade "labels" da anotacao
         if (!Utils.isNullOrEmpty(this.annotation.dataLabels())) {
-            if (value instanceof Map map) {
+            if (value instanceof Map) {
+                Map map = (Map) value;
                 if (this.annotation.temporalSeries()) {
                     System.out.println("ENTROU AQUI");
                     var x = map.get(this.annotation.dataLabels());

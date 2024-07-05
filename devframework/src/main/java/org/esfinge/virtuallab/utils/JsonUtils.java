@@ -389,14 +389,18 @@ public class JsonUtils {
 
         // verifica o tipo do elemento (type se elemento normal, $ref se fizer referencia a outro elemento)
         var type = Utils.isNullOrEmpty(schemaMap.get("type")) ? schemaMap.get("$ref") : schemaMap.get("type");
-        schema = switch (type) {
-            case "object" ->
-                new JsonSchemaObject();
-            case "array" ->
-                new JsonSchemaArray();
-            default ->
-                new JsonSchemaElement();
-        };
+
+        switch (type) {
+            case "object":
+                schema = new JsonSchemaObject();
+                break;
+            case "array":
+                schema = new JsonSchemaArray();
+                break;
+            default:
+                schema = new JsonSchemaElement();
+                break;
+        }
 
         // propriedades basicas
         schema.setType(type);

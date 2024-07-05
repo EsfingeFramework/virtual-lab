@@ -1,18 +1,19 @@
 
 import org.esfinge.virtuallab.TestUtils;
-import org.esfinge.virtuallab.demo.table.TableDemo;
-import org.esfinge.virtuallab.demo.table.Task;
+import org.esfinge.virtuallab.demo.polyglot.Address;
+import org.esfinge.virtuallab.demo.polyglot.Person;
+import org.esfinge.virtuallab.demo.polyglot.PolyglotExample;
 
 public class Main {
 
     public static void main(String... args) throws Exception {
+        TestUtils.createJar("polyglotBase.jar", Address.class, Person.class, PolyglotExample.class);
 //        TestUtils.createJar("tarefa.jar", TarefaService.class, Tarefa.class);
 //        TestUtils.createJar("matematica.jar", MatematicaService.class, MatematicaInvokerProxy.class, Ponto.class);
 //        TestUtils.createJar("chart.jar", ChartService.class, Temperatura.class);
 //        TestUtils.createJar("temperaturaDAO.jar", TemperaturaService.class, TemperaturaServiceProxy.class, Temperatura.class);
 //        TestUtils.createJar("topicDAO.jar", TopicService.class, Topic.class);
 //        TestUtils.createJar("INPE_Goes.jar", DaoXrayLow.class, XrayDataLow.class);
-        TestUtils.createJar("table.jar", TableDemo.class, Task.class);
         /*
 		Temperatura t = new Temperatura(2l, "-23.5475","-46.63611111", 28.2, 19.3, "janeiro");
 

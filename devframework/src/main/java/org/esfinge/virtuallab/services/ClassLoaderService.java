@@ -1,5 +1,6 @@
 package org.esfinge.virtuallab.services;
 
+import esfinge.querybuilder.core.annotation.PersistenceType;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,6 +19,9 @@ import org.apache.commons.io.FilenameUtils;
 import org.esfinge.virtuallab.api.annotations.ServiceClass;
 import org.esfinge.virtuallab.api.annotations.ServiceDAO;
 import org.esfinge.virtuallab.exceptions.ClassLoaderException;
+import org.esfinge.virtuallab.polyglot.PolyglotConfig;
+import org.esfinge.virtuallab.polyglot.PolyglotConfigurator;
+import org.esfinge.virtuallab.polyglot.SecondaryInfo;
 import org.esfinge.virtuallab.utils.Utils;
 
 /**
@@ -225,6 +229,11 @@ public class ClassLoaderService {
         }
 
         private void loadServiceJar(File file) throws Exception {
+
+            var pc = PolyglotConfigurator.getInstance();
+            pc.setClassLoader(null);
+            pc.getConfigs().clear();
+
             // arquivo jar
             JarFile jarFile = null;
 
@@ -255,7 +264,38 @@ public class ClassLoaderService {
                                     this.serviceClass.getName(), clazz.getName()));
                         }
 
+                        // verifica se é uma classe de serviço poliglota
+                        if (clazz.isAnnotationPresent(PolyglotConfig.class)) {
+                            var pa = clazz.getAnnotation(PolyglotConfig.class);
+                            var oldSecInfo = pc.getConfigs().get(pa.secondaryType());
+                            if (oldSecInfo != null) {
+                                oldSecInfo.setUrl(pa.secondaryUrl());
+                                oldSecInfo.setUser(pa.secondaryUser());
+                                oldSecInfo.setPassword(pa.secondaryPassword());
+                                oldSecInfo.setDialect(pa.secondaryDialect());
+                                pc.getConfigs().put(pa.secondaryType(), oldSecInfo);
+                            } else {
+                                var newSecInfo = new SecondaryInfo(pa.secondaryUrl(), pa.secondaryUser(),
+                                        pa.secondaryPassword(), pa.secondaryDialect());
+                                pc.getConfigs().put(pa.secondaryType(), newSecInfo);
+                            }
+                            pc.setClassLoader(this);
+                        }
+
                         this.serviceClass = clazz;
+                    }
+
+                    // verifica se é uma entidade poliglota
+                    if (clazz.isAnnotationPresent(PersistenceType.class)) {
+                        var pt = clazz.getAnnotation(PersistenceType.class);
+                        var oldSecInfo = pc.getConfigs().get(pt.value());
+                        if (oldSecInfo != null) {
+                            oldSecInfo.getMappedClasses().add(clazz);
+                        } else {
+                            var newSecInfo = new SecondaryInfo();
+                            newSecInfo.getMappedClasses().add(clazz);
+                            pc.getConfigs().put(pt.value(), newSecInfo);
+                        }
                     }
 
                     // verifica se eh uma entidade JPA
@@ -269,7 +309,6 @@ public class ClassLoaderService {
                     try {
                         jarFile.close();
                     } catch (IOException e) {
-                        // TODO: debug..
                         e.printStackTrace();
                     }
                 }
@@ -281,7 +320,9 @@ public class ClassLoaderService {
             var jc = new ClassParser(inputStream, fileName).parse();
 
             // carrega a classe lendo o seu bytecode
-            return this.defineClass(jc.getClassName(), jc.getBytes(), 0, jc.getBytes().length);
+            var clazz = this.defineClass(jc.getClassName(), jc.getBytes(), 0, jc.getBytes().length);
+            return clazz;
         }
+
     }
 }
