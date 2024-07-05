@@ -5,12 +5,14 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchemaGenerator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.bson.types.ObjectId;
 import org.esfinge.virtuallab.web.json.JsonArray;
 import org.esfinge.virtuallab.web.json.JsonData;
 import org.esfinge.virtuallab.web.json.JsonDataException;
@@ -33,6 +35,11 @@ public class JsonUtils {
     private static final JsonSchemaGenerator _SCHEMA_MAPPER = new JsonSchemaGenerator(_JSON_MAPPER);
 
     static {
+        SimpleModule module = new SimpleModule();
+        module.addSerializer(ObjectId.class, new ObjectIdSerializer());
+        module.addDeserializer(ObjectId.class, new ObjectIdDeserializer());
+        _JSON_MAPPER.registerModule(module);
+
         // utiliza os campos para serializar/deserializar (nao precisa de getters/setters)
         _JSON_MAPPER.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
     }

@@ -30,8 +30,7 @@ public interface PolyglotExample extends Repository<Person> {
             label = "Lista completa.",
             description = "Lista completa de pessoas com endereço."
     )
-    //@TableReturn(fields = "{id, name, lastName, age, address}",
-    //       headerLabels = "{Id, Nome, Sobrenome, Idade, Endereço}")
-    @TableReturn
+    @TableReturn(fields = {"name", "lastName", "age", "address"},
+            headerLabels = {"Nome", "Sobrenome", "Idade", "Endereço"})
     List<Person> getPerson();
 }

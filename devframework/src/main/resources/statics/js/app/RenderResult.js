@@ -1,3 +1,5 @@
+/* global L */
+
 function RenderResult() {
 
     this.PLAIN = function (data, place) {
@@ -46,8 +48,13 @@ function RenderResult() {
                 $.each(data.rows, function (index, value) {
                     $tr = $('<tr>');
                     $.each(value, function (i, v) {
-
-                        var $row = $('<td>').text(v);
+                        var displayValue;
+                        if (isObject(v)) {
+                            displayValue = formatObject(v);
+                        } else {
+                            displayValue = v;
+                        }
+                        var $row = $('<td>').text(displayValue);
                         $tr.append($row);
                     });
                     $tbody.append($tr);
@@ -112,5 +119,23 @@ function RenderResult() {
 //			alert('Lat: ' + e.latlng.lat + ' , Long: ' + e.latlng.lng);
 //		});
 
-            }
+            };
+}
+
+function isObject(value) {
+    return value && typeof value === 'object' && value.constructor === Object;
+}
+
+function removeNullFields(obj) {
+    return Object.fromEntries(Object.entries(obj).filter(([_, v]) => v != null));
+}
+
+function formatObject(obj) {
+    if (!isObject(obj))
+        return obj;
+
+    const cleanedAddress = removeNullFields(obj);
+    return Object.entries(cleanedAddress)
+            .map(([key, value]) => `${key}: ${value}`)
+            .join(', ');
 }
