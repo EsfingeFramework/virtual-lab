@@ -2,11 +2,24 @@ package org.esfinge.virtuallab.utils;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchemaGenerator;
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,10 +48,33 @@ public class JsonUtils {
     private static final JsonSchemaGenerator _SCHEMA_MAPPER = new JsonSchemaGenerator(_JSON_MAPPER);
 
     static {
-        SimpleModule module = new SimpleModule();
-        module.addSerializer(ObjectId.class, new ObjectIdSerializer());
-        module.addDeserializer(ObjectId.class, new ObjectIdDeserializer());
-        _JSON_MAPPER.registerModule(module);
+        SimpleModule objectIdModule = new SimpleModule();
+        objectIdModule.addSerializer(ObjectId.class, new ObjectIdSerializer());
+        objectIdModule.addDeserializer(ObjectId.class, new ObjectIdDeserializer());
+        _JSON_MAPPER.registerModule(objectIdModule);
+
+        SimpleModule dateModule = new SimpleModule();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        dateModule.addSerializer(Timestamp.class, new JsonSerializer<Timestamp>() {
+            @Override
+            public void serialize(Timestamp value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+                String formattedDate = dateFormat.format(new Date(value.getTime()));
+                gen.writeString(formattedDate);
+            }
+        });
+        dateModule.addDeserializer(Timestamp.class, new JsonDeserializer<Timestamp>() {
+            @Override
+            public Timestamp deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+                String date = p.getText();
+                try {
+                    return new Timestamp(dateFormat.parse(date).getTime());
+                } catch (ParseException e) {
+                    throw new IOException(e);
+                }
+            }
+        });
+        _JSON_MAPPER.registerModule(dateModule);
+        _JSON_MAPPER.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
         // utiliza os campos para serializar/deserializar (nao precisa de getters/setters)
         _JSON_MAPPER.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
@@ -356,9 +392,10 @@ public class JsonUtils {
             var schemaMap = convertToMap(schemaString);
 
             // verifica se a classe eh do tipo Temporal (Calendar, Timestamp, Date..)
-//		if( ReflectionUtils.isTemporalType(typeClass) )
-//			schemaMap.put("type", "datetime-local");
-// monta os schemas dos tipos referenciados (definitions)
+            if (ReflectionUtils.isTemporalType(typeClass)) {
+                schemaMap.put("type", "date");
+            }
+            // monta os schemas dos tipos referenciados (definitions)
             Map<String, JsonSchema> refsMap = new HashMap<>();
 
             if (schemaMap.containsKey("definitions")) {

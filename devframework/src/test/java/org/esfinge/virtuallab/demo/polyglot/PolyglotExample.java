@@ -2,6 +2,7 @@ package org.esfinge.virtuallab.demo.polyglot;
 
 import esfinge.querybuilder.core.Repository;
 import esfinge.querybuilder.core.annotation.TargetEntity;
+import static esfinge.querybuilder.core.utils.PersistenceTypeConstants.MONGODB;
 import java.util.List;
 import org.esfinge.virtuallab.api.annotations.ServiceDAO;
 import org.esfinge.virtuallab.api.annotations.ServiceMethod;
@@ -17,7 +18,7 @@ import org.esfinge.virtuallab.polyglot.PolyglotConfig;
         dialect = "org.hibernate.dialect.PostgreSQLDialect"
 )
 @PolyglotConfig(
-        secondaryType = "MONGODB",
+        secondaryType = MONGODB,
         secondaryUrl = "mongodb://localhost:27017/testdb",
         secondaryUser = "",
         secondaryPassword = "",

@@ -99,7 +99,7 @@ public final class ValidationService {
             throw new ValidationException(String.format("O metodo '%s' deve retornar um objeto valido! (nao pode ser void)", method.getName()));
         }
 
-        // tipos validos: basicos / array / colecao / mapa / objeto valido
+        // tipos validos: basicos / array / colecao / mapa / objeto valido / Date
         if (!ReflectionUtils.isBasicType(returnClass)) {
             if (!ReflectionUtils.isArray(returnClass)) {
                 if (!ReflectionUtils.isCollection(returnClass)) {
@@ -118,8 +118,10 @@ public final class ValidationService {
         for (var paramClass : method.getParameterTypes()) {
             if (!ReflectionUtils.isBasicType(paramClass)) {
                 if (!ReflectionUtils.isFlatObject(paramClass)) {
-                    throw new ValidationException(String.format("O metodo '%s' possui um parametro nao suportado (%s)",
-                            method.getName(), paramClass.getCanonicalName()));
+                    if (!ReflectionUtils.isDate(paramClass)) {
+                        throw new ValidationException(String.format("O metodo '%s' possui um parametro nao suportado (%s)",
+                                method.getName(), paramClass.getCanonicalName()));
+                    }
                 }
             }
         }

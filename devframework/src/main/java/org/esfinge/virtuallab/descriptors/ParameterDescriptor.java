@@ -60,6 +60,7 @@ public class ParameterDescriptor implements Comparable<ParameterDescriptor> {
 
         // recupera o schema JSON do parametro
         var schema = (JsonSchemaElement) JsonUtils.getJsonSchema(paramType);
+
         schema.setTitle(String.format("%s (%s)", this.label, this.dataType));
         schema.setRequired(this.required);
 

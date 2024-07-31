@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -249,7 +250,7 @@ public class ReflectionUtils {
      * @return
      */
     public static boolean isTemporalType(Class<?> clazz) {
-        return (clazz == Calendar.class);
+        return (clazz == Calendar.class || clazz == Date.class);
     }
 
     /**
@@ -379,5 +380,9 @@ public class ReflectionUtils {
         }
 
         return types;
+    }
+
+    public static boolean isDate(Class<?> returnClass) {
+        return returnClass.equals(java.util.Date.class) || returnClass.equals(java.time.LocalDateTime.class);
     }
 }

@@ -2,6 +2,7 @@ package org.esfinge.virtuallab.polyglot;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
+import static esfinge.querybuilder.core.utils.PersistenceTypeConstants.MONGODB;
 import esfinge.querybuilder.mongodb.DatastoreProvider;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +22,7 @@ public class QueryBuilderMongoDBDatastoreProvider implements DatastoreProvider {
     public QueryBuilderMongoDBDatastoreProvider() {
         morphia = new Morphia();
         var pc = PolyglotConfigurator.getInstance();
-        var secInfo = pc.getConfigs().get("MONGODB");
+        var secInfo = pc.getConfigs().get(MONGODB);
         Thread.currentThread().setContextClassLoader(pc.getClassLoader());
         for (var clazz : secInfo.getMappedClasses()) {
             mappClass(clazz);

@@ -231,8 +231,6 @@ public class ClassLoaderService {
         private void loadServiceJar(File file) throws Exception {
 
             var pc = PolyglotConfigurator.getInstance();
-            pc.setClassLoader(null);
-            pc.getConfigs().clear();
 
             // arquivo jar
             JarFile jarFile = null;
@@ -266,6 +264,10 @@ public class ClassLoaderService {
 
                         // verifica se é uma classe de serviço poliglota
                         if (clazz.isAnnotationPresent(PolyglotConfig.class)) {
+                            //TODO: carregando somente último ServiceDAO
+                            pc.setClassLoader(null);
+                            pc.getConfigs().clear();
+
                             var pa = clazz.getAnnotation(PolyglotConfig.class);
                             var oldSecInfo = pc.getConfigs().get(pa.secondaryType());
                             if (oldSecInfo != null) {
