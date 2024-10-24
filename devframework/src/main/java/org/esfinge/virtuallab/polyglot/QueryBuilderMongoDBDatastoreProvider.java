@@ -1,26 +1,28 @@
 package org.esfinge.virtuallab.polyglot;
 
-import com.mongodb.MongoClient;
-import com.mongodb.MongoException;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.ServerAddress;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import dev.morphia.Datastore;
+import dev.morphia.Morphia;
 import static esfinge.querybuilder.core.utils.PersistenceTypeConstants.MONGODB;
 import esfinge.querybuilder.mongodb.DatastoreProvider;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.mongodb.morphia.Datastore;
-import org.mongodb.morphia.Morphia;
 
 public class QueryBuilderMongoDBDatastoreProvider implements DatastoreProvider {
 
-    private final Morphia morphia;
     protected MongoClient mongo;
     private final String host;
     private final int port;
     private final String database;
+    private Datastore datastore;
 
     public QueryBuilderMongoDBDatastoreProvider() {
-        morphia = new Morphia();
         var pc = PolyglotConfigurator.getInstance();
         var secInfo = pc.getConfigs().get(MONGODB);
         Thread.currentThread().setContextClassLoader(pc.getClassLoader());
@@ -33,29 +35,31 @@ public class QueryBuilderMongoDBDatastoreProvider implements DatastoreProvider {
     }
 
     public MongoClient getMongo() {
-        if (mongo == null) {
-            try {
-                mongo = new MongoClient(host, port);
-            } catch (MongoException e) {
-                e.printStackTrace();
-            }
+        try {
+            mongo = MongoClients.create(
+                    MongoClientSettings.builder()
+                            .applyToClusterSettings(builder
+                                    -> builder.hosts(Collections.singletonList(new ServerAddress(host, port))))
+                            .build()
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return mongo;
     }
 
     @Override
     public Datastore getDatastore() {
-        return getMorphia().createDatastore(getMongo(), database);
+        if (datastore == null) {
+            datastore = Morphia.createDatastore(getMongo(), database);
+        }
+        return datastore;
     }
 
     @Override
-    public Morphia getMorphia() {
-        return morphia;
-    }
-
-    @Override
-    public final void mappClass(Class<?> clazz) {
-        getMorphia().map(clazz);
+    public void mappClass(Class<?> clazz) {
+        getDatastore().getMapper().map(clazz);
+        getDatastore().ensureIndexes();
     }
 
     private String getInfo(String key, SecondaryInfo secInfo) {

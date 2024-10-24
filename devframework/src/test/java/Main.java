@@ -1,13 +1,12 @@
 
 import org.esfinge.virtuallab.TestUtils;
-import org.esfinge.virtuallab.demo.polyglot.Address;
-import org.esfinge.virtuallab.demo.polyglot.Person;
-import org.esfinge.virtuallab.demo.polyglot.PolyglotExample;
 
 public class Main {
 
     public static void main(String... args) throws Exception {
-        TestUtils.createJar("polyglotBase.jar", Address.class, Person.class, PolyglotExample.class);
+        //TestUtils.createJar("polyglotBase.jar", Address.class, Person.class, PolyglotExample.class);
+        TestUtils.createJar("alerta_dao.jar", Bater.class, Alerta.class, AlertaDAO.class);
+        TestUtils.createJar("alerta_service.jar", AlertaService.class);
 //        TestUtils.createJar("tarefa.jar", TarefaService.class, Tarefa.class);
 //        TestUtils.createJar("matematica.jar", MatematicaService.class, MatematicaInvokerProxy.class, Ponto.class);
 //        TestUtils.createJar("chart.jar", ChartService.class, Temperatura.class);

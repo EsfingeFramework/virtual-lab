@@ -60,13 +60,14 @@ public class BarChartReturnProcessor extends MethodReturnProcessor<BarChartRetur
             List<?> collection = List.class.cast(value);
 
             // obtem o label em cada objeto da colecao
-            for (var i = 0; i < collection.size(); i++)
- 	 			try {
-                // tenta acessar a propriedade do objeto
-                labels.add(ReflectionUtils.getFieldValue(collection.get(i), this.annotation.dataLabelsField()).toString());
-            } catch (Exception e) {
-                // texto generico (DATA 01, DATA 02, DATA 03..)
-                labels.add(String.format("DATA %02d", i + 1));
+            for (var i = 0; i < collection.size(); i++) {
+                try {
+                    // tenta acessar a propriedade do objeto
+                    labels.add(ReflectionUtils.getFieldValue(collection.get(i), this.annotation.dataLabelsField()).toString());
+                } catch (Exception e) {
+                    // texto generico (DATA 01, DATA 02, DATA 03..)
+                    labels.add(String.format("DATA %02d", i + 1));
+                }
             }
         }
 
