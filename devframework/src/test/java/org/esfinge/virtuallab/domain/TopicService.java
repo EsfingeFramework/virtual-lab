@@ -1,6 +1,6 @@
 package org.esfinge.virtuallab.domain;
 
-import esfinge.querybuilder.core.Repository;
+import ef.qb.core.Repository;
 import java.util.List;
 import org.esfinge.virtuallab.api.annotations.ServiceDAO;
 import org.esfinge.virtuallab.api.annotations.ServiceMethod;

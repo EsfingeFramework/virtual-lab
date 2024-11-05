@@ -1,7 +1,7 @@
 package org.esfinge.virtuallab.domain;
 
-import esfinge.querybuilder.core.Repository;
-import esfinge.querybuilder.core.annotation.LesserOrEquals;
+import ef.qb.core.Repository;
+import ef.qb.core.annotation.LesserOrEquals;
 import java.util.List;
 import org.esfinge.virtuallab.api.annotations.ServiceDAO;
 

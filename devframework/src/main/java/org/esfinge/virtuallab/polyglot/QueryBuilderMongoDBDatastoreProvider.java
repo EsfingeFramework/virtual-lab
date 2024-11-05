@@ -1,25 +1,28 @@
 package org.esfinge.virtuallab.polyglot;
 
 import com.mongodb.MongoClientSettings;
+import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import dev.morphia.Datastore;
 import dev.morphia.Morphia;
-import static esfinge.querybuilder.core.utils.PersistenceTypeConstants.MONGODB;
-import esfinge.querybuilder.mongodb.DatastoreProvider;
+import static ef.qb.core.utils.PersistenceTypeConstants.MONGODB;
+import ef.qb.mongodb.DatastoreProvider;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class QueryBuilderMongoDBDatastoreProvider implements DatastoreProvider {
+public final class QueryBuilderMongoDBDatastoreProvider implements DatastoreProvider {
 
     protected MongoClient mongo;
     private final String host;
     private final int port;
     private final String database;
+    private final String user;
+    private final String password;
     private Datastore datastore;
 
     public QueryBuilderMongoDBDatastoreProvider() {
@@ -32,6 +35,8 @@ public class QueryBuilderMongoDBDatastoreProvider implements DatastoreProvider {
         host = (String) getInfo("host", secInfo);
         port = Integer.parseInt(getInfo("port", secInfo));
         database = (String) getInfo("database", secInfo);
+        user = secInfo.getUser();
+        password = secInfo.getPassword();
     }
 
     public MongoClient getMongo() {
@@ -40,6 +45,7 @@ public class QueryBuilderMongoDBDatastoreProvider implements DatastoreProvider {
                     MongoClientSettings.builder()
                             .applyToClusterSettings(builder
                                     -> builder.hosts(Collections.singletonList(new ServerAddress(host, port))))
+                            .credential(MongoCredential.createCredential(user, database, password.toCharArray()))
                             .build()
             );
         } catch (Exception e) {

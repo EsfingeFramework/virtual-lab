@@ -1,6 +1,6 @@
 package org.esfinge.virtuallab.services;
 
-import esfinge.querybuilder.core.annotation.PersistenceType;
+import ef.qb.core.annotation.PersistenceType;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;

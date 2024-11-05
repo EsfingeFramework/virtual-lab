@@ -1,6 +1,6 @@
 package org.esfinge.virtuallab.metadata.validator;
 
-import esfinge.querybuilder.core.Repository;
+import ef.qb.core.Repository;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import javax.persistence.Entity;
@@ -26,7 +26,7 @@ public class ValidServiceDAOValidador implements AnnotationValidator {
         // verifica se eh uma interface e estende Repository (do QueryBuilder)
         if (!clazz.isInterface() || !Repository.class.isAssignableFrom(clazz)) {
             throw new AnnotationValidationException(String.format(
-                    "A classe '%s' deve ser uma interface que estende 'esfinge.querybuilder.core.Repository' do Esfinge QueryBuilder!", clazz.getCanonicalName()));
+                    "A classe '%s' deve ser uma interface que estende 'ef.qb.core.Repository' do Esfinge QueryBuilder!", clazz.getCanonicalName()));
         }
 
         // verifica se a entidade implementa a anotacao JPA @Entity

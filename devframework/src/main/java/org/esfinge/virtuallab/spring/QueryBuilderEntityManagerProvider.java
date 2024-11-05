@@ -1,6 +1,6 @@
 package org.esfinge.virtuallab.spring;
 
-import esfinge.querybuilder.jpa1.EntityManagerProvider;
+import ef.qb.jpa1.EntityManagerProvider;
 import java.util.HashMap;
 import java.util.Map;
 import javax.persistence.EntityManager;
