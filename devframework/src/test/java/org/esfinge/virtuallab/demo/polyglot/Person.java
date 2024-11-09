@@ -12,13 +12,11 @@ import static javax.persistence.GenerationType.SEQUENCE;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
-import lombok.Data;
 import org.bson.types.ObjectId;
 import org.esfinge.virtuallab.polyglot.ObjectIdConverter;
 
 @Entity
 @PersistenceType(value = "JPA1", secondary = "MONGODB")
-@Data
 public class Person implements Serializable {
 
     @Id
@@ -36,4 +34,53 @@ public class Person implements Serializable {
     @PolyglotOneToOne(referencedEntity = Address.class)
     @PolyglotJoin(name = "addressId", referencedAttributeName = "id")
     private Address address;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public ObjectId getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(ObjectId addressId) {
+        this.addressId = addressId;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
 }

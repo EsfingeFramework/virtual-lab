@@ -2,9 +2,7 @@ package org.esfinge.virtuallab.polyglot;
 
 import java.util.HashMap;
 import java.util.Map;
-import lombok.Data;
 
-@Data
 public class PolyglotConfigurator {
 
     private static PolyglotConfigurator _instance;
@@ -18,6 +16,22 @@ public class PolyglotConfigurator {
         }
 
         return _instance;
+    }
+
+    public ClassLoader getClassLoader() {
+        return classLoader;
+    }
+
+    public void setClassLoader(ClassLoader classLoader) {
+        this.classLoader = classLoader;
+    }
+
+    public Map<String, SecondaryInfo> getConfigs() {
+        return configs;
+    }
+
+    public void setConfigs(Map<String, SecondaryInfo> configs) {
+        this.configs = configs;
     }
 
 }
