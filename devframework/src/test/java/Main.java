@@ -5,8 +5,8 @@ public class Main {
 
     public static void main(String... args) throws Exception {
         //TestUtils.createJar("polyglotBase.jar", Address.class, Person.class, PolyglotExample.class);
-        TestUtils.createJar("alerta_dao.jar", Bater.class, Alerta.class, AlertaDAO.class);
-        TestUtils.createJar("alerta_service.jar", AlertaService.class);
+        TestUtils.createJar("alert_dao.jar", Bater.class, Alert.class, AlertDAO.class);
+        TestUtils.createJar("alert_service.jar", AlertService.class);
 //        TestUtils.createJar("tarefa.jar", TarefaService.class, Tarefa.class);
 //        TestUtils.createJar("matematica.jar", MatematicaService.class, MatematicaInvokerProxy.class, Ponto.class);
 //        TestUtils.createJar("chart.jar", ChartService.class, Temperatura.class);

@@ -3,9 +3,12 @@
 /bin/
 **/.DS_Store
 /virtuallab-lib/target/
-/devframework/src/test/java/Bater.java
 /devframework/src/test/java/VulnerabilidadeService.java
 /devframework/src/test/java/Vulnerabilidade.java
 /devframework/src/test/java/AlertaDAO.java
 /devframework/src/test/java/Alerta.java
 /devframework/src/test/java/AlertaService.java
+/devframework/src/test/java/AlertService.java
+/devframework/src/test/java/Bater.java
+/devframework/src/test/java/Alert.java
+/devframework/src/test/java/AlertDAO.java

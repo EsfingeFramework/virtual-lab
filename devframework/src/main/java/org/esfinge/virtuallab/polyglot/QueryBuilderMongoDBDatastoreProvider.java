@@ -7,6 +7,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import dev.morphia.Datastore;
 import dev.morphia.Morphia;
+import ef.qb.core.annotation.ServicePriority;
 import static ef.qb.core.utils.PersistenceTypeConstants.MONGODB;
 import ef.qb.mongodb.DatastoreProvider;
 import java.util.Collections;
@@ -15,6 +16,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@ServicePriority(10)
 public final class QueryBuilderMongoDBDatastoreProvider implements DatastoreProvider {
 
     protected MongoClient mongo;
